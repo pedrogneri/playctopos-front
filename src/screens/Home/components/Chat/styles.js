@@ -13,7 +13,7 @@ export const MessagesArea = styled.div`
   flex-direction: column;
   overflow-y: auto;
   padding: 20px 20px 0 20px;
-  height: 90%;
+  height: calc(100% - 60px);
 `;
 
 export const Message = styled.p`
@@ -32,7 +32,7 @@ export const Footer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   width: 100%;
-  height: 10%;
+  height: 60px;
   padding: 10px;
 `;
 
