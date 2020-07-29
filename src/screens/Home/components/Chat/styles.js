@@ -8,8 +8,21 @@ export const Container = styled.div`
 `;
 
 export const MessagesArea = styled.div`
+  display: flex;
+  flex-direction: column;
   overflow: auto;
+  padding: 20px 20px 0 20px;
   height: 90%;
+`;
+
+export const Message = styled.p`
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #fff;
+
+  & > b {
+    color: #82cc7e;
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -28,4 +41,5 @@ export const StyledInput = styled.input`
   border: none;
   background-color: #424242;
   color: #fff;
+  width: 100%;
 `;
