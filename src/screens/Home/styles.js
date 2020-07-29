@@ -26,14 +26,14 @@ export const VideoContainer = styled.div`
 
 export const VideoMask = styled.div`
   width: 100%;
-  height: 50%;
+  height: 60%;
   background-color: #121200;
   opacity: .5;
 `;
 
 export const VideoPlayer = styled.iframe`
   width: 100%;
-  height: 50%;
+  height: 60%;
   pointer-events: none;
   border: none;
 `;

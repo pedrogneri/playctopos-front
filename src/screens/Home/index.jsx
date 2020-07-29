@@ -19,7 +19,7 @@ const Home = () => {
 
   useEffect(() => {
     socket.emit('room.join', 1);
-    const handleInitVideo = ({ roomId, initial }) => {
+    const handleInitVideo = ({ initial }) => {
       const actualDate = new Date();
       setShowVideo(true);
       setVideoTime(Math.abs(actualDate.getTime() - initial));
@@ -46,7 +46,7 @@ const Home = () => {
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&start=${videoTime}`}>
           </VideoPlayer>
         )}
-        <button type="button" onClick={playVideo}>Clique para começar o vídeo</button>
+        <button type="button" onClick={playVideo}>Click to start the video</button>
       </VideoContainer>
     </Container>
   );
