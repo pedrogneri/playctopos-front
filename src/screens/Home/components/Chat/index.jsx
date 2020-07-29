@@ -49,8 +49,8 @@ const Chat = () => {
   return (
     <Container>
       <MessagesArea ref={chatRef}>
-        {messageList.map((message) => (
-          <Message>
+        {messageList.map((message, index) => (
+          <Message key={index.toString()}>
             <b>User: </b>
             {message}
           </Message>
