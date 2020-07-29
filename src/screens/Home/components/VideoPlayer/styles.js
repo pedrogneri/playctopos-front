@@ -1,12 +1,21 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+export const PlayerStyle = css`
+  width: 100%;
+  height: 80%;
+
+  @media (max-width: 800px) {
+    height: 30%;
+  }
+`;
 
 export const Placeholder = styled.div`
   display: flex;
-  width: 100%;
-  height: 60%;
   background-color: #414141;
   justify-content: center;
   align-items: center;
+
+  ${PlayerStyle}
 `;
 
 Placeholder.Text = styled.p`
@@ -16,8 +25,8 @@ Placeholder.Text = styled.p`
 `;
 
 export const Player = styled.iframe`
-  width: 100%;
-  height: 60%;
   pointer-events: none;
   border: none;
+
+  ${PlayerStyle}
 `;
