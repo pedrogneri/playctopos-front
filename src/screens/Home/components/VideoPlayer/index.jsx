@@ -26,22 +26,19 @@ const VideoPlayer = () => {
   };
 
   return (
-    <>
-      {!showVideo ? (
-        <Placeholder>
-          <Placeholder.Text>
-            Add videos to playlist :D
+    !showVideo ? (
+      <Placeholder>
+        <Placeholder.Text onClick={playVideo}>
+          Add videos to playlist :D
           </Placeholder.Text>
-        </Placeholder>
-      ) : (
+      </Placeholder>
+    ) : (
         <Player
           allow="autoplay"
           title="Youtube video player"
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&start=${videoTime}`}
         />
-      )}
-      <button type="button" onClick={playVideo}>Click to start the video</button>
-    </>
+      )
   );
 };
 
