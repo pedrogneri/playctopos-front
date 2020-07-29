@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { FaPlay } from 'react-icons/fa';
 
 export const PlayerStyle = css`
   width: 100%;
@@ -14,15 +15,10 @@ export const Placeholder = styled.div`
   background-color: #525252;
   justify-content: center;
   align-items: center;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(17, 17, 17, 1));
 
   ${PlayerStyle}
-`;
-
-Placeholder.Text = styled.p`
-  font-size: 36px;
-  color: #ddd;
-  text-align: center;
-  line-height: inherit;
 `;
 
 export const Player = styled.iframe`
@@ -30,4 +26,10 @@ export const Player = styled.iframe`
   border: none;
 
   ${PlayerStyle}
+`;
+
+export const PlayIcon = styled(FaPlay)`
+  width: 10%;
+  height: 10%;
+  color: #fff;
 `;

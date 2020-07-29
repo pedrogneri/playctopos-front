@@ -4,6 +4,7 @@ import socket from '../../../../socket';
 import {
   Placeholder,
   Player,
+  PlayIcon,
 } from './styles';
 
 const VideoPlayer = () => {
@@ -28,9 +29,7 @@ const VideoPlayer = () => {
   return (
     !showVideo ? (
       <Placeholder>
-        <Placeholder.Text onClick={playVideo}>
-          Add videos to playlist :D
-          </Placeholder.Text>
+        <PlayIcon onClick={playVideo} />
       </Placeholder>
     ) : (
         <Player
