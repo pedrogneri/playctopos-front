@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IoIosSend } from 'react-icons/io';
+import { IoMdSend } from 'react-icons/io';
 
 export const Container = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const MessagesArea = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow-y: auto;
   padding: 20px 20px 0 20px;
   height: 90%;
 `;
@@ -20,9 +20,10 @@ export const Message = styled.p`
   font-size: 16px;
   margin-bottom: 20px;
   color: #fff;
+  overflow-wrap: break-word;
 
   & > b {
-    color: #82cc7e;
+    color: #ca3e47;
   }
 `;
 
@@ -32,7 +33,6 @@ export const Footer = styled.div`
   justify-content: flex-end;
   width: 100%;
   height: 10%;
-  max-height: 10%;
   padding: 10px;
 `;
 
@@ -41,14 +41,13 @@ export const StyledInput = styled.input`
   border: none;
   background-color: transparent;
   color: #fff;
-  width: 90%;
+  width: calc(100% - 40px);
 `;
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   border-radius: 16px;
   background-color: #424242;
 `;
@@ -57,12 +56,11 @@ export const SubmitButton = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  width: 10%;
-  padding: 5px;
+  width: 30px;
 `;
 
-export const SendIcon = styled(IoIosSend)`
-  width: 100%;
-  height: 100%;
+export const SendIcon = styled(IoMdSend)`
+  width: 25px;
+  height: 25px;
   color: #ca3e47;
 `;
