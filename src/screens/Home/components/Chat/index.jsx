@@ -3,10 +3,13 @@ import socket from '../../../../socket';
 
 import {
   Container,
-  InputContainer,
+  Footer,
   MessagesArea,
   StyledInput,
   Message,
+  InputContainer,
+  SendIcon,
+  SubmitButton,
 } from './styles';
 
 const Chat = () => {
@@ -44,16 +47,21 @@ const Chat = () => {
           </Message>
         ))}
       </MessagesArea>
-      <InputContainer>
+      <Footer>
         <form onSubmit={handleSubmit}>
-          <StyledInput
-            type="text"
-            placeholder="Type a message..."
-            onChange={handleChangeInput}
-            value={message}
-          />
+          <InputContainer>
+            <StyledInput
+              type="text"
+              placeholder="Type a message..."
+              onChange={handleChangeInput}
+              value={message}
+            />
+            <SubmitButton type="submit">
+              <SendIcon />
+            </SubmitButton>
+          </InputContainer>
         </form> 
-      </InputContainer>
+      </Footer>
     </Container>
   );
 };

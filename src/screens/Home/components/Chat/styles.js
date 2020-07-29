@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { IoIosSend } from 'react-icons/io';
 
 export const Container = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ export const Message = styled.p`
   }
 `;
 
-export const InputContainer = styled.div`
+export const Footer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -37,9 +38,31 @@ export const InputContainer = styled.div`
 
 export const StyledInput = styled.input`
   padding: 14px;
-  border-radius: 16px;
   border: none;
-  background-color: #424242;
+  background-color: transparent;
   color: #fff;
+  width: 90%;
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 16px;
+  background-color: #424242;
+`;
+
+export const SubmitButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 10%;
+  padding: 5px;
+`;
+
+export const SendIcon = styled(IoIosSend)`
   width: 100%;
+  height: 100%;
+  color: #ca3e47;
 `;
