@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import socket from '../../../../socket';
 
 import {
@@ -13,12 +13,14 @@ import {
 } from './styles';
 
 const Chat = () => {
+  const chatRef = useRef();
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
     const handleSendMessage = ({ message }) => {
       setMessageList([...messageList, message]);
+      scrollChatToBottom();
     };
     socket.on('room.message', handleSendMessage);
 
@@ -37,9 +39,16 @@ const Chat = () => {
     setMessage(event.target.value);
   };
 
+  const scrollChatToBottom = () => {
+    const scroll =
+      chatRef.current.scrollHeight -
+      chatRef.current.clientHeight;
+    chatRef.current.scrollTo(0, scroll);
+  };
+
   return (
     <Container>
-      <MessagesArea>
+      <MessagesArea ref={chatRef}>
         {messageList.map((message) => (
           <Message>
             <b>User: </b>
