@@ -6,6 +6,7 @@ import {
   VideoPlayer,
   VideoContainer,
   VideoMask,
+  VideoPlaceholder,
 } from './styles';
 
 socket.on('connect', () => {
@@ -20,9 +21,7 @@ const Home = () => {
   useEffect(() => {
     socket.emit('room.join', 1);
     const handleInitVideo = ({ initial }) => {
-      const actualDate = new Date();
       setShowVideo(true);
-      setVideoTime(Math.abs(actualDate.getTime() - initial));
     };
     socket.on('video.init', handleInitVideo);
 
@@ -38,7 +37,11 @@ const Home = () => {
     <Container>
       <VideoContainer>
         {!showVideo ? (
-          <VideoMask />
+          <VideoMask>
+            <VideoPlaceholder>
+              Add videos to playlist :D
+            </VideoPlaceholder>
+          </VideoMask>
         ) : (
           <VideoPlayer
             allow="autoplay"
