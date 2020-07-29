@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import socket from '../../socket';
 
 import {
   Container,
   VideoPlayer,
-  CenteredContainer,
-  Input,
+  VideoContainer,
+  VideoMask,
 } from './styles';
 
 socket.on('connect', () => {
@@ -13,23 +13,41 @@ socket.on('connect', () => {
 });
 
 const Home = () => {
-  const [videoId, setVideoId] = useState('c0kfcP_nD9E');
+  const [videoId, setVideoId] = useState('TOypSnKFHrE');
+  const [showVideo, setShowVideo] = useState(false);
+  const [videoTime, setVideoTime] = useState(0);
 
-  const handleSearch = (event) => {
-    setVideoId(event.target.value);
+  useEffect(() => {
+    socket.emit('room.join', 1);
+    const handleInitVideo = ({ roomId, initial }) => {
+      const actualDate = new Date();
+      setShowVideo(true);
+      setVideoTime(Math.abs(actualDate.getTime() - initial));
+    };
+    socket.on('video.init', handleInitVideo);
+
+    return () => socket.off('video.init', handleInitVideo)
+  }, [videoTime]);
+
+  const playVideo = () => {
+    const date = new Date().getTime();
+    socket.emit('video.init', ({ roomId: 1, initial: date }));
   };
 
   return (
     <Container>
-      <CenteredContainer>
-        <label>Digite o ID do video</label>
-        <Input type="text" value={videoId} onChange={handleSearch} />
-        <VideoPlayer
-          allow="autoplay"
-          title="Youtube video player"
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&start=186`}>
-        </VideoPlayer>
-      </CenteredContainer>
+      <VideoContainer>
+        {!showVideo ? (
+          <VideoMask />
+        ) : (
+          <VideoPlayer
+            allow="autoplay"
+            title="Youtube video player"
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&start=${videoTime}`}>
+          </VideoPlayer>
+        )}
+        <button type="button" onClick={playVideo}>Clique para começar o vídeo</button>
+      </VideoContainer>
     </Container>
   );
 };
