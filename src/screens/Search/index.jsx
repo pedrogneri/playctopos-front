@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { getVideoListByQuery } from '../../services/search';
 
+import VideoCard from './components/VideoCard';
+
 import {
   Container,
   SearchBar,
@@ -44,11 +46,13 @@ const Search = () => {
         </SearchBar>
       </form>
       <ResultsContainer>
-        {results.map(({ id, snippet: { title, thumbnails } }) => (
-          <div key={id}>
-            <img height="100px" width="200px" src={thumbnails.medium.url} alt={`${title}-thumbnail`} />
-            <p>{title}</p>
-          </div>
+        {results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }) => (
+          <VideoCard 
+            id={videoId}
+            title={title}
+            channel={channelTitle}
+            thumbnail={thumbnails.medium.url}
+          />
         ))}
       </ResultsContainer>
     </Container>
