@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { getVideoListByQuery } from '../../services/search';
 
 import VideoCard from './components/VideoCard';
@@ -12,8 +14,8 @@ import {
   ResultsContainer,
 } from './styles';
 
-const Search = () => {
-  const [query, setQuery] = useState();
+const Search = ({ onAddToPlaylist }) => {
+  const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
 
   const handleSearch = (event) => {
@@ -52,11 +54,16 @@ const Search = () => {
             title={title}
             channel={channelTitle}
             thumbnail={thumbnails.medium.url}
+            onAddToPlaylist={onAddToPlaylist}
           />
         ))}
       </ResultsContainer>
     </Container>
   );
+};
+
+Search.propTypes = {
+  onAddToPlaylist: PropTypes.func.isRequired,
 };
 
 export default Search;
