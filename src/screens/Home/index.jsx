@@ -3,8 +3,6 @@ import socket from '../../socket';
 
 import VideoPlayer from './components/VideoPlayer';
 import Chat from './components/Chat';
-import TransitionModal from '../../components/TransitionModal';
-import Search from '../Search';
 
 import {
   Container,
@@ -18,7 +16,6 @@ const Home = () => {
   }, []);
 
   return (
-    <>
     <Container>
       <VideoContainer>
         <VideoPlayer />
@@ -27,10 +24,6 @@ const Home = () => {
         <Chat />
       </ChatContainer>
     </Container>
-    <TransitionModal show={true} onClose={() => {}}>
-      <Search />
-    </TransitionModal>
-    </>
   );
 };
 
