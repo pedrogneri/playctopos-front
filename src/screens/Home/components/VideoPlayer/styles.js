@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components';
 import { FaPlay } from 'react-icons/fa';
+import ReactPlayer from 'react-player'
 
 export const PlayerStyle = css`
-  width: 100%;
-  height: 80%;
+  width: 100% !important;
+  height: 80% !important;
 
   @media (max-width: 800px) {
-    height: 100%;
+    height: 100% !important;
   }
 `;
 
@@ -21,7 +22,7 @@ export const Placeholder = styled.div`
   ${PlayerStyle}
 `;
 
-export const Player = styled.iframe`
+export const Player = styled(ReactPlayer)`
   pointer-events: none;
   border: none;
 
