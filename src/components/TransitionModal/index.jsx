@@ -14,16 +14,14 @@ const TransitionModal = ({ children, show, onClose }) => (
       timeout: 500,
     }}
   >
-    <Fade in={show}>
-      {children}
-    </Fade>
+    <Fade in={show}>{children}</Fade>
   </Modal>
 );
 
 TransitionModal.propTypes = {
   children: PropTypes.node,
   show: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
 };
 
 export default TransitionModal;

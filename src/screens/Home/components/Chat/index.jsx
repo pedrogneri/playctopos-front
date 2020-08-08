@@ -24,12 +24,12 @@ const Chat = () => {
     };
     socket.on('room.message', handleSendMessage);
 
-    return () => socket.off('room.message', handleSendMessage)
+    return () => socket.off('room.message', handleSendMessage);
   }, [message, messageList]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(message.trim()) {
+    if (message.trim()) {
       socket.emit('room.message', { roomId: 1, message });
     }
     setMessage('');
@@ -40,9 +40,7 @@ const Chat = () => {
   };
 
   const scrollChatToBottom = () => {
-    const scroll =
-      chatRef.current.scrollHeight -
-      chatRef.current.clientHeight;
+    const scroll = chatRef.current.scrollHeight - chatRef.current.clientHeight;
     chatRef.current.scrollTo(0, scroll);
   };
 
@@ -59,17 +57,12 @@ const Chat = () => {
       <Footer>
         <form onSubmit={handleSubmit}>
           <InputContainer>
-            <StyledInput
-              type="text"
-              placeholder="Type a message..."
-              onChange={handleChangeInput}
-              value={message}
-            />
+            <StyledInput type="text" placeholder="Type a message..." onChange={handleChangeInput} value={message} />
             <SubmitButton type="submit">
               <SendIcon />
             </SubmitButton>
           </InputContainer>
-        </form> 
+        </form>
       </Footer>
     </Container>
   );

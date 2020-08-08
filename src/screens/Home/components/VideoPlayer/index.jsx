@@ -4,13 +4,9 @@ import socket from '../../../../socket';
 import TransitionModal from '../../../../components/TransitionModal';
 import Search from '../../../Search';
 
-import { getRoom, updateRoom } from '../../../../services/room'; 
+import { getRoom, updateRoom } from '../../../../services/room';
 
-import {
-  Placeholder,
-  Player,
-  PlayIcon,
-} from './styles';
+import { Placeholder, Player, PlayIcon } from './styles';
 
 const VideoPlayer = () => {
   const [videoId, setVideoId] = useState('');
@@ -20,7 +16,7 @@ const VideoPlayer = () => {
 
   useEffect(() => {
     getRoom('5f28c42f6239e613afc82b12').then(({ actualVideoId, lastPlayDate }) => {
-      if(actualVideoId && lastPlayDate) {
+      if (actualVideoId && lastPlayDate) {
         setVideoId(actualVideoId);
         setShowVideo(true);
         setVideoTime(Math.round((new Date().getTime() - lastPlayDate) / 1000));
@@ -34,12 +30,12 @@ const VideoPlayer = () => {
     };
     socket.on('video.init', handleInitVideo);
 
-    return () => socket.off('video.init', handleInitVideo)
+    return () => socket.off('video.init', handleInitVideo);
   }, []);
 
   const playVideo = () => {
     const date = new Date().getTime();
-    socket.emit('video.init', ({ roomId: '5f28c42f6239e613afc82b12', actualVideoId: videoId, lastPlayDate: date }));
+    socket.emit('video.init', { roomId: '5f28c42f6239e613afc82b12', actualVideoId: videoId, lastPlayDate: date });
   };
 
   const handleUpdateRoom = (videoId, playDate) => {
@@ -67,7 +63,7 @@ const VideoPlayer = () => {
 
   return (
     <>
-    {!showVideo ? (
+      {!showVideo ? (
         <Placeholder>
           <PlayIcon onClick={handleOpenPlaylist} />
         </Placeholder>
