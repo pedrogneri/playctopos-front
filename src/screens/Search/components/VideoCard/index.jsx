@@ -1,14 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Container,
-  InfoContainer,
-  Thumbnail,
-  Title,
-  Channel,
-  AddToPlaylistIcon,
-} from './styles';
+import { Container, InfoContainer, Thumbnail, Title, Channel, AddToPlaylistIcon } from './styles';
 
 const VideoCard = ({ id, title, channel, thumbnail, onAddToPlaylist }) => {
   return (

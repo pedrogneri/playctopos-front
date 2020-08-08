@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { FaPlay } from 'react-icons/fa';
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player';
 
 export const PlayerStyle = css`
   width: 100% !important;
@@ -16,8 +16,7 @@ export const Placeholder = styled.div`
   background-color: #525252;
   justify-content: center;
   align-items: center;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(17, 17, 17, 1));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(17, 17, 17, 1));
 
   ${PlayerStyle}
 `;
