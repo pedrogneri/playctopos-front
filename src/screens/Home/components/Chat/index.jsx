@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import socket from '../../../../socket';
+import socket from 'socket';
 
 import {
   Container,
