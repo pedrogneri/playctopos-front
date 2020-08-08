@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import socket from '../../socket';
+import socket from 'socket';
 
 import VideoPlayer from './components/VideoPlayer';
 import Chat from './components/Chat';
