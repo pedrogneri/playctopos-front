@@ -5,14 +5,7 @@ import { getVideoListByQuery } from '../../services/search';
 
 import VideoCard from './components/VideoCard';
 
-import {
-  Container,
-  SearchBar,
-  StyledInput,
-  SubmitButton,
-  SearchIcon,
-  ResultsContainer,
-} from './styles';
+import { Container, SearchBar, StyledInput, SubmitButton, SearchIcon, ResultsContainer } from './styles';
 
 const Search = ({ onAddToPlaylist }) => {
   const [query, setQuery] = useState('');
@@ -20,12 +13,14 @@ const Search = ({ onAddToPlaylist }) => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    if(query.trim()) {
-      getVideoListByQuery(query).then((videoList) => {
-        setResults(videoList);
-      }).catch((err) => {
-        console.log(err);
-      });
+    if (query.trim()) {
+      getVideoListByQuery(query)
+        .then((videoList) => {
+          setResults(videoList);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -37,11 +32,7 @@ const Search = ({ onAddToPlaylist }) => {
     <Container>
       <form onSubmit={handleSearch}>
         <SearchBar>
-          <StyledInput
-            value={query}
-            onChange={handleChangeQuery}
-            placeholder="Search something..."
-          />
+          <StyledInput value={query} onChange={handleChangeQuery} placeholder="Search something..." />
           <SubmitButton type="submit">
             <SearchIcon />
           </SubmitButton>
@@ -49,7 +40,7 @@ const Search = ({ onAddToPlaylist }) => {
       </form>
       <ResultsContainer>
         {results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }) => (
-          <VideoCard 
+          <VideoCard
             id={videoId}
             title={title}
             channel={channelTitle}

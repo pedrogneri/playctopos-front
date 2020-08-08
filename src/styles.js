@@ -1,6 +1,5 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
-// eslint-disable-next-line import/prefer-default-export
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap');
 
@@ -93,4 +92,3 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
   }
 `;
-
