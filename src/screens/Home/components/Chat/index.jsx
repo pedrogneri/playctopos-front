@@ -31,7 +31,7 @@ const Chat = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (message.trim()) {
-      socket.emit('room.message', { roomId: 1, message });
+      socket.emit('room.message', { roomId: '5f28c42f6239e613afc82b12', message });
     }
     setMessage('');
   };
