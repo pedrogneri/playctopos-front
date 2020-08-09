@@ -8,7 +8,7 @@ import { Container, VideoContainer, ChatContainer } from './styles';
 
 const Home = () => {
   useEffect(() => {
-    socket.emit('room.join', 1);
+    socket.emit('room.join', '5f28c42f6239e613afc82b12');
   }, []);
 
   return (
