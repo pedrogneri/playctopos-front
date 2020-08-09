@@ -1,6 +1,6 @@
 import { get, post } from 'axios';
 
-const baseURL = 'http://localhost:8080';
+const baseURL = process.env.REACT_APP_API;
 
 export const getRoom = async (id) => {
   const response = await get(`${baseURL}/room`, {
