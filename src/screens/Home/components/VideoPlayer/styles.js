@@ -1,6 +1,7 @@
-import styled, { css } from 'styled-components';
 import { FaPlay } from 'react-icons/fa';
 import ReactPlayer from 'react-player';
+
+import styled, { css } from 'styled-components';
 
 export const PlayerStyle = css`
   width: 100% !important;

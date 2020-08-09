@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+
 import PropTypes from 'prop-types';
 
 import { getVideoListByQuery } from 'services/search';
 
 import VideoCard from './components/VideoCard';
-
 import { Container, SearchBar, StyledInput, SubmitButton, SearchIcon, ResultsContainer } from './styles';
 
 const Search = ({ onAddToPlaylist }) => {
@@ -41,6 +41,7 @@ const Search = ({ onAddToPlaylist }) => {
       <ResultsContainer>
         {results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }) => (
           <VideoCard
+            key={videoId}
             id={videoId}
             title={title}
             channel={channelTitle}
