@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+
 import socket from 'socket';
 
 import TransitionModal from 'components/TransitionModal';
 import Search from 'screens/Search';
-
 import { getRoom, updateRoom } from 'services/room';
 
 import { Placeholder, Player, PlayIcon } from './styles';

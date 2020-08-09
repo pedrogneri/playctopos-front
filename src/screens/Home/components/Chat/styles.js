@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import { IoMdSend } from 'react-icons/io';
+
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
