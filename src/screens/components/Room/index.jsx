@@ -6,7 +6,7 @@ import Chat from './components/Chat';
 import VideoPlayer from './components/VideoPlayer';
 import { Container, VideoContainer, ChatContainer } from './styles';
 
-const Home = () => {
+const Room = () => {
   useEffect(() => {
     socket.emit('room.join', '5f28c42f6239e613afc82b12');
   }, []);
@@ -23,4 +23,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Room;
