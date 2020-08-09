@@ -1,6 +1,6 @@
 import { get } from 'axios';
 
-const baseURL = 'http://localhost:8080';
+const baseURL = process.env.REACT_APP_API;
 
 export const getVideoListByQuery = async (query) => {
   const response = await get(`${baseURL}/searchByQuery`, {
