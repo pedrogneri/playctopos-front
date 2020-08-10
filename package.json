@@ -1,7 +1,7 @@
 {
   "name": "shared-player",
   "version": "0.1.0",
-  "homepage": "https://shared-player-frontend.herokuapp.com/",
+  "homepage": "https://shared-player-frontend.vercel.app/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
