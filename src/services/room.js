@@ -3,7 +3,7 @@ import { get, post } from 'axios';
 const baseURL = process.env.REACT_APP_API;
 
 export const getRoom = async (id) => {
-  const response = await get(`${baseURL}room`, {
+  const response = await get(`${baseURL}/room`, {
     params: {
       id,
     },
@@ -12,7 +12,7 @@ export const getRoom = async (id) => {
 };
 
 export const updateRoom = async (id, room) => {
-  const response = await post(`${baseURL}room?id=${id}`, room, {
+  const response = await post(`${baseURL}/room?id=${id}`, room, {
     params: {
       id,
     },
