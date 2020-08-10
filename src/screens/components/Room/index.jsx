@@ -6,13 +6,13 @@ import Chat from './components/Chat';
 import VideoPlayer from './components/VideoPlayer';
 import { Container, VideoContainer, ChatContainer } from './styles';
 
-const Room = (id) => (
+const Room = ({ id }) => (
   <Container>
     <VideoContainer>
-      <VideoPlayer />
+      <VideoPlayer roomId={id} />
     </VideoContainer>
     <ChatContainer>
-      <Chat />
+      <Chat roomId={id} />
     </ChatContainer>
   </Container>
 );

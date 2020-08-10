@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 import { IconButton } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import socket from 'socket';
 
 import { Container, Footer, MessagesArea, StyledInput, Message, InputContainer, SendIcon } from './styles';
 
-const Chat = () => {
+const Chat = ({ roomId }) => {
   const chatRef = useRef();
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
@@ -23,7 +24,7 @@ const Chat = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (message.trim()) {
-      socket.emit('room.message', { roomId: '5f28c42f6239e613afc82b12', message });
+      socket.emit('room.message', { roomId, message });
     }
     setMessage('');
   };
@@ -59,6 +60,10 @@ const Chat = () => {
       </Footer>
     </Container>
   );
+};
+
+Chat.propTypes = {
+  roomId: PropTypes.string,
 };
 
 export default Chat;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import PropTypes from 'prop-types';
 import socket from 'socket';
 
 import TransitionModal from 'components/TransitionModal';
@@ -8,7 +9,7 @@ import { getRoom, updateRoom } from 'services/room';
 
 import { Placeholder, Player, PlayIcon } from './styles';
 
-const VideoPlayer = () => {
+const VideoPlayer = ({ roomId }) => {
   const [videoId, setVideoId] = useState('');
   const [showVideo, setShowVideo] = useState(false);
   const [showPlaylist, setShowPlaylist] = useState(false);
@@ -19,7 +20,7 @@ const VideoPlayer = () => {
   };
 
   useEffect(() => {
-    getRoom('5f28c42f6239e613afc82b12').then(({ actualVideoId, lastPlayDate }) => {
+    getRoom(roomId).then(({ actualVideoId, lastPlayDate }) => {
       if (actualVideoId && lastPlayDate) {
         setVideoId(actualVideoId);
         setShowVideo(true);
@@ -35,15 +36,15 @@ const VideoPlayer = () => {
     socket.on('video.init', handleInitVideo);
 
     return () => socket.off('video.init', handleInitVideo);
-  }, []);
+  }, [roomId]);
 
   const playVideo = (videoId) => {
     const date = new Date().getTime();
-    socket.emit('video.init', { roomId: '5f28c42f6239e613afc82b12', actualVideoId: videoId, lastPlayDate: date });
+    socket.emit('video.init', { roomId, actualVideoId: videoId, lastPlayDate: date });
   };
 
   const handleUpdateRoom = (videoId, playDate) => {
-    updateRoom('5f28c42f6239e613afc82b12', {
+    updateRoom(roomId, {
       actualVideoId: videoId,
       lastPlayDate: playDate,
     });
@@ -85,6 +86,10 @@ const VideoPlayer = () => {
       </TransitionModal>
     </>
   );
+};
+
+VideoPlayer.propTypes = {
+  roomId: PropTypes.string,
 };
 
 export default VideoPlayer;
