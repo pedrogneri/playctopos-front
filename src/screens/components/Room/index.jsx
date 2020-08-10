@@ -1,26 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import socket from 'socket';
+import PropTypes from 'prop-types';
 
 import Chat from './components/Chat';
 import VideoPlayer from './components/VideoPlayer';
 import { Container, VideoContainer, ChatContainer } from './styles';
 
-const Room = () => {
-  useEffect(() => {
-    socket.emit('room.join', '5f28c42f6239e613afc82b12');
-  }, []);
+const Room = (id) => (
+  <Container>
+    <VideoContainer>
+      <VideoPlayer />
+    </VideoContainer>
+    <ChatContainer>
+      <Chat />
+    </ChatContainer>
+  </Container>
+);
 
-  return (
-    <Container>
-      <VideoContainer>
-        <VideoPlayer />
-      </VideoContainer>
-      <ChatContainer>
-        <Chat />
-      </ChatContainer>
-    </Container>
-  );
+Room.propTypes = {
+  id: PropTypes.string,
 };
 
 export default Room;
