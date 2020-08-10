@@ -1,17 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 
+import { IconButton } from '@material-ui/core';
 import socket from 'socket';
 
-import {
-  Container,
-  Footer,
-  MessagesArea,
-  StyledInput,
-  Message,
-  InputContainer,
-  SendIcon,
-  SubmitButton,
-} from './styles';
+import { Container, Footer, MessagesArea, StyledInput, Message, InputContainer, SendIcon } from './styles';
 
 const Chat = () => {
   const chatRef = useRef();
@@ -59,9 +51,9 @@ const Chat = () => {
         <form onSubmit={handleSubmit}>
           <InputContainer>
             <StyledInput type="text" placeholder="Type a message..." onChange={handleChangeInput} value={message} />
-            <SubmitButton type="submit">
+            <IconButton type="submit">
               <SendIcon />
-            </SubmitButton>
+            </IconButton>
           </InputContainer>
         </form>
       </Footer>

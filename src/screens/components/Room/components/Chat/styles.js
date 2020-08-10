@@ -18,8 +18,8 @@ export const MessagesArea = styled.div`
 `;
 
 export const Message = styled.p`
-  font-size: 16px;
-  margin-bottom: 20px;
+  font-size: 14px;
+  margin-bottom: 10px;
   color: #fff;
   overflow-wrap: break-word;
 
@@ -49,15 +49,9 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   border-radius: 16px;
   background-color: #424242;
-`;
-
-export const SubmitButton = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  width: 30px;
 `;
 
 export const SendIcon = styled(IoMdSend)`
