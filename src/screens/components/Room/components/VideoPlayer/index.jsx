@@ -5,48 +5,40 @@ import socket from 'socket';
 
 import TransitionModal from 'components/TransitionModal';
 import Search from 'screens/components/Search';
-import { getRoom, updateRoom } from 'services/room';
+import { updateRoom, getVideoUrlByRoom } from 'services/room';
 
 import { Placeholder, Player, PlayIcon } from './styles';
 
 const VideoPlayer = ({ roomId }) => {
-  const [videoId, setVideoId] = useState('');
+  const [videoUrl, setVideoUrl] = useState('');
   const [showVideo, setShowVideo] = useState(false);
   const [showPlaylist, setShowPlaylist] = useState(false);
-  const [videoTime, setVideoTime] = useState(0);
-
-  const calculateVideoTime = (lastPlayDate) => {
-    setVideoTime(Math.round((new Date().getTime() - lastPlayDate) / 1000));
-  };
 
   useEffect(() => {
-    getRoom(roomId).then(({ actualVideoId, lastPlayDate }) => {
-      if (actualVideoId && lastPlayDate) {
-        setVideoId(actualVideoId);
-        setShowVideo(true);
-        calculateVideoTime(lastPlayDate);
-      }
-    });
-
-    const handleInitVideo = ({ actualVideoId, lastPlayDate }) => {
-      setVideoId(actualVideoId);
-      setShowVideo(true);
-      calculateVideoTime(lastPlayDate);
+    const handleFetchVideoUrl = () => {
+      getVideoUrlByRoom(roomId).then(({ url }) => {
+        if (!!url) {
+          setShowVideo(true);
+          setVideoUrl(url);
+        } else {
+          setShowVideo(false);
+          setVideoUrl('');
+        }
+      });
     };
-    socket.on('video.init', handleInitVideo);
 
-    return () => socket.off('video.init', handleInitVideo);
-  }, [roomId]);
+    handleFetchVideoUrl();
+    socket.on('video.changeState', handleFetchVideoUrl);
+    // eslint-disable-next-line
+  }, []);
 
-  const playVideo = (videoId) => {
-    const date = new Date().getTime();
-    socket.emit('video.init', { roomId, actualVideoId: videoId, lastPlayDate: date });
+  const changeVideoState = () => {
+    socket.emit('video.changeState', roomId);
   };
 
-  const handleUpdateRoom = (videoId, playDate) => {
-    updateRoom(roomId, {
+  const handleUpdateRoom = async (videoId) => {
+    await updateRoom(roomId, {
       actualVideoId: videoId,
-      lastPlayDate: playDate,
     });
   };
 
@@ -54,15 +46,16 @@ const VideoPlayer = ({ roomId }) => {
     setShowPlaylist(true);
   };
 
-  const handleAddToPlaylist = (id) => {
-    handleUpdateRoom(id, new Date().getTime());
+  const handleAddToPlaylist = async (id) => {
     setShowPlaylist(false);
-    playVideo(id);
+    await handleUpdateRoom(id);
+    changeVideoState();
   };
 
-  const handleEndVideo = () => {
-    handleUpdateRoom('', '');
+  const handleEndVideo = async () => {
     setShowVideo(false);
+    await handleUpdateRoom('');
+    changeVideoState();
   };
 
   return (
@@ -73,12 +66,8 @@ const VideoPlayer = ({ roomId }) => {
         </Placeholder>
       ) : (
         <>
-          <Player
-            onEnded={handleEndVideo}
-            playing={showVideo}
-            url={`https://www.youtube.com/embed/${videoId}?controls=0&rel=0&cc_load_policy=0&showinfo=0&start=${videoTime}`}
-          />
-          <button onClick={handleEndVideo}>Clean</button>
+          <Player onEnded={handleEndVideo} playing={showVideo} url={videoUrl} />
+          <button onClick={handleEndVideo}>Clear</button>
         </>
       )}
       <TransitionModal show={showPlaylist} onClose={() => setShowPlaylist(false)}>
