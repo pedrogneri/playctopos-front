@@ -4,11 +4,14 @@ import { IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
+import { getUsername } from 'utils/username';
+
 import { Container, Footer, MessagesArea, StyledInput, Message, InputContainer, SendIcon } from './styles';
 
 const Chat = ({ roomId }) => {
   const chatRef = useRef();
-  const [message, setMessage] = useState('');
+  const username = getUsername();
+  const [message, setMessage] = useState({ username, value: '' });
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
@@ -22,15 +25,17 @@ const Chat = ({ roomId }) => {
   }, [message, messageList]);
 
   const handleSubmit = (event) => {
+    const username = getUsername();
     event.preventDefault();
-    if (message.trim()) {
-      socket.emit('room.message', { roomId, message });
+
+    if (message.value.trim()) {
+      socket.emit('room.message', { roomId, username, message });
     }
-    setMessage('');
+    setMessage({ ...message, value: '' });
   };
 
   const handleChangeInput = (event) => {
-    setMessage(event.target.value);
+    setMessage({ ...message, value: event.target.value });
   };
 
   const scrollChatToBottom = () => {
@@ -41,17 +46,22 @@ const Chat = ({ roomId }) => {
   return (
     <Container>
       <MessagesArea ref={chatRef}>
-        {messageList.map((message, index) => (
+        {messageList.map(({ username, value }, index) => (
           <Message key={index.toString()}>
-            <b>User: </b>
-            {message}
+            <b>{`${username}: `}</b>
+            {value}
           </Message>
         ))}
       </MessagesArea>
       <Footer>
         <form onSubmit={handleSubmit}>
           <InputContainer>
-            <StyledInput type="text" placeholder="Type a message..." onChange={handleChangeInput} value={message} />
+            <StyledInput
+              type="text"
+              placeholder="Type a message..."
+              onChange={handleChangeInput}
+              value={message.value}
+            />
             <IconButton type="submit">
               <SendIcon />
             </IconButton>
