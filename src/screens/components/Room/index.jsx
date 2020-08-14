@@ -2,7 +2,10 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import { getUsername } from 'utils/username';
+
 import Chat from './components/Chat';
+import SimpleRegister from './components/SimpleRegister';
 import VideoPlayer from './components/VideoPlayer';
 import { Container, VideoContainer, ChatContainer } from './styles';
 
@@ -11,9 +14,7 @@ const Room = ({ id }) => (
     <VideoContainer>
       <VideoPlayer roomId={id} />
     </VideoContainer>
-    <ChatContainer>
-      <Chat roomId={id} />
-    </ChatContainer>
+    <ChatContainer>{!getUsername() ? <SimpleRegister /> : <Chat roomId={id} />}</ChatContainer>
   </Container>
 );
 
