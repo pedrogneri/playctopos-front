@@ -24,7 +24,7 @@ export const Message = styled.p`
   overflow-wrap: break-word;
 
   & > b {
-    color: #ca3e47;
+    color: ${({ color }) => color};
   }
 `;
 

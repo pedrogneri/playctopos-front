@@ -1,17 +1,23 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 
 import { IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
+import { getRandomColor } from 'utils/colors';
 import { getUsername } from 'utils/username';
 
 import { Container, Footer, MessagesArea, StyledInput, Message, InputContainer, SendIcon } from './styles';
 
 const Chat = ({ roomId }) => {
   const chatRef = useRef();
+
   const username = getUsername();
-  const [message, setMessage] = useState({ username, value: '' });
+  const color = useMemo(() => {
+    return getRandomColor();
+  }, []);
+
+  const [message, setMessage] = useState({ username, color, value: '' });
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
@@ -25,11 +31,10 @@ const Chat = ({ roomId }) => {
   }, [message, messageList]);
 
   const handleSubmit = (event) => {
-    const username = getUsername();
     event.preventDefault();
 
     if (message.value.trim()) {
-      socket.emit('room.message', { roomId, username, message });
+      socket.emit('room.message', { roomId, message });
     }
     setMessage({ ...message, value: '' });
   };
@@ -46,8 +51,8 @@ const Chat = ({ roomId }) => {
   return (
     <Container>
       <MessagesArea ref={chatRef}>
-        {messageList.map(({ username, value }, index) => (
-          <Message key={index.toString()}>
+        {messageList.map(({ username, color, value }, index) => (
+          <Message key={index.toString()} color={color}>
             <b>{`${username}: `}</b>
             {value}
           </Message>
