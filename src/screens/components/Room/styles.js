@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const VideoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 100%;
   height: 100vh;
 
   @media (max-width: 800px) {
@@ -27,10 +27,13 @@ export const VideoContainer = styled.div`
 export const ChatContainer = styled.div`
   display: flex;
   width: 25%;
+  min-width: 300px;
+  max-width: 400px;
   height: 100vh;
 
   @media (max-width: 800px) {
     width: 100%;
+    max-width: 100%;
     height: 70%;
   }
 `;
