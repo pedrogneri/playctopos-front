@@ -11,8 +11,7 @@ const SimpleRegister = () => {
     setUsername(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     changeUsername(username);
   };
 
