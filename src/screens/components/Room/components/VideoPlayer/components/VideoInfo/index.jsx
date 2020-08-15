@@ -9,11 +9,11 @@ const VideoInfo = ({ title, channel, thumbnail, onShowPlaylist, onSkip }) => {
   return (
     <Container container alignItems="center">
       <Grid container xs={12} md={6} direction="row" alignItems="center">
-        <Grid xs={5} sm={3} xl={2}>
+        <Grid xs={3} xl={2}>
           <Thumbnail src={thumbnail} />
         </Grid>
 
-        <InfoContainer xs={7} sm={9} xl={10}>
+        <InfoContainer xs={9} xl={10}>
           <Hidden smDown>
             <Title>{title}</Title>
             <Subtitle>{channel}</Subtitle>
