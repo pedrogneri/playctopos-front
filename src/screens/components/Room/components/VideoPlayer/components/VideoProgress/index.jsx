@@ -7,7 +7,7 @@ import { getFormattedTimeBySeconds } from 'utils/timeFormatter';
 import { Container, ProgressBar, BaseBar, TimeLabel } from './styles';
 
 const VideoProgress = ({ value, maxValue }) => {
-  const [percentValue, setPercentValue] = useState(0);
+  const [percentValue, setPercentValue] = useState();
 
   useEffect(() => {
     setPercentValue((value * 100) / maxValue);
