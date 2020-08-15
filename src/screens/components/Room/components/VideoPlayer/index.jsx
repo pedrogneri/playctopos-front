@@ -7,12 +7,15 @@ import TransitionModal from 'components/TransitionModal';
 import Search from 'screens/components/Search';
 import { updateRoom, getVideoUrlByRoom } from 'services/room';
 
+import VideoProgress from './components/VideoProgress';
 import { Placeholder, Player, PlayIcon } from './styles';
 
 const VideoPlayer = ({ roomId }) => {
   const [videoUrl, setVideoUrl] = useState('');
   const [showVideo, setShowVideo] = useState(false);
   const [showPlaylist, setShowPlaylist] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(0);
+  const [videoDuration, setVideoDuration] = useState(0);
 
   useEffect(() => {
     const handleFetchVideoUrl = () => {
@@ -58,6 +61,14 @@ const VideoPlayer = ({ roomId }) => {
     changeVideoState();
   };
 
+  const handleProgress = ({ playedSeconds }) => {
+    setVideoProgress(playedSeconds);
+  };
+
+  const handleVideoDuration = (duration) => {
+    setVideoDuration(duration);
+  };
+
   return (
     <>
       {!showVideo ? (
@@ -66,8 +77,14 @@ const VideoPlayer = ({ roomId }) => {
         </Placeholder>
       ) : (
         <>
-          <Player onEnded={handleEndVideo} playing={showVideo} url={videoUrl} />
-          <button onClick={handleEndVideo}>Clear</button>
+          <Player
+            onProgress={handleProgress}
+            onDuration={handleVideoDuration}
+            onEnded={handleEndVideo}
+            playing={showVideo}
+            url={videoUrl}
+          />
+          <VideoProgress value={videoProgress} maxValue={videoDuration} />
         </>
       )}
       <TransitionModal show={showPlaylist} onClose={() => setShowPlaylist(false)}>
