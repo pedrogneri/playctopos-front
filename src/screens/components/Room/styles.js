@@ -17,6 +17,7 @@ export const VideoContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100vh;
+  overflow-y: auto;
 
   @media (max-width: 800px) {
     width: 100%;
