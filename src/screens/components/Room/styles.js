@@ -7,7 +7,7 @@ export const Container = styled.div`
   background-color: #424242;
   overflow: auto;
 
-  @media (max-width: 800px) {
+  @media (max-width: 959px) {
     flex-direction: column;
   }
 `;
@@ -18,7 +18,7 @@ export const VideoContainer = styled.div`
   width: 100%;
   height: 100vh;
 
-  @media (max-width: 800px) {
+  @media (max-width: 959px) {
     width: 100%;
     height: 30%;
   }
@@ -31,7 +31,7 @@ export const ChatContainer = styled.div`
   max-width: 400px;
   height: 100vh;
 
-  @media (max-width: 800px) {
+  @media (max-width: 959px) {
     width: 100%;
     max-width: 100%;
     height: 70%;

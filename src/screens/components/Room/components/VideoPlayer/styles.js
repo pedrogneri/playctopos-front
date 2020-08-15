@@ -5,9 +5,9 @@ import styled, { css } from 'styled-components';
 
 export const PlayerStyle = css`
   width: 100% !important;
-  height: 80% !important;
+  min-height: 85% !important;
 
-  @media (max-width: 800px) {
+  @media (max-width: 959px) {
     height: 100% !important;
   }
 `;
@@ -22,8 +22,16 @@ export const Placeholder = styled.div`
   ${PlayerStyle}
 `;
 
+export const VideoInfoContainer = styled.div`
+  display: ${({ show }) => (show ? 'block' : 'none')};
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+`;
+
 export const PlayerContainer = styled.div`
   position: relative;
+  display: inline-block;
 
   ${PlayerStyle}
 `;

@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: row;
   padding: 12px 0;
 
-  @media (max-width: 800px) {
+  @media (max-width: 959px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,7 @@ export const InfoContainer = styled.div`
   margin-left: 12px;
   width: 100%;
 
-  @media (max-width: 800px) {
+  @media (max-width: 959px) {
     margin-top: 12px;
     margin-left: 0;
     max-width: 250px;
