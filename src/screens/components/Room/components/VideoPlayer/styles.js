@@ -22,8 +22,16 @@ export const Placeholder = styled.div`
   ${PlayerStyle}
 `;
 
+export const VideoInfoContainer = styled.div`
+  display: ${({ show }) => (show ? 'block' : 'none')};
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+`;
+
 export const PlayerContainer = styled.div`
   position: relative;
+  display: inline-block;
 
   ${PlayerStyle}
 `;
