@@ -83,7 +83,11 @@ const VideoPlayer = ({ roomId }) => {
         </Placeholder>
       ) : (
         <>
-          <PlayerContainer onMouseEnter={() => setShowOverlay(true)} onMouseLeave={() => setShowOverlay(false)}>
+          <PlayerContainer
+            onMouseEnter={() => setShowOverlay(true)}
+            onMouseLeave={() => setShowOverlay(false)}
+            onClick={() => setShowOverlay(true)}
+          >
             <Player
               playing={showVideo}
               url={videoUrl}

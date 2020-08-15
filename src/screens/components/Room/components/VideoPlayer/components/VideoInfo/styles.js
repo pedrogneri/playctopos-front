@@ -37,6 +37,13 @@ export const IconStyle = css`
   height: 30px;
   width: 30px;
   color: #fff !important;
+  margin: 0 12px;
+
+  @media (max-width: 959px) {
+    height: 20px;
+    width: 20px;
+    margin: 0 5px;
+  }
 `;
 
 export const SkipIcon = styled(IoMdSkipForward)`

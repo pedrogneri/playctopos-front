@@ -26,13 +26,8 @@ const VideoInfo = ({ title, channel, thumbnail, onShowPlaylist, onSkip }) => {
       </Grid>
 
       <Grid container xs={12} sm={4} justify="flex-end">
-        <IconButton onClick={onShowPlaylist}>
-          <PlaylistIcon />
-        </IconButton>
-
-        <IconButton onClick={onSkip}>
-          <SkipIcon />
-        </IconButton>
+        <PlaylistIcon onClick={onShowPlaylist} />
+        <SkipIcon onClick={onSkip} />
       </Grid>
     </Container>
   );
