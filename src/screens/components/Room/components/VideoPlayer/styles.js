@@ -22,11 +22,18 @@ export const Placeholder = styled.div`
   ${PlayerStyle}
 `;
 
+export const PlayerContainer = styled.div`
+  position: relative;
+
+  ${PlayerStyle}
+`;
+
 export const Player = styled(ReactPlayer)`
   pointer-events: none;
   border: none;
 
-  ${PlayerStyle}
+  width: 100% !important;
+  height: 100% !important;
 `;
 
 export const PlayIcon = styled(FaPlay)`

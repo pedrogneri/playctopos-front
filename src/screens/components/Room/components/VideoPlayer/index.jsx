@@ -7,13 +7,15 @@ import TransitionModal from 'components/TransitionModal';
 import Search from 'screens/components/Search';
 import { updateRoom, getVideoUrlByRoom } from 'services/room';
 
-import VideoProgress from './components/VideoProgress';
-import { Placeholder, Player, PlayIcon } from './styles';
+import Overlay from './components/Overlay';
+import { Placeholder, Player, PlayIcon, PlayerContainer } from './styles';
 
 const VideoPlayer = ({ roomId }) => {
-  const [videoUrl, setVideoUrl] = useState('');
   const [showVideo, setShowVideo] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
   const [showPlaylist, setShowPlaylist] = useState(false);
+
+  const [videoUrl, setVideoUrl] = useState('');
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
 
@@ -77,14 +79,19 @@ const VideoPlayer = ({ roomId }) => {
         </Placeholder>
       ) : (
         <>
-          <Player
-            onProgress={handleProgress}
-            onDuration={handleVideoDuration}
-            onEnded={handleEndVideo}
-            playing={showVideo}
-            url={videoUrl}
-          />
-          <VideoProgress value={videoProgress} maxValue={videoDuration} />
+          <PlayerContainer onMouseEnter={() => setShowOverlay(true)} onMouseLeave={() => setShowOverlay(false)}>
+            <Player
+              playing={showVideo}
+              url={videoUrl}
+              onProgress={handleProgress}
+              onDuration={handleVideoDuration}
+              onEnded={handleEndVideo}
+            />
+            {showOverlay && <Overlay value={videoProgress} maxValue={videoDuration} />}
+          </PlayerContainer>
+          <button style={{ backgroundColor: '#666', color: '#fff' }} onClick={handleEndVideo}>
+            Clear
+          </button>
         </>
       )}
       <TransitionModal show={showPlaylist} onClose={() => setShowPlaylist(false)}>
