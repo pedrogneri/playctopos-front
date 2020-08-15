@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 
 export const PlayerStyle = css`
   width: 100% !important;
-  height: 80% !important;
+  min-height: 80% !important;
 
   @media (max-width: 800px) {
     height: 100% !important;
