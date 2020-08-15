@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { Hidden } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
@@ -8,7 +9,8 @@ import Search from 'screens/components/Search';
 import { updateRoom, getVideoUrlByRoom } from 'services/room';
 
 import Overlay from './components/Overlay';
-import { Placeholder, Player, PlayIcon, PlayerContainer } from './styles';
+import VideoInfo from './components/VideoInfo';
+import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer } from './styles';
 
 const VideoPlayer = ({ roomId }) => {
   const [showVideo, setShowVideo] = useState(false);
@@ -88,10 +90,28 @@ const VideoPlayer = ({ roomId }) => {
               onEnded={handleEndVideo}
             />
             {showOverlay && <Overlay value={videoProgress} maxValue={videoDuration} />}
+
+            <Hidden smUp>
+              <VideoInfoContainer show={showOverlay}>
+                <VideoInfo
+                  title="Vale nada vale tudo"
+                  channel="Ednaldo Pereira"
+                  thumbnail="https://i.ytimg.com/vi/2lkBFpyo1Mc/hqdefault.jpg"
+                  onShowPlaylist={handleOpenPlaylist}
+                  onSkip={handleEndVideo}
+                />
+              </VideoInfoContainer>
+            </Hidden>
           </PlayerContainer>
-          <button style={{ backgroundColor: '#666', color: '#fff' }} onClick={handleEndVideo}>
-            Clear
-          </button>
+          <Hidden smDown>
+            <VideoInfo
+              title="Vale nada vale tudo"
+              channel="Ednaldo Pereira"
+              thumbnail="https://i.ytimg.com/vi/2lkBFpyo1Mc/hqdefault.jpg"
+              onShowPlaylist={handleOpenPlaylist}
+              onSkip={handleEndVideo}
+            />
+          </Hidden>
         </>
       )}
       <TransitionModal show={showPlaylist} onClose={() => setShowPlaylist(false)}>
