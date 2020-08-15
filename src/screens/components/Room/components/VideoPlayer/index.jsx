@@ -18,12 +18,14 @@ const VideoPlayer = ({ roomId }) => {
   const [showPlaylist, setShowPlaylist] = useState(false);
 
   const [videoUrl, setVideoUrl] = useState('');
+  const [videoInfo, setVideoInfo] = useState({});
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
 
   useEffect(() => {
     const handleFetchVideoUrl = () => {
-      getVideoUrlByRoom(roomId).then(({ url }) => {
+      getVideoUrlByRoom(roomId).then(({ room, url }) => {
+        setVideoInfo(room.actualVideo);
         if (!!url) {
           setShowVideo(true);
           setVideoUrl(url);
@@ -43,9 +45,9 @@ const VideoPlayer = ({ roomId }) => {
     socket.emit('video.changeState', roomId);
   };
 
-  const handleUpdateRoom = async (videoId) => {
+  const handleUpdateRoom = async (video) => {
     await updateRoom(roomId, {
-      actualVideoId: videoId,
+      actualVideo: video,
     });
   };
 
@@ -53,15 +55,15 @@ const VideoPlayer = ({ roomId }) => {
     setShowPlaylist(true);
   };
 
-  const handleAddToPlaylist = async (id) => {
+  const handleAddToPlaylist = async (video) => {
     setShowPlaylist(false);
-    await handleUpdateRoom(id);
+    await handleUpdateRoom(video);
     changeVideoState();
   };
 
   const handleEndVideo = async () => {
     setShowVideo(false);
-    await handleUpdateRoom('');
+    await handleUpdateRoom({ id: '', title: '', channel: '', thumbnail: '' });
     changeVideoState();
   };
 
@@ -91,26 +93,14 @@ const VideoPlayer = ({ roomId }) => {
             />
             {showOverlay && <Overlay value={videoProgress} maxValue={videoDuration} />}
 
-            <Hidden smUp>
+            <Hidden mdUp>
               <VideoInfoContainer show={showOverlay}>
-                <VideoInfo
-                  title="Vale nada vale tudo"
-                  channel="Ednaldo Pereira"
-                  thumbnail="https://i.ytimg.com/vi/2lkBFpyo1Mc/hqdefault.jpg"
-                  onShowPlaylist={handleOpenPlaylist}
-                  onSkip={handleEndVideo}
-                />
+                <VideoInfo {...videoInfo} onShowPlaylist={handleOpenPlaylist} onSkip={handleEndVideo} />
               </VideoInfoContainer>
             </Hidden>
           </PlayerContainer>
           <Hidden smDown>
-            <VideoInfo
-              title="Vale nada vale tudo"
-              channel="Ednaldo Pereira"
-              thumbnail="https://i.ytimg.com/vi/2lkBFpyo1Mc/hqdefault.jpg"
-              onShowPlaylist={handleOpenPlaylist}
-              onSkip={handleEndVideo}
-            />
+            <VideoInfo {...videoInfo} onShowPlaylist={handleOpenPlaylist} onSkip={handleEndVideo} />
           </Hidden>
         </>
       )}

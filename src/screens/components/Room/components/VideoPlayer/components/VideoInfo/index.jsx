@@ -8,7 +8,7 @@ import { Container, SkipIcon, Title, Subtitle, Thumbnail, InfoContainer, Playlis
 const VideoInfo = ({ title, channel, thumbnail, onShowPlaylist, onSkip }) => {
   return (
     <Container container alignItems="center">
-      <Grid container xs={12} md={6} direction="row" alignItems="center">
+      <Grid container xs={12} sm={8} direction="row" alignItems="center">
         <Grid xs={3} xl={2}>
           <Thumbnail src={thumbnail} />
         </Grid>
@@ -25,7 +25,7 @@ const VideoInfo = ({ title, channel, thumbnail, onShowPlaylist, onSkip }) => {
         </InfoContainer>
       </Grid>
 
-      <Grid container xs={12} md={6} justify="flex-end">
+      <Grid container xs={12} sm={4} justify="flex-end">
         <IconButton onClick={onShowPlaylist}>
           <PlaylistIcon />
         </IconButton>

@@ -5,13 +5,17 @@ import PropTypes from 'prop-types';
 import { Container, InfoContainer, Thumbnail, Title, Channel, AddToPlaylistIcon } from './styles';
 
 const VideoCard = ({ id, title, channel, thumbnail, onAddToPlaylist }) => {
+  const handleAddToPlaylist = () => {
+    onAddToPlaylist({ id, title, channel, thumbnail });
+  };
+
   return (
     <Container key={id}>
       <Thumbnail src={thumbnail} alt={`${title}-thumbnail`} />
       <InfoContainer>
         <Title>{title}</Title>
         <Channel>{channel}</Channel>
-        <AddToPlaylistIcon onClick={() => onAddToPlaylist(id)} />
+        <AddToPlaylistIcon onClick={handleAddToPlaylist} />
       </InfoContainer>
     </Container>
   );
