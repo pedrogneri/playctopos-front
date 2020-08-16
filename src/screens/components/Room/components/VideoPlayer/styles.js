@@ -18,6 +18,7 @@ export const Placeholder = styled.div`
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(17, 17, 17, 1));
+  height: 100%;
 
   ${PlayerStyle}
 `;
