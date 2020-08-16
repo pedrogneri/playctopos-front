@@ -38,6 +38,7 @@ export const IconStyle = css`
   width: 30px;
   color: #fff !important;
   margin: 0 12px;
+  cursor: pointer;
 
   @media (max-width: 959px) {
     height: 20px;

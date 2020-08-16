@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Hidden, IconButton } from '@material-ui/core';
+import { Grid, Hidden, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import { Container, SkipIcon, Title, Subtitle, Thumbnail, InfoContainer, PlaylistIcon } from './styles';
@@ -26,8 +26,16 @@ const VideoInfo = ({ title, channel, thumbnail, onShowPlaylist, onSkip }) => {
       </Grid>
 
       <Grid container xs={12} sm={4} justify="flex-end">
-        <PlaylistIcon onClick={onShowPlaylist} />
-        <SkipIcon onClick={onSkip} />
+        <Tooltip title="Open playlist" placement="top">
+          <div>
+            <PlaylistIcon onClick={onShowPlaylist} />
+          </div>
+        </Tooltip>
+        <Tooltip title="Skip video" placement="top">
+          <div>
+            <SkipIcon onClick={onSkip} />
+          </div>
+        </Tooltip>
       </Grid>
     </Container>
   );

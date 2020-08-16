@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import { Container, InfoContainer, Thumbnail, Title, Channel, AddToPlaylistIcon } from './styles';
@@ -15,7 +16,11 @@ const VideoCard = ({ id, title, channel, thumbnail, onAddToPlaylist }) => {
       <InfoContainer>
         <Title>{title}</Title>
         <Channel>{channel}</Channel>
-        <AddToPlaylistIcon onClick={handleAddToPlaylist} />
+        <Tooltip title="Add to playlist" placement="bottom-start">
+          <div>
+            <AddToPlaylistIcon onClick={handleAddToPlaylist} />
+          </div>
+        </Tooltip>
       </InfoContainer>
     </Container>
   );
