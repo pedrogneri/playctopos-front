@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { changeUsername } from 'utils/username';
+import PropTypes from 'prop-types';
+
+import { changeUsername, getUsername } from 'utils/username';
 
 import { Container, Button, StyledForm, StyledInput, Label, UserIcon } from './styles';
 
-const SimpleRegister = () => {
+const SimpleRegister = ({ onClose }) => {
   const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    setUsername(getUsername());
+  }, []);
 
   const handleChangeInput = (event) => {
     setUsername(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     changeUsername(username);
+    onClose();
   };
 
   return (
@@ -25,6 +33,10 @@ const SimpleRegister = () => {
       </StyledForm>
     </Container>
   );
+};
+
+SimpleRegister.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default SimpleRegister;
