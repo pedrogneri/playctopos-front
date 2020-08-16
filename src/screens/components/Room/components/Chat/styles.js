@@ -1,6 +1,7 @@
 import { FaUserCircle } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
 
+import { IconButton } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -72,6 +73,10 @@ export const InputContainer = styled.div`
   justify-content: center;
   border-radius: 16px;
   background-color: #424242;
+`;
+
+export const StyledIconButton = styled(IconButton)`
+  padding: 5px !important;
 `;
 
 export const SendIcon = styled(IoMdSend)`

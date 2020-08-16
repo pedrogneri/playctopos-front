@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 
-import { IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
@@ -17,6 +16,7 @@ import {
   SendIcon,
   ChatHeader,
   UserIcon,
+  StyledIconButton,
 } from './styles';
 
 const Chat = ({ roomId, onOpenRegister }) => {
@@ -81,9 +81,9 @@ const Chat = ({ roomId, onOpenRegister }) => {
               onChange={handleChangeInput}
               value={message.value}
             />
-            <IconButton type="submit">
+            <StyledIconButton type="submit">
               <SendIcon />
-            </IconButton>
+            </StyledIconButton>
           </InputContainer>
         </form>
       </Footer>
