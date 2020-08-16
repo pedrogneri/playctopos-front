@@ -18,6 +18,10 @@ export const VideoContainer = styled.div`
   width: 100%;
   height: 100vh;
 
+  @media (min-width: 960px) {
+    overflow-y: auto;
+  }
+
   @media (max-width: 959px) {
     width: 100%;
     height: 30%;

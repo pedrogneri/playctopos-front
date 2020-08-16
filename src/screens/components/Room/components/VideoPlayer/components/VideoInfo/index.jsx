@@ -8,24 +8,24 @@ import { Container, SkipIcon, Title, Subtitle, Thumbnail, InfoContainer, Playlis
 const VideoInfo = ({ title, channel, thumbnail, onShowPlaylist, onSkip }) => {
   return (
     <Container container alignItems="center">
-      <Grid container xs={12} sm={8} direction="row" alignItems="center">
-        <Grid xs={3} xl={2}>
+      <Grid container item xs={12} sm={8} direction="row" alignItems="center">
+        <Grid container item xs={3} xl={2} justify="center">
           <Thumbnail src={thumbnail} />
         </Grid>
 
-        <InfoContainer xs={9} xl={10}>
-          <Hidden smDown>
+        <InfoContainer item xs={9} xl={10}>
+          <Hidden mdDown>
             <Title>{title}</Title>
             <Subtitle>{channel}</Subtitle>
           </Hidden>
-          <Hidden mdUp>
+          <Hidden lgUp>
             <Title.xs>{title}</Title.xs>
             <Subtitle.xs>{channel}</Subtitle.xs>
           </Hidden>
         </InfoContainer>
       </Grid>
 
-      <Grid container xs={12} sm={4} justify="flex-end">
+      <Grid container item xs={12} sm={4} justify="flex-end">
         <Tooltip title="Open playlist" placement="top">
           <div>
             <PlaylistIcon onClick={onShowPlaylist} />
