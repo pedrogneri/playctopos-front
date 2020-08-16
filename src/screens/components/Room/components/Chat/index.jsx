@@ -7,9 +7,19 @@ import socket from 'socket';
 import { getRandomColor } from 'utils/colors';
 import { getUsername } from 'utils/username';
 
-import { Container, Footer, MessagesArea, StyledInput, Message, InputContainer, SendIcon } from './styles';
+import {
+  Container,
+  Footer,
+  MessagesArea,
+  StyledInput,
+  Message,
+  InputContainer,
+  SendIcon,
+  ChatHeader,
+  UserIcon,
+} from './styles';
 
-const Chat = ({ roomId }) => {
+const Chat = ({ roomId, onOpenRegister }) => {
   const chatRef = useRef();
 
   const username = getUsername();
@@ -50,6 +60,10 @@ const Chat = ({ roomId }) => {
 
   return (
     <Container>
+      <ChatHeader>
+        <h4>Chat</h4>
+        <UserIcon onClick={onOpenRegister} />
+      </ChatHeader>
       <MessagesArea ref={chatRef}>
         {messageList.map(({ username, color, value }, index) => (
           <Message key={index.toString()} color={color}>
@@ -78,7 +92,8 @@ const Chat = ({ roomId }) => {
 };
 
 Chat.propTypes = {
-  roomId: PropTypes.string,
+  roomId: PropTypes.string.isRequired,
+  onOpenRegister: PropTypes.func.isRequired,
 };
 
 export default Chat;

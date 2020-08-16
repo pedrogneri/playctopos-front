@@ -1,3 +1,4 @@
+import { FaUserCircle } from 'react-icons/fa';
 import { IoMdSend } from 'react-icons/io';
 
 import styled from 'styled-components';
@@ -27,6 +28,24 @@ export const Message = styled.p`
     font-weight: 600;
     color: ${({ color }) => color};
   }
+`;
+
+export const ChatHeader = styled.header`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 20px 16px;
+  font-size: 18px;
+  color: #fff;
+  border-bottom: 2px solid #424242;
+`;
+
+export const UserIcon = styled(FaUserCircle)`
+  color: #fff !important;
+  margin-left: auto;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
 `;
 
 export const Footer = styled.div`
