@@ -21,7 +21,8 @@ const VideoPlayer = ({ roomId }) => {
   const [videoInfo, setVideoInfo] = useState({});
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
-  const [volume, setVolume] = useState(0.5);
+  const [volume, setVolume] = useState(1);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     const handleFetchVideoUrl = () => {
@@ -92,6 +93,7 @@ const VideoPlayer = ({ roomId }) => {
             <Player
               playing={showVideo}
               url={videoUrl}
+              muted={isMuted}
               volume={volume}
               onProgress={handleProgress}
               onDuration={handleVideoDuration}
@@ -102,6 +104,8 @@ const VideoPlayer = ({ roomId }) => {
                 time={videoProgress}
                 duration={videoDuration}
                 volume={volume}
+                isMuted={isMuted}
+                onChangeIsMuted={() => setIsMuted(!isMuted)}
                 onChangeVolume={(value) => setVolume(value)}
               />
             )}

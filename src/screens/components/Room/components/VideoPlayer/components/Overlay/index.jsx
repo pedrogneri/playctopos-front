@@ -6,10 +6,15 @@ import VideoProgress from '../VideoProgress';
 import VolumeControl from '../VolumeControl';
 import { Container } from './styles';
 
-const Overlay = ({ volume, onChangeVolume, time, duration }) => {
+const Overlay = ({ volume, onChangeVolume, onChangeIsMuted, isMuted, time, duration }) => {
   return (
     <Container>
-      <VolumeControl volume={volume} onChangeVolume={onChangeVolume} />
+      <VolumeControl
+        isMuted={isMuted}
+        onChangeIsMuted={onChangeIsMuted}
+        volume={volume}
+        onChangeVolume={onChangeVolume}
+      />
       <VideoProgress value={time} maxValue={duration} />
     </Container>
   );
@@ -18,6 +23,8 @@ const Overlay = ({ volume, onChangeVolume, time, duration }) => {
 Overlay.propTypes = {
   volume: PropTypes.number.isRequired,
   onChangeVolume: PropTypes.func.isRequired,
+  isMuted: PropTypes.bool.isRequired,
+  onChangeIsMuted: PropTypes.func.isRequired,
   time: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
 };

@@ -1,7 +1,7 @@
-import { IoMdVolumeHigh } from 'react-icons/io';
+import { IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeOff } from 'react-icons/io';
 
 import { Slider, withStyles } from '@material-ui/core';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledSlider = withStyles({
   root: {
@@ -40,13 +40,28 @@ export const Container = styled.div`
   position: relative;
   display: inline-block;
 
-  &:hover .slider-container {
-    display: flex;
+  @media (min-width: 960px) {
+    &:hover .slider-container {
+      display: flex;
+    }
   }
 `;
 
-export const Icon = styled(IoMdVolumeHigh)`
+export const VolumeIcon = css`
   height: 30px;
   width: 30px;
   color: #fff !important;
+  cursor: pointer;
+`;
+
+export const MutedIcon = styled(IoMdVolumeOff)`
+  ${VolumeIcon};
+`;
+
+export const LowIcon = styled(IoMdVolumeLow)`
+  ${VolumeIcon};
+`;
+
+export const HighIcon = styled(IoMdVolumeHigh)`
+  ${VolumeIcon};
 `;
