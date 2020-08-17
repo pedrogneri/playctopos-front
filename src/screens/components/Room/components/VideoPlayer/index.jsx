@@ -21,6 +21,7 @@ const VideoPlayer = ({ roomId }) => {
   const [videoInfo, setVideoInfo] = useState({});
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
+  const [volume, setVolume] = useState(0.5);
 
   useEffect(() => {
     const handleFetchVideoUrl = () => {
@@ -91,11 +92,19 @@ const VideoPlayer = ({ roomId }) => {
             <Player
               playing={showVideo}
               url={videoUrl}
+              volume={volume}
               onProgress={handleProgress}
               onDuration={handleVideoDuration}
               onEnded={handleEndVideo}
             />
-            {showOverlay && <Overlay value={videoProgress} maxValue={videoDuration} />}
+            {showOverlay && (
+              <Overlay
+                time={videoProgress}
+                duration={videoDuration}
+                volume={volume}
+                onChangeVolume={(value) => setVolume(value)}
+              />
+            )}
 
             <Hidden mdUp>
               <VideoInfoContainer show={showOverlay}>
