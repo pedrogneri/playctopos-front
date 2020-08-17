@@ -8,7 +8,8 @@ export const Container = styled.div`
   left: 0;
 
   display: flex;
-  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
   padding: 16px;
 
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(17, 17, 17, 0.8));
