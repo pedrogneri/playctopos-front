@@ -30,7 +30,7 @@ export const SliderContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 10px;
-  min-width: 100px;
+  width: 100px;
   left: 20px;
   bottom: 6px;
   padding-left: 20px;
@@ -39,6 +39,7 @@ export const SliderContainer = styled.div`
 export const Container = styled.div`
   position: relative;
   display: inline-block;
+  width: 30px;
 
   @media (min-width: 960px) {
     &:hover .slider-container {
