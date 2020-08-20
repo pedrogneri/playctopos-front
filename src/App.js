@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import Home from 'screens/components/Home';
+import Home from 'screens/containers/Home';
 import Room from 'screens/containers/Room';
 
 function App() {

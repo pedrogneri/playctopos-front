@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+
+import PropTypes from 'prop-types';
 
 import { Container, StyledInput, WelcomeMessage, Button, StyledForm } from './styles';
 
-const Home = () => {
-  const history = useHistory();
+const Home = ({ onSubmitRoomId }) => {
   const [roomId, setRoomId] = useState('');
 
-  const handleEnterRoom = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    if (roomId.trim()) {
-      history.push(`room/${roomId}`);
-    }
+    onSubmitRoomId(roomId);
   };
 
   const handleChangeRoomId = (event) => {
@@ -21,12 +19,16 @@ const Home = () => {
   return (
     <Container>
       <WelcomeMessage>Aroldo</WelcomeMessage>
-      <StyledForm onSubmit={handleEnterRoom}>
+      <StyledForm onSubmit={handleSubmit}>
         <StyledInput value={roomId} onChange={handleChangeRoomId} placeholder="Room name" />
         <Button type="submit">START</Button>
       </StyledForm>
     </Container>
   );
+};
+
+Home.propTypes = {
+  onSubmitRoomId: PropTypes.func,
 };
 
 export default Home;
