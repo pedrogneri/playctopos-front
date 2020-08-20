@@ -41,8 +41,6 @@ export const WelcomeMessage = styled.i`
   color: #fff;
   font-weight: 900;
   text-shadow: -1vw 1vw 0px #d5666d, -2vw 2vw 0px #ca3e47;
-
-  letter-spacing: 1vh;
 `;
 
 export const StyledInput = styled.input`
