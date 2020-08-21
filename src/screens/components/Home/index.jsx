@@ -4,31 +4,32 @@ import PropTypes from 'prop-types';
 
 import { Container, StyledInput, WelcomeMessage, Button, StyledForm } from './styles';
 
-const Home = ({ onSubmitRoomId }) => {
-  const [roomId, setRoomId] = useState('');
+const Home = ({ onSubmitRoomName }) => {
+  const [roomName, setRoomName] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmitRoomId(roomId);
+    onSubmitRoomName(roomName);
+    setRoomName('');
   };
 
   const handleChangeRoomId = (event) => {
-    setRoomId(event.target.value);
+    setRoomName(event.target.value);
   };
 
   return (
     <Container>
       <WelcomeMessage>Aroldo</WelcomeMessage>
       <StyledForm onSubmit={handleSubmit}>
-        <StyledInput value={roomId} onChange={handleChangeRoomId} placeholder="Room name" />
-        <Button type="submit">START</Button>
+        <StyledInput value={roomName} onChange={handleChangeRoomId} placeholder="Room name" />
+        <Button type="submit">ENTER</Button>
       </StyledForm>
     </Container>
   );
 };
 
 Home.propTypes = {
-  onSubmitRoomId: PropTypes.func,
+  onSubmitRoomName: PropTypes.func,
 };
 
 export default Home;

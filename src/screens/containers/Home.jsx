@@ -2,17 +2,20 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Home from 'screens/components/Home';
+import { getRoomByName } from 'services/room';
 
 const HomeContainer = () => {
   const history = useHistory();
 
-  const handleEnterRoom = (roomId) => {
-    if (roomId.trim()) {
-      history.push(`room/${roomId}`);
+  const handleEnterRoom = (roomName) => {
+    if (roomName.trim()) {
+      getRoomByName(roomName).then((room) => {
+        if (!!room) history.push(`room/${room._id}`);
+      });
     }
   };
 
-  return <Home onSubmitRoomId={handleEnterRoom} />;
+  return <Home onSubmitRoomName={handleEnterRoom} />;
 };
 
 export default HomeContainer;
