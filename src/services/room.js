@@ -2,10 +2,19 @@ import { get, put } from 'axios';
 
 const baseURL = process.env.REACT_APP_API;
 
-export const getRoom = async (id) => {
+export const getRoomById = async (id) => {
   const response = await get(`${baseURL}/room`, {
     params: {
       id,
+    },
+  });
+  return response.data;
+};
+
+export const getRoomByName = async (name) => {
+  const response = await get(`${baseURL}/getRoomByName`, {
+    params: {
+      name,
     },
   });
   return response.data;
