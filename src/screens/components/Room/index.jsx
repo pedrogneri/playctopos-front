@@ -32,7 +32,7 @@ const Room = ({ id }) => {
       </VideoContainer>
       <ChatContainer>
         {showRegister ? (
-          <SimpleRegister onClose={handleCloseRegister} />
+          <SimpleRegister roomId={id} onClose={handleCloseRegister} />
         ) : (
           <Chat roomId={id} onOpenRegister={handleOpenRegister} />
         )}

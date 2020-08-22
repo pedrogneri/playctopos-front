@@ -31,6 +31,14 @@ export const Message = styled.p`
   }
 `;
 
+export const Warn = styled.p`
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-style: italic;
+  color: #999;
+  overflow-wrap: break-word;
+`;
+
 export const ChatHeader = styled.header`
   display: flex;
   align-items: center;

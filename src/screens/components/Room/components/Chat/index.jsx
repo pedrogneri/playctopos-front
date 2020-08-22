@@ -17,6 +17,7 @@ import {
   ChatHeader,
   UserIcon,
   StyledIconButton,
+  Warn,
 } from './styles';
 
 const Chat = ({ roomId, onOpenRegister }) => {
@@ -27,7 +28,7 @@ const Chat = ({ roomId, onOpenRegister }) => {
     return getRandomColor();
   }, []);
 
-  const [message, setMessage] = useState({ username, color, value: '' });
+  const [message, setMessage] = useState({ username, color, value: '', type: 'message' });
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
@@ -65,12 +66,16 @@ const Chat = ({ roomId, onOpenRegister }) => {
         <UserIcon onClick={onOpenRegister} />
       </ChatHeader>
       <MessagesArea ref={chatRef}>
-        {messageList.map(({ username, color, value }, index) => (
-          <Message key={index.toString()} color={color}>
-            <b>{`${username}: `}</b>
-            {value}
-          </Message>
-        ))}
+        {messageList.map(({ username, type, color, value }, index) =>
+          type === 'warn' ? (
+            <Warn>{value}</Warn>
+          ) : (
+            <Message key={index.toString()} color={color}>
+              <b>{`${username}: `}</b>
+              {value}
+            </Message>
+          ),
+        )}
       </MessagesArea>
       <Footer>
         <form onSubmit={handleSubmit}>
