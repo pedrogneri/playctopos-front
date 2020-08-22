@@ -21,8 +21,10 @@ const SimpleRegister = ({ roomId, onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const oldUsername = getUsername() || 'Someone';
-    sendWarn(roomId, `${oldUsername} changed his name to ${username}`);
-    changeUsername(username);
+    if (oldUsername !== username) {
+      sendWarn(roomId, `${oldUsername} changed his name to ${username}`);
+      changeUsername(username);
+    }
     onClose();
   };
 
