@@ -69,7 +69,7 @@ const Chat = ({ roomId, onOpenRegister }) => {
       <MessagesArea ref={chatRef}>
         {messageList.map(({ username, type, color, value }, index) =>
           type === 'warn' ? (
-            <Warn>{value}</Warn>
+            <Warn key={index.toString()}>{value}</Warn>
           ) : (
             <Message key={index.toString()} color={color}>
               <b>{`${username}: `}</b>
