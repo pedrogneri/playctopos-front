@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import { Hidden } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -22,7 +23,7 @@ const VideoPlayer = ({ roomId }) => {
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
   const [volume, setVolume] = useState(1);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(isMobile);
 
   useEffect(() => {
     const handleFetchVideoUrl = () => {
@@ -77,6 +78,12 @@ const VideoPlayer = ({ roomId }) => {
     setVideoDuration(duration);
   };
 
+  const handleClickPlayer = () => {
+    if (isMobile) {
+      setShowOverlay(!showOverlay);
+    }
+  };
+
   return (
     <>
       {!showVideo ? (
@@ -88,7 +95,7 @@ const VideoPlayer = ({ roomId }) => {
           <PlayerContainer
             onMouseEnter={() => setShowOverlay(true)}
             onMouseLeave={() => setShowOverlay(false)}
-            onClick={() => setShowOverlay(true)}
+            onClick={handleClickPlayer}
           >
             <Player
               playing={showVideo}
