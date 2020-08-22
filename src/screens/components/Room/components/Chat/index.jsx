@@ -23,6 +23,7 @@ import {
 
 const Chat = ({ roomId, onOpenRegister }) => {
   const chatRef = useRef();
+  const inputRef = useRef();
 
   const username = getUsername();
   const color = useMemo(() => {
@@ -44,6 +45,7 @@ const Chat = ({ roomId, onOpenRegister }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    inputRef.current.focus();
 
     if (message.value.trim()) {
       sendMessage(roomId, message);
@@ -82,6 +84,7 @@ const Chat = ({ roomId, onOpenRegister }) => {
         <form onSubmit={handleSubmit}>
           <InputContainer>
             <StyledInput
+              ref={inputRef}
               type="text"
               placeholder="Type a message..."
               onChange={handleChangeInput}
