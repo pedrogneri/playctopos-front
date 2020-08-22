@@ -1,6 +1,11 @@
 import { get, put } from 'axios';
+import socket from 'socket';
 
 const baseURL = process.env.REACT_APP_API;
+
+export const joinRoom = (id) => {
+  socket.emit('room.join', id);
+};
 
 export const getRoomById = async (id) => {
   const response = await get(`${baseURL}/room`, {

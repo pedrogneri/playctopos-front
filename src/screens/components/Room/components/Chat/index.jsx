@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
+import { sendMessage } from 'services/chat';
 import { getRandomColor } from 'utils/colors';
 import { getUsername } from 'utils/username';
 
@@ -28,7 +29,7 @@ const Chat = ({ roomId, onOpenRegister }) => {
     return getRandomColor();
   }, []);
 
-  const [message, setMessage] = useState({ username, color, value: '', type: 'message' });
+  const [message, setMessage] = useState({ username, color, value: '' });
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const Chat = ({ roomId, onOpenRegister }) => {
     event.preventDefault();
 
     if (message.value.trim()) {
-      socket.emit('room.message', { roomId, message });
+      sendMessage(roomId, message);
     }
     setMessage({ ...message, value: '' });
   };

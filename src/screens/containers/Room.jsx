@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
-import socket from 'socket';
 
 import Room from 'screens/components/Room';
+import { sendWarn } from 'services/chat';
+import { joinRoom } from 'services/room';
 import { getUsername } from 'utils/username';
 
 const RoomContainer = ({ match: { params } }) => {
@@ -11,11 +12,8 @@ const RoomContainer = ({ match: { params } }) => {
 
   useEffect(() => {
     const username = getUsername() || 'Someone';
-    socket.emit('room.join', id);
-    socket.emit('room.message', {
-      roomId: id,
-      message: { username, value: `${username} joined the party`, type: 'warn' },
-    });
+    joinRoom(id);
+    sendWarn(id, `${username} joined the party`);
   }, [id]);
 
   return <Room id={id} />;

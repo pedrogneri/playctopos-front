@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
-import socket from 'socket';
 
+import { sendWarn } from 'services/chat';
 import { changeUsername, getUsername } from 'utils/username';
 
 import { Container, Button, StyledForm, StyledInput, Label, UserIcon } from './styles';
@@ -21,10 +21,7 @@ const SimpleRegister = ({ roomId, onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const oldUsername = getUsername() || 'Someone';
-    socket.emit('room.message', {
-      roomId,
-      message: { username, value: `${oldUsername} changed his name to ${username}`, type: 'warn' },
-    });
+    sendWarn(roomId, `${oldUsername} changed his name to ${username}`);
     changeUsername(username);
     onClose();
   };
