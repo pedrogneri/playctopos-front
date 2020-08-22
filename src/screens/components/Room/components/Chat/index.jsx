@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
+import { sendMessage } from 'services/chat';
 import { getRandomColor } from 'utils/colors';
 import { getUsername } from 'utils/username';
 
@@ -17,6 +18,7 @@ import {
   ChatHeader,
   UserIcon,
   StyledIconButton,
+  Warn,
 } from './styles';
 
 const Chat = ({ roomId, onOpenRegister }) => {
@@ -44,7 +46,7 @@ const Chat = ({ roomId, onOpenRegister }) => {
     event.preventDefault();
 
     if (message.value.trim()) {
-      socket.emit('room.message', { roomId, message });
+      sendMessage(roomId, message);
     }
     setMessage({ ...message, value: '' });
   };
@@ -65,12 +67,16 @@ const Chat = ({ roomId, onOpenRegister }) => {
         <UserIcon onClick={onOpenRegister} />
       </ChatHeader>
       <MessagesArea ref={chatRef}>
-        {messageList.map(({ username, color, value }, index) => (
-          <Message key={index.toString()} color={color}>
-            <b>{`${username}: `}</b>
-            {value}
-          </Message>
-        ))}
+        {messageList.map(({ username, type, color, value }, index) =>
+          type === 'warn' ? (
+            <Warn key={index.toString()}>{value}</Warn>
+          ) : (
+            <Message key={index.toString()} color={color}>
+              <b>{`${username}: `}</b>
+              {value}
+            </Message>
+          ),
+        )}
       </MessagesArea>
       <Footer>
         <form onSubmit={handleSubmit}>

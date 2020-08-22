@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
+import { sendWarn } from 'services/chat';
 import { changeUsername, getUsername } from 'utils/username';
 
 import { Container, Button, StyledForm, StyledInput, Label, UserIcon } from './styles';
 
-const SimpleRegister = ({ onClose }) => {
+const SimpleRegister = ({ roomId, onClose }) => {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
@@ -19,6 +20,8 @@ const SimpleRegister = ({ onClose }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const oldUsername = getUsername() || 'Someone';
+    sendWarn(roomId, `${oldUsername} changed his name to ${username}`);
     changeUsername(username);
     onClose();
   };
@@ -36,6 +39,7 @@ const SimpleRegister = ({ onClose }) => {
 };
 
 SimpleRegister.propTypes = {
+  roomId: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
