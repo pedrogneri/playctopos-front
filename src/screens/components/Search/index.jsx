@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
+import { useToast } from 'hooks/useToast';
 import { getVideoListByQuery } from 'services/search';
 
 import VideoCard from './components/VideoCard';
 import { Container, SearchBar, StyledInput, SubmitButton, SearchIcon, ResultsContainer } from './styles';
 
 const Search = ({ onAddToPlaylist }) => {
+  const toast = useToast();
+
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
 
@@ -18,8 +21,8 @@ const Search = ({ onAddToPlaylist }) => {
         .then((videoList) => {
           setResults(videoList);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          toast.add({ type: 'error', message: 'Something went wrong :(' });
         });
     }
   };
