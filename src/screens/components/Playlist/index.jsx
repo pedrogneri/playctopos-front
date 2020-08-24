@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { useToast } from 'hooks/useToast';
+import useToast from 'hooks/useToast';
 import { getVideoListByQuery } from 'services/search';
 
 import VideoCard from './components/VideoCard';
 import { Container, SearchBar, StyledInput, SubmitButton, SearchIcon, ResultsContainer } from './styles';
 
-const Search = ({ onAddToPlaylist }) => {
+const Playlist = ({ onAddToPlaylist }) => {
   const toast = useToast();
 
   const [query, setQuery] = useState('');
@@ -57,8 +57,8 @@ const Search = ({ onAddToPlaylist }) => {
   );
 };
 
-Search.propTypes = {
+Playlist.propTypes = {
   onAddToPlaylist: PropTypes.func.isRequired,
 };
 
-export default Search;
+export default Playlist;

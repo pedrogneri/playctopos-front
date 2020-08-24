@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import socket from 'socket';
 
 import TransitionModal from 'components/TransitionModal';
-import Search from 'screens/components/Search';
+import Playlist from 'screens/components/Playlist';
 import { updateRoom, getVideoUrlByRoom } from 'services/room';
 
 import Overlay from './components/Overlay';
@@ -129,7 +129,7 @@ const VideoPlayer = ({ roomId }) => {
         </>
       )}
       <TransitionModal show={showPlaylist} onClose={() => setShowPlaylist(false)}>
-        <Search onAddToPlaylist={handleAddToPlaylist} />
+        <Playlist onAddToPlaylist={handleAddToPlaylist} />
       </TransitionModal>
     </>
   );
