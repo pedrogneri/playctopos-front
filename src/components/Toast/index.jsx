@@ -9,7 +9,7 @@ const Toast = ({ message, remove, type }) => {
   const removeRef = useRef(remove);
 
   useEffect(() => {
-    const duration = 6000;
+    const duration = 3000;
     const id = setTimeout(() => removeRef.current(), duration);
 
     return () => clearTimeout(id);
