@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import useToast from 'hooks/useToast';
 import { getVideoListByQuery } from 'services/search';
 
+import EmptyState from './components/EmptyState';
 import VideoCard from './components/VideoCard';
 import { Container, SearchBar, StyledInput, SearchIcon, ClearIcon, ResultsContainer } from './styles';
 
@@ -56,6 +57,7 @@ const Playlist = ({ playlist, onAddToPlaylist }) => {
         </SearchBar>
       </form>
       <ResultsContainer>
+        {!showResults && playlist.length === 0 && <EmptyState />}
         {!showResults
           ? playlist.map(({ id, title, thumbnail, channel }) => (
               <VideoCard

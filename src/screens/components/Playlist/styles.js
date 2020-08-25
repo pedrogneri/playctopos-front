@@ -46,5 +46,6 @@ export const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 12px;
+  height: 100%;
   overflow-y: auto;
 `;
