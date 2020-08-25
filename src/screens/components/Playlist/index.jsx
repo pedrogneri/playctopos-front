@@ -22,8 +22,12 @@ const Playlist = ({ playlist, onAddToPlaylist }) => {
     if (query.trim()) {
       getVideoListByQuery(query)
         .then((videoList) => {
-          setShowResults(true);
-          setResults(videoList);
+          if (videoList.length > 0) {
+            setShowResults(true);
+            setResults(videoList);
+          } else {
+            toast.add({ type: 'warning', message: 'No results' });
+          }
         })
         .catch(() => {
           toast.add({ type: 'error', message: 'Something went wrong :(' });
