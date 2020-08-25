@@ -7,7 +7,7 @@ import socket from 'socket';
 
 import TransitionModal from 'components/TransitionModal';
 import Playlist from 'screens/components/Playlist';
-import { updateRoom, getVideoUrlByRoom } from 'services/room';
+import { updateActualVideo, getVideoUrlByRoom, updatePlaylist } from 'services/room';
 
 import Overlay from './components/Overlay';
 import VideoInfo from './components/VideoInfo';
@@ -19,19 +19,27 @@ const VideoPlayer = ({ roomId }) => {
   const [showPlaylist, setShowPlaylist] = useState(false);
 
   const [videoUrl, setVideoUrl] = useState('');
+  const [lastPlayDate, setLastPlayDate] = useState(0);
   const [videoInfo, setVideoInfo] = useState({});
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(isMobile);
 
+  const [playlist, setPlaylist] = useState([]);
+
   useEffect(() => {
     const handleFetchVideoUrl = () => {
       getVideoUrlByRoom(roomId).then(({ room, url }) => {
-        setVideoInfo(room.actualVideo);
+        setPlaylist(room.playlist);
+
         if (!!url) {
-          setShowVideo(true);
-          setVideoUrl(url);
+          if (lastPlayDate !== room.lastPlayDate) {
+            setLastPlayDate(room.lastPlayDate);
+            setShowVideo(true);
+            setVideoInfo(room.actualVideo);
+            setVideoUrl(url);
+          }
         } else {
           setShowVideo(false);
           setVideoUrl('');
@@ -48,10 +56,13 @@ const VideoPlayer = ({ roomId }) => {
     socket.emit('video.changeState', roomId);
   };
 
-  const handleUpdateRoom = async (video) => {
-    await updateRoom(roomId, {
-      actualVideo: video,
-    });
+  const handleUpdatePlaylist = async (video) => {
+    const newPlaylist = [...playlist, video];
+    await updatePlaylist(roomId, newPlaylist);
+  };
+
+  const handleUpdateActualVideo = async (actualVideo) => {
+    await updateActualVideo(roomId, actualVideo);
   };
 
   const handleOpenPlaylist = () => {
@@ -60,13 +71,13 @@ const VideoPlayer = ({ roomId }) => {
 
   const handleAddToPlaylist = async (video) => {
     setShowPlaylist(false);
-    await handleUpdateRoom(video);
+    await handleUpdatePlaylist(video);
     changeVideoState();
   };
 
   const handleEndVideo = async () => {
     setShowVideo(false);
-    await handleUpdateRoom({ id: '', title: '', channel: '', thumbnail: '' });
+    await handleUpdateActualVideo({ id: '', title: '', channel: '', thumbnail: '' });
     changeVideoState();
   };
 
@@ -129,7 +140,7 @@ const VideoPlayer = ({ roomId }) => {
         </>
       )}
       <TransitionModal show={showPlaylist} onClose={() => setShowPlaylist(false)}>
-        <Playlist onAddToPlaylist={handleAddToPlaylist} />
+        <Playlist playlist={playlist} onAddToPlaylist={handleAddToPlaylist} />
       </TransitionModal>
     </>
   );
