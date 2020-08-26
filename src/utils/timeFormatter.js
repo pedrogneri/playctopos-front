@@ -1,7 +1,23 @@
 import moment from 'moment';
 
 export const getFormattedTimeBySeconds = (seconds) => {
-  const hours = seconds / 3600;
+  const duration = moment.duration(seconds, 'seconds');
 
-  return moment.utc(seconds * 1000).format(hours < 1 ? 'mm:ss' : 'HH:mm:ss');
+  return formatDuration(duration);
+};
+
+const formatDuration = (duration) => {
+  let items = [('0' + duration.minutes()).slice(-2), ('0' + duration.seconds()).slice(-2)];
+
+  if (duration.hours() > 0) {
+    items = [('0' + duration.hours()).slice(-2), ...items];
+  }
+  if (duration.days() > 0) {
+    items = [('0' + duration.days()).slice(-2), ...items];
+  }
+  if (duration.months() > 0) {
+    items = [('0' + duration.months()).slice(-2), ...items];
+  }
+
+  return items.join(':');
 };
