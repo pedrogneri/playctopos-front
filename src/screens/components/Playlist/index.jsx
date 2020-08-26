@@ -47,11 +47,11 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
   const handleAddToPlaylist = (video) => {
     const newPlaylist = [...playlist, video];
     onUpdatePlaylist(newPlaylist);
+    setShowResults(false);
   };
 
   const handleRemoveFromPlaylist = (index) => {
     playlist.splice(index, 1);
-    console.log(playlist);
     onUpdatePlaylist(playlist);
   };
 
