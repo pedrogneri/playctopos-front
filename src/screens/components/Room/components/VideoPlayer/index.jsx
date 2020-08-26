@@ -56,11 +56,6 @@ const VideoPlayer = ({ roomId }) => {
     socket.emit('video.changeState', roomId);
   };
 
-  const handleUpdatePlaylist = async (video) => {
-    const newPlaylist = [...playlist, video];
-    await updatePlaylist(roomId, newPlaylist);
-  };
-
   const handleUpdateActualVideo = async (actualVideo) => {
     await updateActualVideo(roomId, actualVideo);
   };
@@ -69,9 +64,8 @@ const VideoPlayer = ({ roomId }) => {
     setShowPlaylist(true);
   };
 
-  const handleAddToPlaylist = async (video) => {
-    setShowPlaylist(false);
-    await handleUpdatePlaylist(video);
+  const handleUpdatePlaylist = async (playlist) => {
+    await updatePlaylist(roomId, playlist);
     changeVideoState();
   };
 
@@ -140,7 +134,7 @@ const VideoPlayer = ({ roomId }) => {
         </>
       )}
       <TransitionModal show={showPlaylist} onClose={() => setShowPlaylist(false)}>
-        <Playlist playlist={playlist} onAddToPlaylist={handleAddToPlaylist} />
+        <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} />
       </TransitionModal>
     </>
   );

@@ -10,7 +10,7 @@ import EmptyState from './components/EmptyState';
 import VideoCard from './components/VideoCard';
 import { Container, SearchBar, StyledInput, SearchIcon, ClearIcon, ResultsContainer } from './styles';
 
-const Playlist = ({ playlist, onAddToPlaylist }) => {
+const Playlist = ({ playlist, onUpdatePlaylist }) => {
   const toast = useToast();
 
   const [showResults, setShowResults] = useState(false);
@@ -44,6 +44,17 @@ const Playlist = ({ playlist, onAddToPlaylist }) => {
     setShowResults(false);
   };
 
+  const handleAddToPlaylist = (video) => {
+    const newPlaylist = [...playlist, video];
+    onUpdatePlaylist(newPlaylist);
+  };
+
+  const handleRemoveFromPlaylist = (index) => {
+    playlist.splice(index, 1);
+    console.log(playlist);
+    onUpdatePlaylist(playlist);
+  };
+
   return (
     <Container>
       <form onSubmit={handleSearch}>
@@ -63,24 +74,26 @@ const Playlist = ({ playlist, onAddToPlaylist }) => {
       <ResultsContainer>
         {!showResults && playlist.length === 0 && <EmptyState />}
         {!showResults
-          ? playlist.map(({ id, title, thumbnail, channel }) => (
+          ? playlist.map(({ id, title, thumbnail, channel }, index) => (
               <VideoCard
-                key={id}
+                index={index}
+                key={`${id}-${index}`}
                 id={id}
                 title={title}
                 channel={channel}
                 thumbnail={thumbnail}
-                onAddToPlaylist={onAddToPlaylist}
+                onRemoveFromPlaylist={handleRemoveFromPlaylist}
               />
             ))
-          : results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }) => (
+          : results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }, index) => (
               <VideoCard
-                key={videoId}
+                index={index}
+                key={`${videoId}-${index}`}
                 id={videoId}
                 title={title}
                 channel={channelTitle}
                 thumbnail={thumbnails.medium.url}
-                onAddToPlaylist={onAddToPlaylist}
+                onAddToPlaylist={handleAddToPlaylist}
               />
             ))}
       </ResultsContainer>
@@ -90,7 +103,7 @@ const Playlist = ({ playlist, onAddToPlaylist }) => {
 
 Playlist.propTypes = {
   playlist: PropTypes.arrayOf(PropTypes.object),
-  onAddToPlaylist: PropTypes.func.isRequired,
+  onUpdatePlaylist: PropTypes.func.isRequired,
 };
 
 export default Playlist;
