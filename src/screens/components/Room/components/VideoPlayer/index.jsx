@@ -19,7 +19,6 @@ const VideoPlayer = ({ roomId }) => {
   const [showPlaylist, setShowPlaylist] = useState(false);
 
   const [videoUrl, setVideoUrl] = useState('');
-  const [lastPlayDate, setLastPlayDate] = useState(0);
   const [videoInfo, setVideoInfo] = useState({});
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
@@ -34,12 +33,9 @@ const VideoPlayer = ({ roomId }) => {
         setPlaylist(room.playlist);
 
         if (!!url) {
-          if (lastPlayDate !== room.lastPlayDate) {
-            setLastPlayDate(room.lastPlayDate);
-            setShowVideo(true);
-            setVideoInfo(room.actualVideo);
-            setVideoUrl(url);
-          }
+          setShowVideo(true);
+          setVideoInfo(room.actualVideo);
+          setVideoUrl(url);
         } else {
           setShowVideo(false);
           setVideoUrl('');
