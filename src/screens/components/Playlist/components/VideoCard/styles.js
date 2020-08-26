@@ -1,6 +1,6 @@
-import { MdPlaylistAdd } from 'react-icons/md';
+import { AiFillCloseCircle, AiFillPlusCircle } from 'react-icons/ai';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -43,9 +43,21 @@ export const Thumbnail = styled.img`
   height: 125px;
 `;
 
-export const AddToPlaylistIcon = styled(MdPlaylistAdd)`
+export const IconContainer = styled.div`
+  margin-top: auto;
+`;
+
+export const IconStyle = css`
   color: #fff;
   width: 25px;
   height: 25px;
   cursor: pointer;
+`;
+
+export const AddIcon = styled(AiFillPlusCircle)`
+  ${IconStyle}
+`;
+
+export const RemoveIcon = styled(AiFillCloseCircle)`
+  ${IconStyle}
 `;

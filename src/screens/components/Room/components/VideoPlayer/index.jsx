@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import socket from 'socket';
 
 import TransitionModal from 'components/TransitionModal';
-import Search from 'screens/components/Search';
-import { updateRoom, getVideoUrlByRoom } from 'services/room';
+import Playlist from 'screens/components/Playlist';
+import { updateActualVideo, getVideoUrlByRoom, updatePlaylist } from 'services/room';
 
 import Overlay from './components/Overlay';
 import VideoInfo from './components/VideoInfo';
@@ -25,12 +25,16 @@ const VideoPlayer = ({ roomId }) => {
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(isMobile);
 
+  const [playlist, setPlaylist] = useState([]);
+
   useEffect(() => {
     const handleFetchVideoUrl = () => {
       getVideoUrlByRoom(roomId).then(({ room, url }) => {
-        setVideoInfo(room.actualVideo);
+        setPlaylist(room.playlist);
+
         if (!!url) {
           setShowVideo(true);
+          setVideoInfo(room.actualVideo);
           setVideoUrl(url);
         } else {
           setShowVideo(false);
@@ -48,25 +52,22 @@ const VideoPlayer = ({ roomId }) => {
     socket.emit('video.changeState', roomId);
   };
 
-  const handleUpdateRoom = async (video) => {
-    await updateRoom(roomId, {
-      actualVideo: video,
-    });
+  const handleUpdateActualVideo = async (actualVideo) => {
+    await updateActualVideo(roomId, actualVideo);
   };
 
   const handleOpenPlaylist = () => {
     setShowPlaylist(true);
   };
 
-  const handleAddToPlaylist = async (video) => {
-    setShowPlaylist(false);
-    await handleUpdateRoom(video);
+  const handleUpdatePlaylist = async (playlist) => {
+    await updatePlaylist(roomId, playlist);
     changeVideoState();
   };
 
   const handleEndVideo = async () => {
     setShowVideo(false);
-    await handleUpdateRoom({ id: '', title: '', channel: '', thumbnail: '' });
+    await handleUpdateActualVideo({ id: '', title: '', channel: '', thumbnail: '' });
     changeVideoState();
   };
 
@@ -129,7 +130,7 @@ const VideoPlayer = ({ roomId }) => {
         </>
       )}
       <TransitionModal show={showPlaylist} onClose={() => setShowPlaylist(false)}>
-        <Search onAddToPlaylist={handleAddToPlaylist} />
+        <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} />
       </TransitionModal>
     </>
   );

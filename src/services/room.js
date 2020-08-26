@@ -7,15 +7,6 @@ export const joinRoom = (id) => {
   socket.emit('room.join', id);
 };
 
-export const getRoomById = async (id) => {
-  const response = await get(`${baseURL}/room`, {
-    params: {
-      id,
-    },
-  });
-  return response.data;
-};
-
 export const getRoomByName = async (name) => {
   const response = await get(`${baseURL}/getRoomByName`, {
     params: {
@@ -25,8 +16,17 @@ export const getRoomByName = async (name) => {
   return response.data;
 };
 
-export const updateRoom = async (id, room) => {
-  const response = await put(`${baseURL}/room`, room, {
+export const updateActualVideo = async (id, actualVideo) => {
+  const response = await put(`${baseURL}/actualVideo`, actualVideo, {
+    params: {
+      id,
+    },
+  });
+  return response.data;
+};
+
+export const updatePlaylist = async (id, playlist) => {
+  const response = await put(`${baseURL}/playlist`, playlist, {
     params: {
       id,
     },

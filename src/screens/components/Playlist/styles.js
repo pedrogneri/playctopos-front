@@ -1,4 +1,4 @@
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineSearch, AiFillCloseCircle } from 'react-icons/ai';
 
 import styled from 'styled-components';
 
@@ -30,14 +30,13 @@ export const StyledInput = styled.input`
   width: calc(100% - 40px);
 `;
 
-export const SubmitButton = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  width: 30px;
+export const SearchIcon = styled(AiOutlineSearch)`
+  width: 25px;
+  height: 25px;
+  color: #ca3e47;
 `;
 
-export const SearchIcon = styled(AiOutlineSearch)`
+export const ClearIcon = styled(AiFillCloseCircle)`
   width: 25px;
   height: 25px;
   color: #ca3e47;
@@ -47,5 +46,6 @@ export const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 12px;
+  height: 100%;
   overflow-y: auto;
 `;
