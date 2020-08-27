@@ -1,14 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
   * {
     margin: 0;
     padding: 0;
     outline: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Open Sans', sans-serif !important;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -32,35 +32,35 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 40px;
     letter-spacing: 0;
     line-height: 48px;
   }
 
   h2 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 32px;
     letter-spacing: 0;
     line-height: 40px;
   }
 
   h3 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 24px;
     letter-spacing: 0;
     line-height: 32px;
   }
 
   h4 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     letter-spacing: 0;
     line-height: 28px;
   }
 
   h5 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     letter-spacing: 0;
     line-height: 24px;
@@ -68,7 +68,7 @@ export const GlobalStyle = createGlobalStyle`
 
   p, span, label {
     display: block;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     letter-spacing: 0;
     line-height: 20px;
@@ -79,7 +79,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   b {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: bold;
   }
 
