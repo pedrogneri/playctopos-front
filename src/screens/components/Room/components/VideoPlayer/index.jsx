@@ -65,9 +65,16 @@ const VideoPlayer = ({ roomId }) => {
     changeVideoState();
   };
 
-  const handleEndVideo = async () => {
-    setShowVideo(false);
-    await handleUpdateActualVideo({ id: '', title: '', channel: '', thumbnail: '' });
+  const handleStart = async () => {
+    await handleUpdateActualVideo({ ...videoInfo, duration: videoDuration });
+  };
+
+  const handleEndVideo = () => {
+    changeVideoState();
+  };
+
+  const handleSkipVideo = async () => {
+    await handleUpdateActualVideo({ ...videoInfo, duration: 0 });
     changeVideoState();
   };
 
@@ -103,6 +110,7 @@ const VideoPlayer = ({ roomId }) => {
               url={videoUrl}
               muted={isMuted}
               volume={volume}
+              onStart={handleStart}
               onProgress={handleProgress}
               onDuration={handleVideoDuration}
               onEnded={handleEndVideo}
@@ -120,12 +128,12 @@ const VideoPlayer = ({ roomId }) => {
 
             <Hidden mdUp>
               <VideoInfoContainer show={showOverlay}>
-                <VideoInfo {...videoInfo} onShowPlaylist={handleOpenPlaylist} onSkip={handleEndVideo} />
+                <VideoInfo {...videoInfo} onShowPlaylist={handleOpenPlaylist} onSkip={handleSkipVideo} />
               </VideoInfoContainer>
             </Hidden>
           </PlayerContainer>
           <Hidden smDown>
-            <VideoInfo {...videoInfo} onShowPlaylist={handleOpenPlaylist} onSkip={handleEndVideo} />
+            <VideoInfo {...videoInfo} onShowPlaylist={handleOpenPlaylist} onSkip={handleSkipVideo} />
           </Hidden>
         </>
       )}
