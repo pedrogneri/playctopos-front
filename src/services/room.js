@@ -1,14 +1,12 @@
-import { get, put } from 'axios';
+import api from 'api';
 import socket from 'socket';
-
-const baseURL = process.env.REACT_APP_API;
 
 export const joinRoom = (id) => {
   socket.emit('room.join', id);
 };
 
 export const getRoomByName = async (name) => {
-  const response = await get(`${baseURL}/getRoomByName`, {
+  const response = await api.get('/getRoomByName', {
     params: {
       name,
     },
@@ -17,7 +15,7 @@ export const getRoomByName = async (name) => {
 };
 
 export const updateActualVideo = async (id, actualVideo) => {
-  const response = await put(`${baseURL}/actualVideo`, actualVideo, {
+  const response = await api.put('/actualVideo', actualVideo, {
     params: {
       id,
     },
@@ -26,7 +24,7 @@ export const updateActualVideo = async (id, actualVideo) => {
 };
 
 export const updatePlaylist = async (id, playlist) => {
-  const response = await put(`${baseURL}/playlist`, playlist, {
+  const response = await api.put('/playlist', playlist, {
     params: {
       id,
     },
@@ -35,7 +33,7 @@ export const updatePlaylist = async (id, playlist) => {
 };
 
 export const getVideoUrlByRoom = async (id) => {
-  const response = await get(`${baseURL}/getVideoUrlByRoom`, {
+  const response = await api.get('/getVideoUrlByRoom', {
     params: {
       id,
     },
