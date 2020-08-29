@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
+import Loader from 'components/Loader';
 import useToast from 'hooks/useToast';
 import { getVideoListByQuery } from 'services/search';
 
@@ -13,6 +14,7 @@ import { Container, SearchBar, StyledInput, SearchIcon, ClearIcon, ResultsContai
 const Playlist = ({ playlist, onUpdatePlaylist }) => {
   const toast = useToast();
 
+  const [loading, setLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -20,6 +22,7 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
   const handleSearch = (event) => {
     event.preventDefault();
     if (query.trim()) {
+      setLoading(true);
       getVideoListByQuery(query)
         .then((videoList) => {
           if (videoList.length > 0) {
@@ -31,6 +34,9 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
         })
         .catch(() => {
           toast.add({ type: 'error', message: 'Something went wrong :(' });
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   };
@@ -71,32 +77,36 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
           )}
         </SearchBar>
       </form>
-      <ResultsContainer>
-        {!showResults && playlist.length === 0 && <EmptyState />}
-        {!showResults
-          ? playlist.map(({ id, title, thumbnail, channel }, index) => (
-              <VideoCard
-                index={index}
-                key={`${id}-${index}`}
-                id={id}
-                title={title}
-                channel={channel}
-                thumbnail={thumbnail}
-                onRemoveFromPlaylist={handleRemoveFromPlaylist}
-              />
-            ))
-          : results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }, index) => (
-              <VideoCard
-                index={index}
-                key={`${videoId}-${index}`}
-                id={videoId}
-                title={title}
-                channel={channelTitle}
-                thumbnail={thumbnails.medium.url}
-                onAddToPlaylist={handleAddToPlaylist}
-              />
-            ))}
-      </ResultsContainer>
+      {loading ? (
+        <Loader />
+      ) : (
+        <ResultsContainer>
+          {!showResults && playlist.length === 0 && <EmptyState />}
+          {!showResults
+            ? playlist.map(({ id, title, thumbnail, channel }, index) => (
+                <VideoCard
+                  index={index}
+                  key={`${id}-${index}`}
+                  id={id}
+                  title={title}
+                  channel={channel}
+                  thumbnail={thumbnail}
+                  onRemoveFromPlaylist={handleRemoveFromPlaylist}
+                />
+              ))
+            : results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }, index) => (
+                <VideoCard
+                  index={index}
+                  key={`${videoId}-${index}`}
+                  id={videoId}
+                  title={title}
+                  channel={channelTitle}
+                  thumbnail={thumbnails.medium.url}
+                  onAddToPlaylist={handleAddToPlaylist}
+                />
+              ))}
+        </ResultsContainer>
+      )}
     </Container>
   );
 };

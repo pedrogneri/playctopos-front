@@ -92,6 +92,12 @@ const VideoPlayer = ({ roomId }) => {
     }
   };
 
+  const videoInfoProps = {
+    title: videoInfo.title || '',
+    channel: videoInfo.channel || '',
+    thumbnail: videoInfo.thumbnail || '',
+  };
+
   return (
     <>
       {!showVideo ? (
@@ -128,12 +134,12 @@ const VideoPlayer = ({ roomId }) => {
 
             <Hidden mdUp>
               <VideoInfoContainer show={showOverlay}>
-                <VideoInfo {...videoInfo} onShowPlaylist={handleOpenPlaylist} onSkip={handleSkipVideo} />
+                <VideoInfo {...videoInfoProps} onShowPlaylist={handleOpenPlaylist} onSkip={handleSkipVideo} />
               </VideoInfoContainer>
             </Hidden>
           </PlayerContainer>
           <Hidden smDown>
-            <VideoInfo {...videoInfo} onShowPlaylist={handleOpenPlaylist} onSkip={handleSkipVideo} />
+            <VideoInfo {...videoInfoProps} onShowPlaylist={handleOpenPlaylist} onSkip={handleSkipVideo} />
           </Hidden>
         </>
       )}
