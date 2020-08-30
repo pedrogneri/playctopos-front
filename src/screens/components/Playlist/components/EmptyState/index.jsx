@@ -1,12 +1,15 @@
 import React from 'react';
 
-import { Container, SadIcon, Text } from './styles';
+import { Container, Icon, Text, IconContainer } from './styles';
 
 const EmptyState = () => {
   return (
     <Container>
-      <SadIcon />
-      <Text>No videos yet</Text>
+      <IconContainer>
+        <Icon />
+      </IconContainer>
+
+      <Text>{'No videos yet :('}</Text>
     </Container>
   );
 };

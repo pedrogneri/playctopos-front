@@ -1,4 +1,4 @@
-import { FaRegSadCry } from 'react-icons/fa';
+import { MdOndemandVideo } from 'react-icons/md';
 
 import styled from 'styled-components';
 
@@ -11,14 +11,26 @@ export const Container = styled.div`
   min-height: 100%;
 `;
 
-export const SadIcon = styled(FaRegSadCry)`
-  width: 100px;
-  height: 100px;
-  color: #666;
+export const IconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  min-width: 150px;
+  border-radius: 100%;
+
+  background-color: #414141;
+`;
+
+export const Icon = styled(MdOndemandVideo)`
+  width: 80px;
+  height: 80px;
+  color: #313131;
 `;
 
 export const Text = styled.h3`
-  margin-top: 10%;
-  color: #666;
+  margin-top: 5%;
+  color: #525252;
   font-weight: 600;
 `;

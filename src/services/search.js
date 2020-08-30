@@ -1,9 +1,7 @@
-import { get } from 'axios';
-
-const baseURL = process.env.REACT_APP_API;
+import api from 'api';
 
 export const getVideoListByQuery = async (query) => {
-  const response = await get(`${baseURL}/searchByQuery`, {
+  const response = await api.get('/searchByQuery', {
     params: {
       query,
     },
@@ -12,7 +10,7 @@ export const getVideoListByQuery = async (query) => {
 };
 
 export const getVideoById = async (id) => {
-  const response = await get(`${baseURL}/searchById`, {
+  const response = await api.get('/searchById', {
     params: {
       id,
     },
