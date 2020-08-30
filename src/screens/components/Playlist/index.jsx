@@ -85,7 +85,7 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
     setShowSearch(true);
   };
 
-  const onSearchBarBlur = () => {
+  const handleSearchBarBlur = () => {
     if (!showResults) {
       setShowSearch(false);
     }
@@ -101,7 +101,7 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
                 ref={searchBarRef}
                 value={query}
                 onChange={handleChangeQuery}
-                onBlur={onSearchBarBlur}
+                onBlur={handleSearchBarBlur}
                 placeholder="Search something..."
               />
               {!showResults ? (
