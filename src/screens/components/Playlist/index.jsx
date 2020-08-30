@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -9,15 +9,32 @@ import { getVideoListByQuery } from 'services/search';
 
 import EmptyState from './components/EmptyState';
 import VideoCard from './components/VideoCard';
-import { Container, SearchBar, StyledInput, SearchIcon, ClearIcon, ResultsContainer } from './styles';
+import {
+  Container,
+  SearchBar,
+  StyledInput,
+  SearchIcon,
+  ClearIcon,
+  ResultsContainer,
+  HeaderContainer,
+  PlusIcon,
+  HeaderText,
+  StyledForm,
+} from './styles';
 
 const Playlist = ({ playlist, onUpdatePlaylist }) => {
   const toast = useToast();
+  const searchBarRef = useRef();
 
   const [loading, setLoading] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    if (!!searchBarRef.current) searchBarRef.current.focus();
+  }, [showSearch]);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -48,12 +65,15 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
   const handleClickClear = () => {
     setQuery('');
     setShowResults(false);
+    setShowSearch(false);
   };
 
   const handleAddToPlaylist = (video) => {
     const newPlaylist = [...playlist, video];
     onUpdatePlaylist(newPlaylist);
+    setQuery('');
     setShowResults(false);
+    setShowSearch(false);
   };
 
   const handleRemoveFromPlaylist = (index) => {
@@ -61,22 +81,47 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
     onUpdatePlaylist(playlist);
   };
 
+  const handleShowSearchBar = () => {
+    setShowSearch(true);
+  };
+
+  const onSearchBarBlur = () => {
+    if (!showResults) {
+      setShowSearch(false);
+    }
+  };
+
   return (
     <Container>
-      <form onSubmit={handleSearch}>
-        <SearchBar>
-          <StyledInput value={query} onChange={handleChangeQuery} placeholder="Search something..." />
-          {!showResults ? (
-            <IconButton type="submit">
-              <SearchIcon />
-            </IconButton>
-          ) : (
-            <IconButton type="button" onClick={handleClickClear}>
-              <ClearIcon />
-            </IconButton>
-          )}
-        </SearchBar>
-      </form>
+      <HeaderContainer>
+        {showSearch ? (
+          <StyledForm onSubmit={handleSearch}>
+            <SearchBar>
+              <StyledInput
+                ref={searchBarRef}
+                value={query}
+                onChange={handleChangeQuery}
+                onBlur={onSearchBarBlur}
+                placeholder="Search something..."
+              />
+              {!showResults ? (
+                <IconButton type="submit">
+                  <SearchIcon />
+                </IconButton>
+              ) : (
+                <IconButton type="button" onClick={handleClickClear}>
+                  <ClearIcon />
+                </IconButton>
+              )}
+            </SearchBar>
+          </StyledForm>
+        ) : (
+          <>
+            <HeaderText>Room playlist</HeaderText>
+            <PlusIcon onClick={handleShowSearchBar} />
+          </>
+        )}
+      </HeaderContainer>
       {loading ? (
         <Loader />
       ) : (
