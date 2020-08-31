@@ -1,4 +1,5 @@
 import React from 'react';
+import htmlParser from 'react-html-parser';
 
 import { Grid, Hidden, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -15,12 +16,12 @@ const VideoInfo = ({ title, channel, thumbnail, onShowPlaylist, onSkip }) => {
 
         <InfoContainer item xs={9} xl={10}>
           <Hidden mdDown>
-            <Title>{title}</Title>
-            <Subtitle>{channel}</Subtitle>
+            <Title>{htmlParser(title)}</Title>
+            <Subtitle>{htmlParser(channel)}</Subtitle>
           </Hidden>
           <Hidden lgUp>
-            <Title.xs>{title}</Title.xs>
-            <Subtitle.xs>{channel}</Subtitle.xs>
+            <Title.xs>{htmlParser(title)}</Title.xs>
+            <Subtitle.xs>{htmlParser(channel)}</Subtitle.xs>
           </Hidden>
         </InfoContainer>
       </Grid>

@@ -1,4 +1,5 @@
 import React from 'react';
+import htmlParser from 'react-html-parser';
 
 import { Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -18,8 +19,8 @@ const VideoCard = ({ index, id, title, channel, thumbnail, onAddToPlaylist, onRe
     <Container>
       <Thumbnail src={thumbnail} alt={`${title}-thumbnail`} />
       <InfoContainer>
-        <Title>{title}</Title>
-        <Channel>{channel}</Channel>
+        <Title>{htmlParser(title)}</Title>
+        <Channel>{htmlParser(channel)}</Channel>
         {!!onAddToPlaylist ? (
           <Tooltip title="Add to playlist" placement="bottom-start">
             <IconContainer>
