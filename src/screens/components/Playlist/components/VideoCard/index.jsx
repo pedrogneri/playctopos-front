@@ -4,15 +4,28 @@ import htmlParser from 'react-html-parser';
 import { Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import { Container, InfoContainer, Thumbnail, Title, Channel, AddIcon, RemoveIcon, IconContainer } from './styles';
+import { getUsername } from 'utils/username';
 
-const VideoCard = ({ index, id, title, channel, thumbnail, onAddToPlaylist, onRemoveFromPlaylist }) => {
+import {
+  Container,
+  InfoContainer,
+  Thumbnail,
+  Title,
+  Channel,
+  AddIcon,
+  RemoveIcon,
+  BottomContainer,
+  UserLabel,
+  IconContainer,
+} from './styles';
+
+const VideoCard = ({ index, id, title, channel, thumbnail, addedBy, onAddToPlaylist, onRemoveFromPlaylist }) => {
   const handleRemoveFromPlaylist = () => {
     onRemoveFromPlaylist(index);
   };
 
   const handleAddToPlaylist = () => {
-    onAddToPlaylist({ id, title, channel, thumbnail });
+    onAddToPlaylist({ id, title, channel, thumbnail, addedBy: getUsername() });
   };
 
   return (
@@ -21,19 +34,22 @@ const VideoCard = ({ index, id, title, channel, thumbnail, onAddToPlaylist, onRe
       <InfoContainer>
         <Title>{htmlParser(title)}</Title>
         <Channel>{htmlParser(channel)}</Channel>
-        {!!onAddToPlaylist ? (
-          <Tooltip title="Add to playlist" placement="bottom-start">
-            <IconContainer>
-              <AddIcon onClick={handleAddToPlaylist} />
-            </IconContainer>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Remove from playlist" placement="bottom-start">
-            <IconContainer>
-              <RemoveIcon onClick={handleRemoveFromPlaylist} />
-            </IconContainer>
-          </Tooltip>
-        )}
+        <BottomContainer>
+          {addedBy && <UserLabel>{`Added by ${addedBy}`}</UserLabel>}
+          {!!onAddToPlaylist ? (
+            <Tooltip title="Add to playlist" placement="bottom-start">
+              <IconContainer>
+                <AddIcon onClick={handleAddToPlaylist} />
+              </IconContainer>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Remove from playlist" placement="bottom-start">
+              <IconContainer>
+                <RemoveIcon onClick={handleRemoveFromPlaylist} />
+              </IconContainer>
+            </Tooltip>
+          )}
+        </BottomContainer>
       </InfoContainer>
     </Container>
   );
@@ -45,6 +61,7 @@ VideoCard.propTypes = {
   title: PropTypes.string.isRequired,
   channel: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
+  addedBy: PropTypes.string,
   onAddToPlaylist: PropTypes.func,
   onRemoveFromPlaylist: PropTypes.func,
 };
