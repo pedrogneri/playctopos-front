@@ -96,6 +96,7 @@ const VideoPlayer = ({ roomId }) => {
     title: videoInfo.title || '',
     channel: videoInfo.channel || '',
     thumbnail: videoInfo.thumbnail || '',
+    addedBy: videoInfo.addedBy || '',
   };
 
   return (
