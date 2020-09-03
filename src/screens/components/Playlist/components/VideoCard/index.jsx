@@ -4,6 +4,7 @@ import htmlParser from 'react-html-parser';
 import { Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
+import UserBadge from 'components/UserBadge';
 import { getUsername } from 'utils/username';
 
 import {
@@ -35,7 +36,7 @@ const VideoCard = ({ index, id, title, channel, thumbnail, addedBy, onAddToPlayl
         <Title>{htmlParser(title)}</Title>
         <Channel>{htmlParser(channel)}</Channel>
         <BottomContainer>
-          {addedBy && <UserLabel>{`Added by ${addedBy}`}</UserLabel>}
+          {addedBy && <UserBadge username={addedBy} />}
           {!!onAddToPlaylist ? (
             <Tooltip title="Add to playlist" placement="bottom-start">
               <IconContainer>
