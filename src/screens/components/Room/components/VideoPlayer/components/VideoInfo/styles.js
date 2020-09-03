@@ -10,6 +10,13 @@ export const Container = styled(Grid)`
   background-color: #424242;
 `;
 
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+`;
+
 export const InfoContainer = styled(Grid)`
   padding-left: 12px;
 `;

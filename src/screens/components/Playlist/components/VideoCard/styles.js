@@ -5,7 +5,11 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 12px 0;
+  padding: 12px 12px 12px 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #424242;
+  }
 
   @media (max-width: 959px) {
     flex-direction: column;
@@ -29,14 +33,14 @@ export const InfoContainer = styled.div`
 
 export const Title = styled.p`
   font-size: 14px;
+  font-weight: 600;
   margin-bottom: 5px;
   color: #fff;
 `;
 
 export const Channel = styled.p`
   font-size: 10px;
-  font-weight: 600;
-  color: #666;
+  color: #fff;
 `;
 
 export const Thumbnail = styled.img`
@@ -44,6 +48,13 @@ export const Thumbnail = styled.img`
 `;
 
 export const IconContainer = styled.div`
+  margin-left: auto;
+`;
+
+export const BottomContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
   margin-top: auto;
 `;
 
