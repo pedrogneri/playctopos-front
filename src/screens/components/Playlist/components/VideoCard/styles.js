@@ -58,15 +58,6 @@ export const BottomContainer = styled.div`
   margin-top: auto;
 `;
 
-export const UserLabel = styled.div`
-  border-radius: 12px;
-  padding: 6px;
-  font-size: 10px;
-
-  border: 1px solid #ca3e47;
-  color: #ca3e47;
-`;
-
 export const IconStyle = css`
   color: #fff;
   width: 25px;

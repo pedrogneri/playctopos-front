@@ -16,7 +16,6 @@ import {
   AddIcon,
   RemoveIcon,
   BottomContainer,
-  UserLabel,
   IconContainer,
 } from './styles';
 
