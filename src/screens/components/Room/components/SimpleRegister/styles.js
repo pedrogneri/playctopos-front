@@ -54,5 +54,5 @@ export const UserIcon = styled.div`
   height: 80px;
   width: 80px;
   border-radius: 100%;
-  background-color: #ddd;
+  background-color: ${({ theme }) => theme.gray};
 `;
