@@ -40,7 +40,8 @@ export const WelcomeMessage = styled.i`
   font-size: 20vw;
   color: ${({ theme }) => theme.white};
   font-weight: 900;
-  text-shadow: -1vw 1vw 0px #d5666d, -2vw 2vw 0px ${({ theme }) => theme.secondary.default};
+  text-shadow: -1vw 1vw 0px ${({ theme }) => theme.secondary.light},
+    -2vw 2vw 0px ${({ theme }) => theme.secondary.default};
 `;
 
 export const StyledInput = styled.input`
