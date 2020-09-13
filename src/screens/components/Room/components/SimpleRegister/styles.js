@@ -1,3 +1,5 @@
+import { FaUserCircle } from 'react-icons/fa';
+
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -50,9 +52,8 @@ export const StyledInput = styled.input`
   width: 100%;
 `;
 
-export const UserIcon = styled.div`
+export const UserIcon = styled(FaUserCircle)`
+  color: ${({ theme }) => theme.white} !important;
   height: 80px;
   width: 80px;
-  border-radius: 100%;
-  background-color: ${({ theme }) => theme.gray};
 `;
