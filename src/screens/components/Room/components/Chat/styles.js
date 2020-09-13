@@ -35,7 +35,7 @@ export const Warn = styled.p`
   font-size: 14px;
   margin-bottom: 10px;
   font-style: italic;
-  color: #999;
+  color: ${({ theme }) => theme.gray};
   overflow-wrap: break-word;
 `;
 
