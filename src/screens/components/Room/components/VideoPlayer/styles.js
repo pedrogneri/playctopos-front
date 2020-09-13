@@ -48,5 +48,5 @@ export const Player = styled(ReactPlayer)`
 export const PlayIcon = styled(FaPlay)`
   width: 10%;
   height: 10%;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
 `;

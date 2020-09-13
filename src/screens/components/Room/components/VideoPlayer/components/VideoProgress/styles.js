@@ -26,7 +26,7 @@ export const ProgressBar = styled.div`
 `;
 
 export const TimeLabel = styled.p`
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   font-size: 12px;
   margin: 0 12px;
 `;

@@ -28,7 +28,7 @@ export const Label = styled.label`
   font-size: 14px;
   width: 100%;
   font-weight: 600;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
 `;
 
 export const StyledForm = styled.form`
@@ -40,7 +40,7 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledInput = styled.input`
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   background-color: #414141;
   border: none;
   padding: 12px;

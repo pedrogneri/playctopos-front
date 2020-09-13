@@ -22,7 +22,7 @@ export const MessagesArea = styled.div`
 export const Message = styled.p`
   font-size: 14px;
   margin-bottom: 10px;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   overflow-wrap: break-word;
 
   & > b {
@@ -45,12 +45,12 @@ export const ChatHeader = styled.header`
   width: 100%;
   padding: 20px 16px;
   font-size: 18px;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   border-bottom: 2px solid #424242;
 `;
 
 export const UserIcon = styled(FaUserCircle)`
-  color: #fff !important;
+  color: ${({ theme }) => theme.white} !important;
   margin-left: auto;
   height: 30px;
   width: 30px;
@@ -70,7 +70,7 @@ export const StyledInput = styled.input`
   padding: 14px;
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   width: calc(100% - 40px);
 `;
 

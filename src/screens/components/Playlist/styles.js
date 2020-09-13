@@ -25,7 +25,7 @@ export const StyledInput = styled.input`
   padding: 12px;
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   width: calc(100% - 40px);
 `;
 
@@ -65,7 +65,7 @@ export const HeaderContainer = styled.header`
 
 export const HeaderText = styled.span`
   font-size: 20px;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
 `;
 
 export const PlusIcon = styled(AiFillPlusCircle)`

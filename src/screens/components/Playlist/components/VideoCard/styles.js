@@ -35,12 +35,12 @@ export const Title = styled.p`
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
 `;
 
 export const Channel = styled.p`
   font-size: 10px;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
 `;
 
 export const Thumbnail = styled.img`
@@ -59,7 +59,7 @@ export const BottomContainer = styled.div`
 `;
 
 export const IconStyle = css`
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   width: 25px;
   height: 25px;
   cursor: pointer;

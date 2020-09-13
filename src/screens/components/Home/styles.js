@@ -38,7 +38,7 @@ export const StyledForm = styled.form`
 
 export const WelcomeMessage = styled.i`
   font-size: 20vw;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   font-weight: 900;
   text-shadow: -1vw 1vw 0px #d5666d, -2vw 2vw 0px #ca3e47;
 `;
@@ -49,7 +49,7 @@ export const StyledInput = styled.input`
   max-width: 300px;
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   width: calc(100% - 40px);
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid ${({ theme }) => theme.white};
 `;
