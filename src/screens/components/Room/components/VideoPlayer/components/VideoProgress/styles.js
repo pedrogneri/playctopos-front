@@ -12,7 +12,7 @@ export const Container = styled.div`
 export const BaseBar = styled.div`
   display: flex;
   border-radius: 12px;
-  background-color: #666;
+  background-color: ${({ theme }) => theme.primary.light};
   width: 100%;
   height: 100%;
 `;
