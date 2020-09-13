@@ -10,7 +10,7 @@ export const Container = styled.div`
   max-width: 90%;
   height: 500px;
   border-radius: 12px;
-  background-color: #313131;
+  background-color: ${({ theme }) => theme.primary.dark};
 `;
 
 export const SearchBar = styled.div`

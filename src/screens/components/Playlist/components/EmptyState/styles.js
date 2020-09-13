@@ -26,7 +26,7 @@ export const IconContainer = styled.div`
 export const Icon = styled(MdOndemandVideo)`
   width: 80px;
   height: 80px;
-  color: #313131;
+  color: ${({ theme }) => theme.primary.dark};
 `;
 
 export const Text = styled.h3`

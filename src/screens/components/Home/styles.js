@@ -7,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #313131;
+  background-color: ${({ theme }) => theme.primary.dark};
 `;
 
 export const Button = styled.button`
