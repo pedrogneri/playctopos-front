@@ -31,6 +31,6 @@ export const Icon = styled(MdOndemandVideo)`
 
 export const Text = styled.h3`
   margin-top: 5%;
-  color: #525252;
+  color: ${({ theme }) => theme.primary.light};
   font-weight: 600;
 `;
