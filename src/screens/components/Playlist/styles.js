@@ -32,13 +32,13 @@ export const StyledInput = styled.input`
 export const SearchIcon = styled(AiOutlineSearch)`
   width: 25px;
   height: 25px;
-  color: #ca3e47;
+  color: ${({ theme }) => theme.secondary.default};
 `;
 
 export const ClearIcon = styled(AiFillCloseCircle)`
   width: 25px;
   height: 25px;
-  color: #ca3e47;
+  color: ${({ theme }) => theme.secondary.default};
 `;
 
 export const ResultsContainer = styled.div`
@@ -71,7 +71,7 @@ export const HeaderText = styled.span`
 export const PlusIcon = styled(AiFillPlusCircle)`
   width: 30px;
   height: 30px;
-  color: #ca3e47;
+  color: ${({ theme }) => theme.secondary.default};
   margin-left: auto;
   cursor: pointer;
 `;

@@ -90,5 +90,5 @@ export const StyledIconButton = styled(IconButton)`
 export const SendIcon = styled(IoMdSend)`
   width: 25px;
   height: 25px;
-  color: #ca3e47;
+  color: ${({ theme }) => theme.secondary.default};
 `;

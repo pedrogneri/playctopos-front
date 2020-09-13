@@ -11,10 +11,10 @@ export const Container = styled.div`
 export const Button = styled.button`
   font-size: 14px;
   font-weight: 600;
-  color: #ca3e47;
+  color: ${({ theme }) => theme.secondary.default};
   background-color: transparent;
   border-radius: 24px;
-  border: 2px solid #ca3e47;
+  border: 2px solid ${({ theme }) => theme.secondary.default};
   padding: 12px;
   width: 60%;
   cursor: pointer;

@@ -20,7 +20,7 @@ export const BaseBar = styled.div`
 export const ProgressBar = styled.div`
   width: ${({ value }) => `${value}%`};
   height: 100%;
-  background-color: #ca3e47;
+  background-color: ${({ theme }) => theme.secondary.default};
   border-radius: 12px;
   transition: width 1s;
 `;
