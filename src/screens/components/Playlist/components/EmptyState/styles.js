@@ -20,7 +20,7 @@ export const IconContainer = styled.div`
   min-width: 150px;
   border-radius: 100%;
 
-  background-color: #414141;
+  background-color: ${({ theme }) => theme.primary.default};
 `;
 
 export const Icon = styled(MdOndemandVideo)`

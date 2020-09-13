@@ -41,7 +41,7 @@ export const StyledForm = styled.form`
 
 export const StyledInput = styled.input`
   color: ${({ theme }) => theme.white};
-  background-color: #414141;
+  background-color: ${({ theme }) => theme.primary.default};
   border: none;
   padding: 12px;
   border-radius: 12px;

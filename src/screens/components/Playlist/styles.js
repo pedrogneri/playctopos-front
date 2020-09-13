@@ -18,7 +18,7 @@ export const SearchBar = styled.div`
   flex-direction: row;
   width: 100%;
   border-radius: 16px;
-  background-color: #424242;
+  background-color: ${({ theme }) => theme.primary.default};
 `;
 
 export const StyledInput = styled.input`
@@ -60,7 +60,7 @@ export const HeaderContainer = styled.header`
   padding: 16px;
   min-height: 83px;
 
-  border-bottom: 1px solid #424242;
+  border-bottom: 1px solid ${({ theme }) => theme.primary.default};
 `;
 
 export const HeaderText = styled.span`

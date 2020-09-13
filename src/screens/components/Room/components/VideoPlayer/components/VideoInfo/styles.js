@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled(Grid)`
   padding: 12px;
   height: 100%;
-  background-color: #424242;
+  background-color: ${({ theme }) => theme.primary.default};
 `;
 
 export const IconContainer = styled.div`

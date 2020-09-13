@@ -46,7 +46,7 @@ export const ChatHeader = styled.header`
   padding: 20px 16px;
   font-size: 18px;
   color: ${({ theme }) => theme.white};
-  border-bottom: 2px solid #424242;
+  border-bottom: 2px solid ${({ theme }) => theme.primary.default};
 `;
 
 export const UserIcon = styled(FaUserCircle)`
@@ -80,7 +80,7 @@ export const InputContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 16px;
-  background-color: #424242;
+  background-color: ${({ theme }) => theme.primary.default};
 `;
 
 export const StyledIconButton = styled(IconButton)`
