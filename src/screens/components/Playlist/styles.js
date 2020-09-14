@@ -10,7 +10,7 @@ export const Container = styled.div`
   max-width: 90%;
   height: 500px;
   border-radius: 12px;
-  background-color: #313131;
+  background-color: ${({ theme }) => theme.primary.dark};
 `;
 
 export const SearchBar = styled.div`
@@ -18,27 +18,27 @@ export const SearchBar = styled.div`
   flex-direction: row;
   width: 100%;
   border-radius: 16px;
-  background-color: #424242;
+  background-color: ${({ theme }) => theme.primary.default};
 `;
 
 export const StyledInput = styled.input`
   padding: 12px;
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   width: calc(100% - 40px);
 `;
 
 export const SearchIcon = styled(AiOutlineSearch)`
   width: 25px;
   height: 25px;
-  color: #ca3e47;
+  color: ${({ theme }) => theme.secondary.default};
 `;
 
 export const ClearIcon = styled(AiFillCloseCircle)`
   width: 25px;
   height: 25px;
-  color: #ca3e47;
+  color: ${({ theme }) => theme.secondary.default};
 `;
 
 export const ResultsContainer = styled.div`
@@ -60,18 +60,18 @@ export const HeaderContainer = styled.header`
   padding: 16px;
   min-height: 83px;
 
-  border-bottom: 1px solid #424242;
+  border-bottom: 1px solid ${({ theme }) => theme.primary.default};
 `;
 
 export const HeaderText = styled.span`
   font-size: 20px;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
 `;
 
 export const PlusIcon = styled(AiFillPlusCircle)`
   width: 30px;
   height: 30px;
-  color: #ca3e47;
+  color: ${({ theme }) => theme.secondary.default};
   margin-left: auto;
   cursor: pointer;
 `;

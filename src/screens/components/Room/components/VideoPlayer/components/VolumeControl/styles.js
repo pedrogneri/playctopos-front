@@ -51,7 +51,7 @@ export const Container = styled.div`
 export const VolumeIcon = css`
   height: 30px;
   width: 30px;
-  color: #fff !important;
+  color: ${({ theme }) => theme.white} !important;
   cursor: pointer;
 `;
 

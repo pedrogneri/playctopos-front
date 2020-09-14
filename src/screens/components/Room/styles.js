@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 100vh;
-  background-color: #424242;
+  background-color: ${({ theme }) => theme.primary.default};
   overflow: auto;
 
   @media (max-width: 959px) {

@@ -9,8 +9,8 @@ export const UserLabel = styled.div`
   padding: 6px;
   font-size: 10px;
 
-  border: 1px solid #ca3e47;
-  color: #ca3e47;
+  border: 1px solid ${({ theme }) => theme.secondary.default};
+  color: ${({ theme }) => theme.secondary.default};
 
   max-width: max-content;
 `;

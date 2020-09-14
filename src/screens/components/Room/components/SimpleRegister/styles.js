@@ -1,3 +1,5 @@
+import { FaUserCircle } from 'react-icons/fa';
+
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -5,16 +7,16 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 16px;
-  background-color: #313131;
+  background-color: ${({ theme }) => theme.primary.dark};
 `;
 
 export const Button = styled.button`
   font-size: 14px;
   font-weight: 600;
-  color: #ca3e47;
+  color: ${({ theme }) => theme.secondary.default};
   background-color: transparent;
   border-radius: 24px;
-  border: 2px solid #ca3e47;
+  border: 2px solid ${({ theme }) => theme.secondary.default};
   padding: 12px;
   width: 60%;
   cursor: pointer;
@@ -28,7 +30,7 @@ export const Label = styled.label`
   font-size: 14px;
   width: 100%;
   font-weight: 600;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
 `;
 
 export const StyledForm = styled.form`
@@ -40,8 +42,8 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledInput = styled.input`
-  color: #fff;
-  background-color: #414141;
+  color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.primary.default};
   border: none;
   padding: 12px;
   border-radius: 12px;
@@ -50,9 +52,8 @@ export const StyledInput = styled.input`
   width: 100%;
 `;
 
-export const UserIcon = styled.div`
+export const UserIcon = styled(FaUserCircle)`
+  color: ${({ theme }) => theme.white} !important;
   height: 80px;
   width: 80px;
-  border-radius: 100%;
-  background-color: #ddd;
 `;

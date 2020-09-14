@@ -20,17 +20,17 @@ export const IconContainer = styled.div`
   min-width: 150px;
   border-radius: 100%;
 
-  background-color: #414141;
+  background-color: ${({ theme }) => theme.primary.default};
 `;
 
 export const Icon = styled(MdOndemandVideo)`
   width: 80px;
   height: 80px;
-  color: #313131;
+  color: ${({ theme }) => theme.primary.dark};
 `;
 
 export const Text = styled.h3`
   margin-top: 5%;
-  color: #525252;
+  color: ${({ theme }) => theme.primary.light};
   font-weight: 600;
 `;

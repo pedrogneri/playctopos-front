@@ -7,16 +7,16 @@ export const Container = styled.div`
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #313131;
+  background-color: ${({ theme }) => theme.primary.dark};
 `;
 
 export const Button = styled.button`
   font-size: 14px;
   font-weight: 600;
-  color: #ca3e47;
+  color: ${({ theme }) => theme.secondary.default};
   background-color: transparent;
   border-radius: 24px;
-  border: 2px solid #ca3e47;
+  border: 2px solid ${({ theme }) => theme.secondary.default};
   padding: 12px;
   width: 60%;
   cursor: pointer;
@@ -38,9 +38,10 @@ export const StyledForm = styled.form`
 
 export const WelcomeMessage = styled.i`
   font-size: 20vw;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   font-weight: 900;
-  text-shadow: -1vw 1vw 0px #d5666d, -2vw 2vw 0px #ca3e47;
+  text-shadow: -1vw 1vw 0px ${({ theme }) => theme.secondary.light},
+    -2vw 2vw 0px ${({ theme }) => theme.secondary.default};
 `;
 
 export const StyledInput = styled.input`
@@ -49,7 +50,7 @@ export const StyledInput = styled.input`
   max-width: 300px;
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
   width: calc(100% - 40px);
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid ${({ theme }) => theme.white};
 `;

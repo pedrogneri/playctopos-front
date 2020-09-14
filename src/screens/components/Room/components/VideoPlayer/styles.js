@@ -14,7 +14,7 @@ export const PlayerStyle = css`
 
 export const Placeholder = styled.div`
   display: flex;
-  background-color: #525252;
+  background-color: ${({ theme }) => theme.primary.light};
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(17, 17, 17, 1));
@@ -48,5 +48,5 @@ export const Player = styled(ReactPlayer)`
 export const PlayIcon = styled(FaPlay)`
   width: 10%;
   height: 10%;
-  color: #fff;
+  color: ${({ theme }) => theme.white};
 `;
