@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { Hidden } from '@material-ui/core';
-import Playlist from 'features/components/Playlist';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
 import TransitionModal from 'components/TransitionModal';
+import Playlist from 'features/components/Playlist';
 import { updateActualVideo, getVideoUrlByRoom, updatePlaylist } from 'services/room';
 
 import Overlay from './components/Overlay';

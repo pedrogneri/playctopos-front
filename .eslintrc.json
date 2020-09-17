@@ -33,7 +33,7 @@
         "groups": [
           "/^react/",
           "module",
-          "/^(@types|action-creators|actions|components|containers|hocs|hooks|i18n|models|reducers|screens|services|styledComponents|utils)/*/",
+          "/^(@types|action-creators|actions|components|containers|features|hocs|hooks|i18n|models|reducers|screens|services|styledComponents|utils)/*/",
           "/^./modules/",
           ["parent", "sibling", "index"]
         ],

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import Chat from 'features/components/Chat';
-import SimpleRegister from 'features/SimpleRegister';
-import VideoPlayer from 'features/VideoPlayer';
 import PropTypes from 'prop-types';
 
+import Chat from 'features/components/Chat';
+import SimpleRegister from 'features/components/SimpleRegister';
+import VideoPlayer from 'features/components/VideoPlayer';
 import { getUsername } from 'utils/username';
 
 import { Container, VideoContainer, ChatContainer } from './styles';
