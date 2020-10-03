@@ -1,15 +1,13 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-
-import PropTypes from 'prop-types';
+import { useHistory, useParams } from 'react-router-dom';
 
 import Room from 'screens/components/Room';
 import { sendWarn } from 'services/chat';
 import { joinRoom, getVideoUrlByRoom } from 'services/room';
 import { getUsername } from 'utils/username';
 
-const RoomContainer = ({ match: { params } }) => {
-  const { id } = params;
+const RoomContainer = () => {
+  const { id } = useParams();
   const history = useHistory();
   const [roomName, setRoomName] = useState('');
 
@@ -34,10 +32,6 @@ const RoomContainer = ({ match: { params } }) => {
   }, [id, validateRoomId]);
 
   return <Room id={id} name={roomName} />;
-};
-
-RoomContainer.propTypes = {
-  match: PropTypes.object,
 };
 
 export default RoomContainer;
