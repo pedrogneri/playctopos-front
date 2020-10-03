@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
+import Chat from 'features/components/Chat';
+import SimpleRegister from 'features/components/SimpleRegister';
+import VideoPlayer from 'features/components/VideoPlayer';
 import { getUsername } from 'utils/username';
 
-import Chat from './components/Chat';
-import SimpleRegister from './components/SimpleRegister';
-import VideoPlayer from './components/VideoPlayer';
 import { Container, VideoContainer, ChatContainer } from './styles';
 
 const Room = ({ id }) => {
@@ -40,6 +40,7 @@ const Room = ({ id }) => {
     </Container>
   );
 };
+
 Room.propTypes = {
   id: PropTypes.string,
 };
