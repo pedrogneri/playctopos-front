@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
@@ -11,13 +11,15 @@ import { getUsername } from 'utils/username';
 const RoomContainer = ({ match: { params } }) => {
   const { id } = params;
   const history = useHistory();
+  const [roomName, setRoomName] = useState('');
 
   const validateRoomId = useCallback(() => {
     getVideoUrlByRoom(id)
-      .then((room) => {
-        if (!room) {
+      .then((data) => {
+        if (!data) {
           history.push('/');
         }
+        setRoomName(data.room.name);
       })
       .catch(() => {
         history.push('/');
@@ -31,7 +33,7 @@ const RoomContainer = ({ match: { params } }) => {
     sendWarn(id, `${username} joined the party`);
   }, [id, validateRoomId]);
 
-  return <Room id={id} />;
+  return <Room id={id} name={roomName} />;
 };
 
 RoomContainer.propTypes = {
