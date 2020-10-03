@@ -19,7 +19,7 @@ const Home = ({ onSubmitRoomName }) => {
 
   return (
     <Container>
-      <WelcomeMessage>Aroldo</WelcomeMessage>
+      <WelcomeMessage>Playctopos</WelcomeMessage>
       <StyledForm onSubmit={handleSubmit}>
         <StyledInput value={roomName} onChange={handleChangeRoomId} placeholder="Room name" />
         <Button type="submit">ENTER</Button>

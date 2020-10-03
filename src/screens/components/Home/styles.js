@@ -37,11 +37,12 @@ export const StyledForm = styled.form`
 `;
 
 export const WelcomeMessage = styled.i`
-  font-size: 20vw;
+  font-size: 15vw;
   color: ${({ theme }) => theme.white};
   font-weight: 900;
-  text-shadow: -1vw 1vw 0px ${({ theme }) => theme.secondary.light},
-    -2vw 2vw 0px ${({ theme }) => theme.secondary.default};
+  text-shadow: -0.8vw 0.8vw 0px ${({ theme }) => theme.secondary.light},
+    -1.6vw 1.6vw 0px ${({ theme }) => theme.secondary.default};
+  margin-bottom: 0.5em;
 `;
 
 export const StyledInput = styled.input`
