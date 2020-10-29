@@ -13,22 +13,6 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.primary.dark};
 `;
 
-export const SearchBar = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.primary.default};
-`;
-
-export const StyledInput = styled.input`
-  padding: 12px;
-  border: none;
-  background-color: transparent;
-  color: ${({ theme }) => theme.white};
-  width: calc(100% - 40px);
-`;
-
 export const SearchIcon = styled(AiOutlineSearch)`
   width: 25px;
   height: 25px;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-import { IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
+import Input from 'components/Input';
 import Loader from 'components/Loader';
 import useToast from 'hooks/useToast';
 import { getVideoListByQuery } from 'services/search';
@@ -11,8 +11,6 @@ import EmptyState from './components/EmptyState';
 import VideoCard from './components/VideoCard';
 import {
   Container,
-  SearchBar,
-  StyledInput,
   SearchIcon,
   ClearIcon,
   ResultsContainer,
@@ -96,24 +94,16 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
       <HeaderContainer>
         {showSearch ? (
           <StyledForm onSubmit={handleSearch}>
-            <SearchBar>
-              <StyledInput
-                ref={searchBarRef}
-                value={query}
-                onChange={handleChangeQuery}
-                onBlur={handleSearchBarBlur}
-                placeholder="Search something..."
-              />
-              {!showResults ? (
-                <IconButton type="submit">
-                  <SearchIcon />
-                </IconButton>
-              ) : (
-                <IconButton type="button" onClick={handleClickClear}>
-                  <ClearIcon />
-                </IconButton>
-              )}
-            </SearchBar>
+            <Input
+              inputRef={searchBarRef}
+              value={query}
+              onChange={handleChangeQuery}
+              onBlur={handleSearchBarBlur}
+              placeholder="Search something..."
+              buttonType={showResults ? 'button' : undefined}
+              onClick={showResults ? handleClickClear : undefined}
+              endAdornment={showResults ? <ClearIcon /> : <SearchIcon />}
+            />
           </StyledForm>
         ) : (
           <>

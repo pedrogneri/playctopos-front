@@ -3,23 +3,12 @@ import React, { useEffect, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
+import Input from 'components/Input';
 import { sendMessage } from 'services/chat';
 import { getRandomColor } from 'utils/colors';
 import { getUsername } from 'utils/username';
 
-import {
-  Container,
-  Footer,
-  MessagesArea,
-  StyledInput,
-  Message,
-  InputContainer,
-  SendIcon,
-  ChatHeader,
-  UserIcon,
-  StyledIconButton,
-  Warn,
-} from './styles';
+import { Container, Footer, MessagesArea, Message, SendIcon, ChatHeader, UserIcon, Warn } from './styles';
 
 const Chat = ({ roomId, onOpenRegister }) => {
   const chatRef = useRef();
@@ -82,18 +71,13 @@ const Chat = ({ roomId, onOpenRegister }) => {
       </MessagesArea>
       <Footer>
         <form onSubmit={handleSubmit}>
-          <InputContainer>
-            <StyledInput
-              ref={inputRef}
-              type="text"
-              placeholder="Type a message..."
-              onChange={handleChangeInput}
-              value={message.value}
-            />
-            <StyledIconButton type="submit">
-              <SendIcon />
-            </StyledIconButton>
-          </InputContainer>
+          <Input
+            inputRef={inputRef}
+            placeholder="Type a message..."
+            onChange={handleChangeInput}
+            value={message.value}
+            endAdornment={<SendIcon />}
+          />
         </form>
       </Footer>
     </Container>
