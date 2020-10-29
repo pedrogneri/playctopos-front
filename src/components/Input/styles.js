@@ -14,7 +14,7 @@ export const InputContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-radius: 16px;
+  border-radius: 12px;
   background-color: ${({ theme }) => theme.primary.default};
 `;
 
