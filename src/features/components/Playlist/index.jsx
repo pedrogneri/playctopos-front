@@ -117,16 +117,12 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
         <ResultsContainer>
           {!showResults && playlist.length === 0 && <EmptyState />}
           {!showResults
-            ? playlist.map(({ id, title, thumbnail, channel, addedBy }, index) => (
+            ? playlist.map((video, index) => (
                 <VideoCard
                   index={index}
                   key={`${id}-${index}`}
-                  id={id}
-                  title={title}
-                  channel={channel}
-                  thumbnail={thumbnail}
-                  addedBy={addedBy}
                   onRemoveFromPlaylist={handleRemoveFromPlaylist}
+                  {...video}
                 />
               ))
             : results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }, index) => (
