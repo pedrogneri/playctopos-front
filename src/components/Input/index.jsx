@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 import { InputContainer, StyledInput, StyledIconButton } from './styles';
 
-const Input = ({ inputRef, onClick, endAdornment, buttonType, ...inputProps }) => {
+const Input = ({ inputRef, onClick, endAdornment, ...inputProps }) => {
   return (
     <InputContainer>
       <StyledInput ref={inputRef} {...inputProps} />
-      <StyledIconButton type={buttonType || 'submit'} onClick={onClick}>
+      <StyledIconButton type={onClick ? 'button' : 'submit'} onClick={onClick}>
         {endAdornment}
       </StyledIconButton>
     </InputContainer>
@@ -23,7 +23,6 @@ Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
-  buttonType: PropTypes.string,
 };
 
 export default Input;
