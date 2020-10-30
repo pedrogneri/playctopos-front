@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 
+import { useStoreState } from 'easy-peasy';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
 import Input from 'components/Input';
-import { sendMessage } from 'services/chat';
+import { useSockets } from 'hooks/useSockets';
 import { getRandomColor } from 'utils/colors';
 import { getUsername } from 'utils/username';
 
@@ -13,31 +14,27 @@ import { Container, Footer, MessagesArea, Message, SendIcon, ChatHeader, UserIco
 const Chat = ({ roomId, onOpenRegister }) => {
   const chatRef = useRef();
   const inputRef = useRef();
+  const sockets = useSockets();
+  const messages = useStoreState((state) => state.messages);
 
   const username = getUsername();
-  const color = useMemo(() => {
-    return getRandomColor();
-  }, []);
+  const color = useMemo(() => getRandomColor(), []);
 
   const [message, setMessage] = useState({ username, color, value: '' });
-  const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
-    const handleSendMessage = ({ message }) => {
-      setMessageList([...messageList, message]);
-      scrollChatToBottom();
-    };
-    socket.on('room.message', handleSendMessage);
+    scrollChatToBottom();
+    socket.on('room.message', scrollChatToBottom);
 
-    return () => socket.off('room.message', handleSendMessage);
-  }, [message, messageList]);
+    return () => socket.off('room.message', scrollChatToBottom);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     inputRef.current.focus();
 
     if (message.value.trim()) {
-      sendMessage(roomId, message);
+      sockets.handleSendMessage(roomId, message);
     }
     setMessage({ ...message, value: '' });
   };
@@ -58,7 +55,7 @@ const Chat = ({ roomId, onOpenRegister }) => {
         <UserIcon onClick={onOpenRegister} />
       </ChatHeader>
       <MessagesArea ref={chatRef}>
-        {messageList.map(({ username, type, color, value }, index) =>
+        {messages.map(({ username, type, color, value }, index) =>
           type === 'warn' ? (
             <Warn key={index.toString()}>{value}</Warn>
           ) : (
