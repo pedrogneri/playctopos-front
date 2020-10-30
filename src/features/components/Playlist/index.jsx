@@ -120,7 +120,7 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
             ? playlist.map((video, index) => (
                 <VideoCard
                   index={index}
-                  key={`${id}-${index}`}
+                  key={`${video.id}-${index}`}
                   onRemoveFromPlaylist={handleRemoveFromPlaylist}
                   {...video}
                 />
