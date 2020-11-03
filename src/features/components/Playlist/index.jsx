@@ -100,7 +100,7 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
               onChange={handleChangeQuery}
               onBlur={handleSearchBarBlur}
               placeholder="Search something..."
-              onClick={showResults && handleClickClear}
+              onClick={showResults ? handleClickClear : undefined}
               endAdornment={showResults ? <ClearIcon /> : <SearchIcon />}
             />
           </StyledForm>
