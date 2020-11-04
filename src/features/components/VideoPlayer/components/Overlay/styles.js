@@ -10,7 +10,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
-  padding: 16px;
+  padding: 8px 16px;
 
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(17, 17, 17, 0.8));
 `;
