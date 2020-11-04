@@ -10,7 +10,11 @@ const VolumeControl = ({ volume, onChangeVolume, isMuted, onChangeIsMuted }) => 
       <div onClick={onChangeIsMuted}>{isMuted ? <MutedIcon /> : volume >= 0.5 ? <HighIcon /> : <LowIcon />}</div>
 
       <SliderContainer className="slider-container">
-        <StyledSlider value={volume * 100} onChange={(_, newValue) => onChangeVolume(newValue / 100)} />
+        <StyledSlider
+          orientation="vertical"
+          value={volume * 100}
+          onChange={(_, newValue) => onChangeVolume(newValue / 100)}
+        />
       </SliderContainer>
     </Container>
   );

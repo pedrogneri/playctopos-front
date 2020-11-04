@@ -14,3 +14,9 @@ export const Container = styled.div`
 
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(17, 17, 17, 0.8));
 `;
+
+export const Content = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
