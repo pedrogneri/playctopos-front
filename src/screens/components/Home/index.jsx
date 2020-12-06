@@ -22,7 +22,7 @@ const Home = ({ onSubmitRoomName }) => {
       <WelcomeMessage>Playctopos</WelcomeMessage>
       <StyledForm onSubmit={handleSubmit}>
         <StyledInput value={roomName} onChange={handleChangeRoomId} placeholder="Room name" />
-        <Button type="submit">ENTER</Button>
+        <Button type="submit">Enter</Button>
       </StyledForm>
     </Container>
   );
