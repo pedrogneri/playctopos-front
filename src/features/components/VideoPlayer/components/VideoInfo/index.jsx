@@ -5,54 +5,86 @@ import { Grid, Hidden, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import UserBadge from 'components/UserBadge';
+import { getFormattedTimeBySeconds } from 'utils/timeFormatter';
 
-import { Container, SkipIcon, Title, Subtitle, Thumbnail, InfoContainer, PlaylistIcon, IconContainer } from './styles';
+import VideoProgress from '../VideoProgress';
+import VolumeControl from '../VolumeControl';
+import {
+  Container,
+  SkipIcon,
+  Title,
+  Subtitle,
+  Thumbnail,
+  InfoContainer,
+  PlaylistIcon,
+  IconContainer,
+  TimeLabel,
+} from './styles';
 
-const VideoInfo = ({ title, channel, thumbnail, addedBy, onShowPlaylist, onSkip }) => {
+const VideoInfo = ({
+  title,
+  channel,
+  thumbnail,
+  addedBy,
+  onShowPlaylist,
+  onSkip,
+  volume,
+  onChangeVolume,
+  onChangeIsMuted,
+  isMuted,
+  time,
+  duration,
+}) => {
   return (
-    <Container container alignItems="center">
-      <Grid container item xs={12} sm={8} direction="row" alignItems="center">
-        <Grid container item xs={3} xl={2} justify="center">
-          <Thumbnail src={thumbnail} />
-        </Grid>
-
-        <InfoContainer item xs={9} xl={10}>
-          <Hidden mdDown>
-            <Title>{htmlParser(title)}</Title>
-            <Subtitle>{htmlParser(channel)}</Subtitle>
-          </Hidden>
-          <Hidden lgUp>
-            <Title.xs>{htmlParser(title)}</Title.xs>
-            <Subtitle.xs>{htmlParser(channel)}</Subtitle.xs>
-          </Hidden>
-
-          <Hidden xsDown>
-            <UserBadge username={addedBy} />
-          </Hidden>
-        </InfoContainer>
-      </Grid>
-
-      <Grid container item xs={12} sm={4} direction="row">
-        <Hidden smUp>
-          <Grid container item xs={6} sm={12} justify="flex-start" alignItems="center">
-            <UserBadge username={addedBy} />
+    <>
+      <VideoProgress value={time} maxValue={duration} />
+      <Container container justify="space-between" alignItems="center">
+        <Grid container item xs={12} sm={4} direction="row" alignItems="center">
+          <Grid container item xs={3} xl={2} justify="center">
+            <Thumbnail src={thumbnail} />
           </Grid>
-        </Hidden>
 
-        <Grid container item xs={6} sm={12} justify="flex-end">
-          <Tooltip title="Open playlist" placement="top">
-            <IconContainer>
-              <PlaylistIcon onClick={onShowPlaylist} />
-            </IconContainer>
-          </Tooltip>
-          <Tooltip title="Skip video" placement="top">
-            <IconContainer>
-              <SkipIcon onClick={onSkip} />
-            </IconContainer>
-          </Tooltip>
+          <InfoContainer item xs={9} xl={10}>
+            <Hidden mdDown>
+              <Title>{htmlParser(title)}</Title>
+              <Subtitle>{htmlParser(channel)}</Subtitle>
+            </Hidden>
+            <Hidden lgUp>
+              <Title.xs>{htmlParser(title)}</Title.xs>
+              <Subtitle.xs>{htmlParser(channel)}</Subtitle.xs>
+            </Hidden>
+          </InfoContainer>
         </Grid>
-      </Grid>
-    </Container>
+
+        <Grid container item xs={12} sm={4} direction="row">
+          <Grid container item xs={6} sm={12} justify="center">
+            <Tooltip title="Open playlist" placement="top">
+              <IconContainer>
+                <PlaylistIcon onClick={onShowPlaylist} />
+              </IconContainer>
+            </Tooltip>
+            <Tooltip title="Skip video" placement="top">
+              <IconContainer>
+                <SkipIcon onClick={onSkip} />
+              </IconContainer>
+            </Tooltip>
+            <IconContainer>
+              <VolumeControl
+                isMuted={isMuted}
+                onChangeIsMuted={onChangeIsMuted}
+                volume={volume}
+                onChangeVolume={onChangeVolume}
+              />
+            </IconContainer>
+          </Grid>
+        </Grid>
+
+        <Grid container item xs={12} sm={4} direction="column" alignItems="flex-end">
+          <TimeLabel>{`${getFormattedTimeBySeconds(time)} / ${getFormattedTimeBySeconds(duration)}`}</TimeLabel>
+          <UserBadge username={addedBy} />
+        </Grid>
+      </Container>
+    </>
   );
 };
 
@@ -63,6 +95,12 @@ VideoInfo.propTypes = {
   addedBy: PropTypes.string.isRequired,
   onShowPlaylist: PropTypes.func.isRequired,
   onSkip: PropTypes.func.isRequired,
+  volume: PropTypes.number.isRequired,
+  onChangeVolume: PropTypes.func.isRequired,
+  isMuted: PropTypes.bool.isRequired,
+  onChangeIsMuted: PropTypes.func.isRequired,
+  time: PropTypes.number.isRequired,
+  duration: PropTypes.number.isRequired,
 };
 
 export default VideoInfo;
