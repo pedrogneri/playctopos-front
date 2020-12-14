@@ -10,7 +10,6 @@ export const Container = styled.div`
 
 export const BaseBar = styled.div`
   display: flex;
-  border-radius: 12px;
   background-color: ${({ theme }) => theme.primary.light};
   width: 100%;
   height: 100%;
@@ -20,7 +19,6 @@ export const ProgressBar = styled.div`
   width: ${({ value }) => `${value}%`};
   height: 100%;
   background-color: ${({ theme }) => theme.secondary.default};
-  border-radius: 12px;
   transition: width 1s;
 `;
 
