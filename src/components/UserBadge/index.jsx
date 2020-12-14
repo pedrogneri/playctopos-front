@@ -2,14 +2,10 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import { Container, UserLabel } from './styles';
+import { Container } from './styles';
 
 const UserBadge = ({ username }) => {
-  return (
-    <Container>
-      <UserLabel>{`Added by ${username}`}</UserLabel>
-    </Container>
-  );
+  return <Container>{`Added by ${username}`}</Container>;
 };
 
 UserBadge.propTypes = {
