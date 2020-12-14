@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 
 export const Container = styled(Grid)`
-  padding: 8px;
+  padding: 12px;
   height: 100%;
   background-color: ${({ theme }) => theme.primary.default};
 `;
