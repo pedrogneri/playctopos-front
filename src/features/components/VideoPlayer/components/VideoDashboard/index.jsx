@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import htmlParser from 'react-html-parser';
 
 import { Grid, Hidden, Tooltip } from '@material-ui/core';
@@ -35,6 +35,11 @@ const VideoDashboard = ({
   time,
   duration,
 }) => {
+  const timeLabelText = useMemo(() => `${getFormattedTimeBySeconds(time)} / ${getFormattedTimeBySeconds(duration)}`, [
+    time,
+    duration,
+  ]);
+
   return (
     <>
       <VideoProgress value={time} maxValue={duration} />
@@ -80,7 +85,7 @@ const VideoDashboard = ({
         </Grid>
 
         <Grid container item xs={6} sm={4} direction="column" alignItems="flex-end">
-          <TimeLabel>{`${getFormattedTimeBySeconds(time)} / ${getFormattedTimeBySeconds(duration)}`}</TimeLabel>
+          <TimeLabel>{timeLabelText}</TimeLabel>
           <UserBadge username={addedBy} />
         </Grid>
       </Container>
