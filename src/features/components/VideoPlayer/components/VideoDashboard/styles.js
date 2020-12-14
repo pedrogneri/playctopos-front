@@ -27,6 +27,9 @@ export const InfoContainer = styled(Grid)`
 
 export const Title = styled.h5`
   color: ${({ theme }) => theme.white};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: normal;
 `;
 
@@ -38,11 +41,16 @@ export const Subtitle = styled.h5`
 Title.xs = styled.h5`
   color: ${({ theme }) => theme.white};
   font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: normal;
+  text-overflow: ellipsis;
 `;
 
-Subtitle.xs = styled.p`
+Subtitle.xs = styled.h5`
   font-size: 12px;
-  color: ${({ theme }) => theme.white};
+  font-weight: normal;
+  color: ${({ theme }) => theme.gray};
 `;
 
 export const IconStyle = css`
