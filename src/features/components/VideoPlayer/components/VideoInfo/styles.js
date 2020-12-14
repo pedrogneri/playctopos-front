@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 
 export const Container = styled(Grid)`
-  padding: 12px;
+  padding: 8px;
   height: 100%;
   background-color: ${({ theme }) => theme.primary.default};
 `;
@@ -21,13 +21,13 @@ export const InfoContainer = styled(Grid)`
   padding-left: 12px;
 `;
 
-export const Title = styled.h3`
+export const Title = styled.h5`
   color: ${({ theme }) => theme.white};
-  margin-bottom: 12px;
+  font-weight: normal;
 `;
 
 export const Subtitle = styled.h5`
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.gray};
   font-weight: normal;
 `;
 
@@ -65,4 +65,9 @@ export const PlaylistIcon = styled(MdFeaturedPlayList)`
 export const Thumbnail = styled.img`
   width: 100%;
   max-width: 200px;
+`;
+
+export const TimeLabel = styled.p`
+  color: ${({ theme }) => theme.white};
+  font-size: 12px;
 `;
