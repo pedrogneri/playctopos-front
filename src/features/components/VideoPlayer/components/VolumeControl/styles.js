@@ -64,15 +64,15 @@ export const IconContainer = styled.div`
 `;
 
 export const VolumeIcon = css`
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
   color: ${({ theme }) => theme.gray} !important;
   margin: 0 12px;
   cursor: pointer;
 
   @media (max-width: 959px) {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
     margin: 0 5px;
   }
 `;

@@ -41,8 +41,8 @@ Subtitle.xs = styled.p`
 `;
 
 export const IconStyle = css`
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   color: ${({ theme }) => theme.gray} !important;
   margin: 0 12px;
   cursor: pointer;
