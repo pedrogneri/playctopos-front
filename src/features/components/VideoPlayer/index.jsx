@@ -9,7 +9,7 @@ import TransitionModal from 'components/TransitionModal';
 import Playlist from 'features/components/Playlist';
 import { updateActualVideo, getVideoUrlByRoom, updatePlaylist } from 'services/room';
 
-import VideoInfo from './components/VideoInfo';
+import VideoDashboard from './components/VideoDashboard';
 import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer } from './styles';
 
 const VideoPlayer = ({ roomId }) => {
@@ -91,7 +91,7 @@ const VideoPlayer = ({ roomId }) => {
     }
   };
 
-  const videoInfoProps = {
+  const VideoDashboardProps = {
     title: videoInfo.title || '',
     channel: videoInfo.channel || '',
     thumbnail: videoInfo.thumbnail || '',
@@ -102,6 +102,8 @@ const VideoPlayer = ({ roomId }) => {
     isMuted,
     onChangeVolume: (value) => setVolume(value),
     onChangeIsMuted: () => setIsMuted(!isMuted),
+    onShowPlaylist: handleOpenPlaylist,
+    onSkip: handleSkipVideo,
   };
 
   return (
@@ -130,12 +132,12 @@ const VideoPlayer = ({ roomId }) => {
 
             <Hidden mdUp>
               <VideoInfoContainer show={showOverlay}>
-                <VideoInfo {...videoInfoProps} onShowPlaylist={handleOpenPlaylist} onSkip={handleSkipVideo} />
+                <VideoDashboard {...VideoDashboardProps} />
               </VideoInfoContainer>
             </Hidden>
           </PlayerContainer>
           <Hidden smDown>
-            <VideoInfo {...videoInfoProps} onShowPlaylist={handleOpenPlaylist} onSkip={handleSkipVideo} />
+            <VideoDashboard {...VideoDashboardProps} />
           </Hidden>
         </>
       )}

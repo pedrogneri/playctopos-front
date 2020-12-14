@@ -21,7 +21,7 @@ import {
   TimeLabel,
 } from './styles';
 
-const VideoInfo = ({
+const VideoDashboard = ({
   title,
   channel,
   thumbnail,
@@ -88,7 +88,7 @@ const VideoInfo = ({
   );
 };
 
-VideoInfo.propTypes = {
+VideoDashboard.propTypes = {
   title: PropTypes.string.isRequired,
   channel: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
@@ -103,4 +103,4 @@ VideoInfo.propTypes = {
   duration: PropTypes.number.isRequired,
 };
 
-export default VideoInfo;
+export default VideoDashboard;
