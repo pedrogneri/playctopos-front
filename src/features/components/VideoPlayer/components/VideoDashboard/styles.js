@@ -43,9 +43,13 @@ Subtitle.xs = styled.p`
 export const IconStyle = css`
   height: 30px;
   width: 30px;
-  color: ${({ theme }) => theme.white} !important;
+  color: ${({ theme }) => theme.gray} !important;
   margin: 0 12px;
   cursor: pointer;
+
+  &:hover {
+    color: ${({ theme }) => theme.white} !important;
+  }
 
   @media (max-width: 959px) {
     height: 20px;

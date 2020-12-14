@@ -1,11 +1,11 @@
-import { IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeOff } from 'react-icons/io';
+import { MdVolumeUp, MdVolumeDown, MdVolumeOff } from 'react-icons/md';
 
 import { Slider, withStyles } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 
 export const StyledSlider = withStyles({
   root: {
-    color: '#ca3e47',
+    color: '#fff',
     height: 5,
     width: 100,
   },
@@ -40,6 +40,10 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
+  &:hover svg {
+    color: ${({ theme }) => theme.white} !important;
+  }
+
   @media (min-width: 960px) {
     &:hover .slider-container {
       display: flex;
@@ -51,24 +55,25 @@ export const Container = styled.div`
 export const VolumeIcon = css`
   height: 30px;
   width: 30px;
-  color: ${({ theme }) => theme.white} !important;
-  cursor: pointer;
+  color: ${({ theme }) => theme.gray} !important;
   margin: 0 12px;
+  cursor: pointer;
 
   @media (max-width: 959px) {
     height: 20px;
     width: 20px;
+    margin: 0 5px;
   }
 `;
 
-export const MutedIcon = styled(IoMdVolumeOff)`
+export const MutedIcon = styled(MdVolumeOff)`
   ${VolumeIcon};
 `;
 
-export const LowIcon = styled(IoMdVolumeLow)`
+export const LowIcon = styled(MdVolumeDown)`
   ${VolumeIcon};
 `;
 
-export const HighIcon = styled(IoMdVolumeHigh)`
+export const HighIcon = styled(MdVolumeUp)`
   ${VolumeIcon};
 `;
