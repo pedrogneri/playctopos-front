@@ -6,13 +6,17 @@ import styled, { css } from 'styled-components';
 export const StyledSlider = withStyles({
   root: {
     color: '#fff',
-    height: 5,
-    width: 100,
+    height: 3,
+    width: 90,
   },
   thumb: {
-    height: 15,
-    width: 15,
+    height: 12,
+    width: 12,
+    marginTop: -3,
     backgroundColor: '#fff',
+    '&:focus, &:hover, &$active': {
+      boxShadow: 'inherit',
+    },
   },
   active: {},
   track: {
@@ -30,8 +34,8 @@ export const SliderContainer = styled.div`
   position: absolute;
   justify-content: center;
   align-items: center;
-  width: 150px;
-  left: 30px;
+  width: 120px;
+  left: 40px;
 `;
 
 export const Container = styled.div`
@@ -52,9 +56,16 @@ export const Container = styled.div`
   }
 `;
 
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
 export const VolumeIcon = css`
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   color: ${({ theme }) => theme.gray} !important;
   margin: 0 12px;
   cursor: pointer;
