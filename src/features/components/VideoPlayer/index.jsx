@@ -9,7 +9,6 @@ import TransitionModal from 'components/TransitionModal';
 import Playlist from 'features/components/Playlist';
 import { updateActualVideo, getVideoUrlByRoom, updatePlaylist } from 'services/room';
 
-import Overlay from './components/Overlay';
 import VideoInfo from './components/VideoInfo';
 import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer } from './styles';
 
@@ -97,6 +96,12 @@ const VideoPlayer = ({ roomId }) => {
     channel: videoInfo.channel || '',
     thumbnail: videoInfo.thumbnail || '',
     addedBy: videoInfo.addedBy || '',
+    time: videoProgress,
+    duration: videoDuration,
+    volume,
+    isMuted,
+    onChangeVolume: (value) => setVolume(value),
+    onChangeIsMuted: () => setIsMuted(!isMuted),
   };
 
   return (
@@ -122,16 +127,6 @@ const VideoPlayer = ({ roomId }) => {
               onDuration={handleVideoDuration}
               onEnded={handleEndVideo}
             />
-            {showOverlay && (
-              <Overlay
-                time={videoProgress}
-                duration={videoDuration}
-                volume={volume}
-                isMuted={isMuted}
-                onChangeIsMuted={() => setIsMuted(!isMuted)}
-                onChangeVolume={(value) => setVolume(value)}
-              />
-            )}
 
             <Hidden mdUp>
               <VideoInfoContainer show={showOverlay}>
