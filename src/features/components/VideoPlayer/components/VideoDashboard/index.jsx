@@ -56,7 +56,7 @@ const VideoDashboard = ({
           </InfoContainer>
         </Grid>
 
-        <Grid container item xs={12} sm={4} direction="row">
+        <Grid container item xs={6} sm={4} direction="row">
           <Grid container item xs={6} sm={12} justify="center">
             <Tooltip title="Open playlist" placement="top">
               <IconContainer>
@@ -79,7 +79,7 @@ const VideoDashboard = ({
           </Grid>
         </Grid>
 
-        <Grid container item xs={12} sm={4} direction="column" alignItems="flex-end">
+        <Grid container item xs={6} sm={4} direction="column" alignItems="flex-end">
           <TimeLabel>{`${getFormattedTimeBySeconds(time)} / ${getFormattedTimeBySeconds(duration)}`}</TimeLabel>
           <UserBadge username={addedBy} />
         </Grid>
