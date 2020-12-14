@@ -32,15 +32,14 @@ export const InfoContainer = styled.div`
 `;
 
 export const Title = styled.p`
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  margin-bottom: 5px;
   color: ${({ theme }) => theme.white};
 `;
 
 export const Channel = styled.p`
-  font-size: 10px;
-  color: ${({ theme }) => theme.white};
+  font-size: 12px;
+  color: ${({ theme }) => theme.gray};
 `;
 
 export const Thumbnail = styled.img`
