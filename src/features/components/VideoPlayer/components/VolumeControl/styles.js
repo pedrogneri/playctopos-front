@@ -6,11 +6,12 @@ import styled, { css } from 'styled-components';
 export const StyledSlider = withStyles({
   root: {
     color: '#ca3e47',
-    height: 300,
+    height: 5,
+    width: 100,
   },
   thumb: {
-    height: 12,
-    width: 12,
+    height: 15,
+    width: 15,
     backgroundColor: '#fff',
   },
   active: {},
@@ -29,16 +30,15 @@ export const SliderContainer = styled.div`
   position: absolute;
   justify-content: center;
   align-items: center;
-  height: 150px;
-  padding: 25px 0;
-  bottom: 20px;
+  width: 150px;
+  left: 30px;
 `;
 
 export const Container = styled.div`
   position: relative;
-  display: inline-block;
-  width: 30px;
-  margin-right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media (min-width: 960px) {
     &:hover .slider-container {
@@ -53,6 +53,12 @@ export const VolumeIcon = css`
   width: 30px;
   color: ${({ theme }) => theme.white} !important;
   cursor: pointer;
+  margin: 0 12px;
+
+  @media (max-width: 959px) {
+    height: 20px;
+    width: 20px;
+  }
 `;
 
 export const MutedIcon = styled(IoMdVolumeOff)`

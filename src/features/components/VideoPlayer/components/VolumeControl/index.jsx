@@ -7,11 +7,17 @@ import { Container, SliderContainer, MutedIcon, LowIcon, HighIcon, StyledSlider 
 const VolumeControl = ({ volume, onChangeVolume, isMuted, onChangeIsMuted }) => {
   return (
     <Container>
-      <div onClick={onChangeIsMuted}>{isMuted ? <MutedIcon /> : volume >= 0.5 ? <HighIcon /> : <LowIcon />}</div>
+      {isMuted ? (
+        <MutedIcon onClick={onChangeIsMuted} />
+      ) : volume >= 0.5 ? (
+        <HighIcon onClick={onChangeIsMuted} />
+      ) : (
+        <LowIcon onClick={onChangeIsMuted} />
+      )}
 
       <SliderContainer className="slider-container">
         <StyledSlider
-          orientation="vertical"
+          orientation="horizontal"
           value={volume * 100}
           onChange={(_, newValue) => onChangeVolume(newValue / 100)}
         />
