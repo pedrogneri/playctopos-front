@@ -18,7 +18,6 @@ const VideoProgress = ({ value, maxValue }) => {
       <BaseBar>
         <ProgressBar value={percentValue} />
       </BaseBar>
-      <TimeLabel>{getFormattedTimeBySeconds(maxValue - value)}</TimeLabel>
     </Container>
   );
 };
