@@ -8,6 +8,10 @@ export const Container = styled(Grid)`
   padding: 12px;
   height: 100%;
   background-color: ${({ theme }) => theme.primary.dark};
+
+  @media (max-width: 959px) {
+    border-bottom: 2px solid ${({ theme }) => theme.primary.default};
+  }
 `;
 
 export const IconContainer = styled.div`
@@ -33,10 +37,11 @@ export const Subtitle = styled.h5`
 
 Title.xs = styled.h5`
   color: ${({ theme }) => theme.white};
-  margin-bottom: 6px;
+  font-size: 12px;
 `;
 
 Subtitle.xs = styled.p`
+  font-size: 12px;
   color: ${({ theme }) => theme.white};
 `;
 
