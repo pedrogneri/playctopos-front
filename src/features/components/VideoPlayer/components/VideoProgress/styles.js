@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  height: 5px;
+  height: 2px;
 `;
 
 export const BaseBar = styled.div`
