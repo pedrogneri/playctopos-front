@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import htmlParser from 'react-html-parser';
 
 import { Grid, Hidden, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -7,19 +6,10 @@ import PropTypes from 'prop-types';
 import UserBadge from 'components/UserBadge';
 import { getFormattedTimeBySeconds } from 'utils/timeFormatter';
 
+import TitleSection from '../TitleSection';
 import VideoProgress from '../VideoProgress';
 import VolumeControl from '../VolumeControl';
-import {
-  Container,
-  SkipIcon,
-  Title,
-  Subtitle,
-  Thumbnail,
-  InfoContainer,
-  PlaylistIcon,
-  IconContainer,
-  TimeLabel,
-} from './styles';
+import { Container, SkipIcon, PlaylistIcon, IconContainer, TimeLabel } from './styles';
 
 const VideoDashboard = ({
   title,
@@ -44,25 +34,12 @@ const VideoDashboard = ({
     <>
       <VideoProgress value={time} maxValue={duration} />
       <Container container justify="space-between" alignItems="center">
-        <Grid container item xs={12} sm={4} direction="row" alignItems="center">
-          <Grid container item xs={3} xl={2} justify="center">
-            <Thumbnail src={thumbnail} />
-          </Grid>
-
-          <InfoContainer item xs={9} xl={10}>
-            <Hidden mdDown>
-              <Title>{htmlParser(title)}</Title>
-              <Subtitle>{htmlParser(channel)}</Subtitle>
-            </Hidden>
-            <Hidden lgUp>
-              <Title.xs>{htmlParser(title)}</Title.xs>
-              <Subtitle.xs>{htmlParser(channel)}</Subtitle.xs>
-            </Hidden>
-          </InfoContainer>
-        </Grid>
+        <Hidden smUp>
+          <TitleSection title={title} channel={channel} thumbnail={thumbnail} />
+        </Hidden>
 
         <Grid container item xs={6} sm={4} direction="row">
-          <Grid container item xs={6} sm={12} justify="center">
+          <Grid container item xs={6} sm={12}>
             <Tooltip title="Open playlist" placement="top">
               <IconContainer>
                 <PlaylistIcon onClick={onShowPlaylist} />
@@ -83,6 +60,10 @@ const VideoDashboard = ({
             </IconContainer>
           </Grid>
         </Grid>
+
+        <Hidden xsDown>
+          <TitleSection title={title} channel={channel} thumbnail={thumbnail} />
+        </Hidden>
 
         <Grid container item xs={6} sm={4} direction="column" alignItems="flex-end">
           <TimeLabel>{timeLabelText}</TimeLabel>

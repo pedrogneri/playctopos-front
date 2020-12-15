@@ -21,38 +21,6 @@ export const IconContainer = styled.div`
   height: 100%;
 `;
 
-export const InfoContainer = styled(Grid)`
-  padding-left: 12px;
-`;
-
-export const Title = styled.h5`
-  color: ${({ theme }) => theme.white};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: normal;
-`;
-
-export const Subtitle = styled.h5`
-  color: ${({ theme }) => theme.gray};
-  font-weight: normal;
-`;
-
-Title.xs = styled.h5`
-  color: ${({ theme }) => theme.white};
-  font-size: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  font-weight: normal;
-  text-overflow: ellipsis;
-`;
-
-Subtitle.xs = styled.h5`
-  font-size: 12px;
-  font-weight: normal;
-  color: ${({ theme }) => theme.gray};
-`;
-
 export const IconStyle = css`
   height: 25px;
   width: 25px;
@@ -77,11 +45,6 @@ export const SkipIcon = styled(IoMdSkipForward)`
 
 export const PlaylistIcon = styled(MdFeaturedPlayList)`
   ${IconStyle}
-`;
-
-export const Thumbnail = styled.img`
-  width: 100%;
-  max-width: 200px;
 `;
 
 export const TimeLabel = styled.p`
