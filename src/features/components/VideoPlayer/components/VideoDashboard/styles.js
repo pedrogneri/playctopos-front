@@ -47,6 +47,10 @@ export const PlaylistIcon = styled(MdFeaturedPlayList)`
   ${IconStyle}
 `;
 
+export const TitleSectionWrapper = styled.div`
+  margin-bottom: 20px;
+`;
+
 export const TimeLabel = styled.p`
   color: ${({ theme }) => theme.white};
   font-size: 12px;

@@ -9,7 +9,7 @@ import { getFormattedTimeBySeconds } from 'utils/timeFormatter';
 import TitleSection from '../TitleSection';
 import VideoProgress from '../VideoProgress';
 import VolumeControl from '../VolumeControl';
-import { Container, SkipIcon, PlaylistIcon, IconContainer, TimeLabel } from './styles';
+import { Container, SkipIcon, PlaylistIcon, IconContainer, TimeLabel, TitleSectionWrapper } from './styles';
 
 const VideoDashboard = ({
   title,
@@ -35,11 +35,13 @@ const VideoDashboard = ({
       <VideoProgress value={time} maxValue={duration} />
       <Container container justify="space-between" alignItems="center">
         <Hidden smUp>
-          <TitleSection title={title} channel={channel} thumbnail={thumbnail} />
+          <TitleSectionWrapper>
+            <TitleSection title={title} channel={channel} thumbnail={thumbnail} />
+          </TitleSectionWrapper>
         </Hidden>
 
         <Grid container item xs={6} sm={4} direction="row">
-          <Grid container item xs={6} sm={12}>
+          <Grid container item>
             <Tooltip title="Open playlist" placement="top">
               <IconContainer>
                 <PlaylistIcon onClick={onShowPlaylist} />
