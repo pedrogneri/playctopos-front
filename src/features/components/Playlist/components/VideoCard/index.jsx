@@ -17,6 +17,7 @@ import {
   RemoveIcon,
   BottomContainer,
   IconContainer,
+  Row,
 } from './styles';
 
 const VideoCard = ({ index, id, title, channel, thumbnail, addedBy, onAddToPlaylist, onRemoveFromPlaylist }) => {
@@ -30,27 +31,30 @@ const VideoCard = ({ index, id, title, channel, thumbnail, addedBy, onAddToPlayl
 
   return (
     <Container>
-      <Thumbnail src={thumbnail} alt={`${title}-thumbnail`} />
-      <InfoContainer>
-        <Title>{htmlParser(title)}</Title>
-        <Channel>{htmlParser(channel)}</Channel>
-        <BottomContainer>
-          {addedBy && <UserBadge username={addedBy} />}
-          {!!onAddToPlaylist ? (
-            <Tooltip title="Add to playlist" placement="bottom-start">
-              <IconContainer>
-                <AddIcon onClick={handleAddToPlaylist} />
-              </IconContainer>
-            </Tooltip>
-          ) : (
-            <Tooltip title="Remove from playlist" placement="bottom-start">
-              <IconContainer>
-                <RemoveIcon onClick={handleRemoveFromPlaylist} />
-              </IconContainer>
-            </Tooltip>
-          )}
-        </BottomContainer>
-      </InfoContainer>
+      <Row>
+        <Thumbnail src={thumbnail} alt={`${title}-thumbnail`} />
+        <InfoContainer>
+          <Title>{htmlParser(title)}</Title>
+          <Channel>{htmlParser(channel)}</Channel>
+        </InfoContainer>
+      </Row>
+
+      <BottomContainer>
+        {addedBy && <UserBadge username={addedBy} />}
+        {!!onAddToPlaylist ? (
+          <Tooltip title="Add to playlist" placement="bottom-start">
+            <IconContainer>
+              <AddIcon onClick={handleAddToPlaylist} />
+            </IconContainer>
+          </Tooltip>
+        ) : (
+          <Tooltip title="Remove from playlist" placement="bottom-start">
+            <IconContainer>
+              <RemoveIcon onClick={handleRemoveFromPlaylist} />
+            </IconContainer>
+          </Tooltip>
+        )}
+      </BottomContainer>
     </Container>
   );
 };

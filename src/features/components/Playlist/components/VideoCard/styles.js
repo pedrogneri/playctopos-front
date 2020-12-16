@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 12px 12px 12px 0;
 
   &:not(:last-child) {
@@ -16,6 +16,10 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
   }
+`;
+
+export const Row = styled.div`
+  display: flex;
 `;
 
 export const InfoContainer = styled.div`
@@ -43,7 +47,7 @@ export const Channel = styled.p`
 `;
 
 export const Thumbnail = styled.img`
-  height: 125px;
+  height: 45px;
 `;
 
 export const IconContainer = styled.div`
