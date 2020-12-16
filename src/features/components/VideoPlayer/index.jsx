@@ -11,7 +11,7 @@ import { updateActualVideo, getVideoUrlByRoom } from 'services/room';
 import VideoDashboard from './components/VideoDashboard';
 import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer, EmptyText } from './styles';
 
-const VideoPlayer = ({ roomId }) => {
+const VideoPlayer = ({ roomId, onShowPlaylist }) => {
   const [showVideo, setShowVideo] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
 
@@ -79,10 +79,6 @@ const VideoPlayer = ({ roomId }) => {
     }
   };
 
-  const handleOpenPlaylist = () => {
-    // TODO: Use onShowPlaylist function from Room,
-  };
-
   const VideoDashboardProps = {
     title: videoInfo.title || '',
     channel: videoInfo.channel || '',
@@ -94,7 +90,7 @@ const VideoPlayer = ({ roomId }) => {
     isMuted,
     onChangeVolume: (value) => setVolume(value),
     onChangeIsMuted: () => setIsMuted(!isMuted),
-    onShowPlaylist: handleOpenPlaylist,
+    onShowPlaylist,
     onSkip: handleSkipVideo,
   };
 
@@ -102,7 +98,7 @@ const VideoPlayer = ({ roomId }) => {
     <>
       {!showVideo ? (
         <Placeholder>
-          <PlayIcon onClick={handleOpenPlaylist} />
+          <PlayIcon onClick={onShowPlaylist} />
           <EmptyText>
             <p>The playlist are empty</p>
             <p>Add videos to start the party</p>
@@ -143,6 +139,7 @@ const VideoPlayer = ({ roomId }) => {
 
 VideoPlayer.propTypes = {
   roomId: PropTypes.string,
+  onShowPlaylist: PropTypes.func,
 };
 
 export default VideoPlayer;

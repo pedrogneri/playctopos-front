@@ -32,6 +32,10 @@ const Room = ({ id, name }) => {
     setShowRegister(false);
   };
 
+  const handleOpenPlaylist = () => {
+    setOpenPlaylist(true);
+  };
+
   const handleUpdatePlaylist = async (playlist) => {
     await updatePlaylist(id, playlist);
     socket.emit('video.changeState', id);
@@ -50,7 +54,7 @@ const Room = ({ id, name }) => {
           />
         </PlaylistContainer>
         <VideoContainer>
-          <VideoPlayer roomId={id} />
+          <VideoPlayer roomId={id} onShowPlaylist={handleOpenPlaylist} />
         </VideoContainer>
         <ChatContainer>
           {showRegister ? (
