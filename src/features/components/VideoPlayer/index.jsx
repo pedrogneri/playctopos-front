@@ -10,7 +10,7 @@ import Playlist from 'features/components/Playlist';
 import { updateActualVideo, getVideoUrlByRoom, updatePlaylist } from 'services/room';
 
 import VideoDashboard from './components/VideoDashboard';
-import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer } from './styles';
+import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer, EmptyText } from './styles';
 
 const VideoPlayer = ({ roomId }) => {
   const [showVideo, setShowVideo] = useState(false);
@@ -111,6 +111,10 @@ const VideoPlayer = ({ roomId }) => {
       {!showVideo ? (
         <Placeholder>
           <PlayIcon onClick={handleOpenPlaylist} />
+          <EmptyText>
+            <p>The playlist are empty</p>
+            <p>Add videos to start the party</p>
+          </EmptyText>
         </Placeholder>
       ) : (
         <>
