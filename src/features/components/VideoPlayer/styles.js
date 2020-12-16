@@ -31,6 +31,7 @@ export const EmptyText = styled.div`
   border-left: 2px solid #fff;
 
   & > p {
+    line-height: 30px;
     font-size: 20px;
   }
 
@@ -38,6 +39,7 @@ export const EmptyText = styled.div`
     padding: 12px;
 
     & > p {
+      line-height: 22px;
       font-size: 12px;
     }
   }
