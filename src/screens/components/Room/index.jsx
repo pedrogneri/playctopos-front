@@ -54,12 +54,7 @@ const Room = ({ id, name }) => {
             expanded={openPlaylist}
             switchExpanded={() => setOpenPlaylist(!openPlaylist)}
           />
-          <Playlist
-            expanded={openPlaylist}
-            switchExpanded={() => setOpenPlaylist(!openPlaylist)}
-            playlist={playlist}
-            onUpdatePlaylist={handleUpdatePlaylist}
-          />
+          <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} />
         </PlaylistContainer>
         <VideoContainer>
           <VideoPlayer roomId={id} onShowPlaylist={handleOpenPlaylist} />
