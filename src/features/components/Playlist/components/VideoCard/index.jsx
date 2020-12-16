@@ -4,7 +4,7 @@ import htmlParser from 'react-html-parser';
 import { Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import UserBadge from 'components/UserBadge';
+import { truncateText } from 'utils/generic';
 import { getUsername } from 'utils/username';
 
 import {
@@ -16,7 +16,6 @@ import {
   AddIcon,
   RemoveIcon,
   BottomContainer,
-  IconContainer,
   Row,
 } from './styles';
 
@@ -34,27 +33,27 @@ const VideoCard = ({ index, id, title, channel, thumbnail, addedBy, onAddToPlayl
       <Row>
         <Thumbnail src={thumbnail} alt={`${title}-thumbnail`} />
         <InfoContainer>
-          <Title>{htmlParser(title)}</Title>
+          <Tooltip title={htmlParser(title)} placement="bottom-start">
+            <Title>{truncateText(htmlParser(title).toString(), 35)}</Title>
+          </Tooltip>
           <Channel>{htmlParser(channel)}</Channel>
         </InfoContainer>
+        <BottomContainer>
+          {!!onAddToPlaylist ? (
+            <Tooltip title="Add to playlist" placement="bottom-start">
+              <div>
+                <AddIcon onClick={handleAddToPlaylist} />
+              </div>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Remove from playlist" placement="bottom-start">
+              <div>
+                <RemoveIcon onClick={handleRemoveFromPlaylist} />
+              </div>
+            </Tooltip>
+          )}
+        </BottomContainer>
       </Row>
-
-      <BottomContainer>
-        {addedBy && <UserBadge username={addedBy} />}
-        {!!onAddToPlaylist ? (
-          <Tooltip title="Add to playlist" placement="bottom-start">
-            <IconContainer>
-              <AddIcon onClick={handleAddToPlaylist} />
-            </IconContainer>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Remove from playlist" placement="bottom-start">
-            <IconContainer>
-              <RemoveIcon onClick={handleRemoveFromPlaylist} />
-            </IconContainer>
-          </Tooltip>
-        )}
-      </BottomContainer>
     </Container>
   );
 };
