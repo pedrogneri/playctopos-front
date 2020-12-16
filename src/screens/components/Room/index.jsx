@@ -5,6 +5,7 @@ import { useStoreState } from 'easy-peasy';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
+import ExpandButton from 'components/ExpandButton';
 import Chat from 'features/components/Chat';
 import Playlist from 'features/components/Playlist';
 import SimpleRegister from 'features/components/SimpleRegister';
@@ -19,6 +20,7 @@ const Room = ({ id, name }) => {
   const username = getUsername();
   const playlist = useStoreState((state) => state.playlist);
   const [openPlaylist, setOpenPlaylist] = useState(false);
+  const [openChat, setOpenChat] = useState(true);
 
   useEffect(() => {
     setShowRegister(!username);
@@ -46,6 +48,7 @@ const Room = ({ id, name }) => {
       <Helmet title={name} />
       <Container>
         <PlaylistContainer show={openPlaylist}>
+          <ExpandButton fromLeft expanded={openPlaylist} switchExpanded={() => setOpenPlaylist(!openPlaylist)} />
           <Playlist
             expanded={openPlaylist}
             switchExpanded={() => setOpenPlaylist(!openPlaylist)}
@@ -56,7 +59,8 @@ const Room = ({ id, name }) => {
         <VideoContainer>
           <VideoPlayer roomId={id} onShowPlaylist={handleOpenPlaylist} />
         </VideoContainer>
-        <ChatContainer>
+        <ChatContainer show={openChat}>
+          <ExpandButton fromRight expanded={openChat} switchExpanded={() => setOpenChat(!openChat)} />
           {showRegister ? (
             <SimpleRegister roomId={id} onClose={handleCloseRegister} />
           ) : (
