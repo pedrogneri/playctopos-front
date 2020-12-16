@@ -48,7 +48,12 @@ const Room = ({ id, name }) => {
       <Helmet title={name} />
       <Container>
         <PlaylistContainer show={openPlaylist}>
-          <ExpandButton fromLeft expanded={openPlaylist} switchExpanded={() => setOpenPlaylist(!openPlaylist)} />
+          <ExpandButton
+            componentName="playlist"
+            fromLeft
+            expanded={openPlaylist}
+            switchExpanded={() => setOpenPlaylist(!openPlaylist)}
+          />
           <Playlist
             expanded={openPlaylist}
             switchExpanded={() => setOpenPlaylist(!openPlaylist)}
@@ -60,7 +65,12 @@ const Room = ({ id, name }) => {
           <VideoPlayer roomId={id} onShowPlaylist={handleOpenPlaylist} />
         </VideoContainer>
         <ChatContainer show={openChat}>
-          <ExpandButton fromRight expanded={openChat} switchExpanded={() => setOpenChat(!openChat)} />
+          <ExpandButton
+            componentName="chat"
+            fromRight
+            expanded={openChat}
+            switchExpanded={() => setOpenChat(!openChat)}
+          />
           {showRegister ? (
             <SimpleRegister roomId={id} onClose={handleCloseRegister} />
           ) : (
