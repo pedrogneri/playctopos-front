@@ -2,16 +2,18 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import { Container, SliderContainer, MutedIcon, LowIcon, HighIcon, StyledSlider } from './styles';
+import { Container, SliderContainer, MutedIcon, LowIcon, HighIcon, StyledSlider, IconContainer } from './styles';
 
 const VolumeControl = ({ volume, onChangeVolume, isMuted, onChangeIsMuted }) => {
   return (
     <Container>
-      <div onClick={onChangeIsMuted}>{isMuted ? <MutedIcon /> : volume >= 0.5 ? <HighIcon /> : <LowIcon />}</div>
+      <IconContainer onClick={onChangeIsMuted}>
+        {isMuted ? <MutedIcon /> : volume >= 0.5 ? <HighIcon /> : <LowIcon />}
+      </IconContainer>
 
       <SliderContainer className="slider-container">
         <StyledSlider
-          orientation="vertical"
+          orientation="horizontal"
           value={volume * 100}
           onChange={(_, newValue) => onChangeVolume(newValue / 100)}
         />

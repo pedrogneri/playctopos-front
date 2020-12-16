@@ -9,9 +9,8 @@ import TransitionModal from 'components/TransitionModal';
 import Playlist from 'features/components/Playlist';
 import { updateActualVideo, getVideoUrlByRoom, updatePlaylist } from 'services/room';
 
-import Overlay from './components/Overlay';
-import VideoInfo from './components/VideoInfo';
-import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer } from './styles';
+import VideoDashboard from './components/VideoDashboard';
+import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer, EmptyText } from './styles';
 
 const VideoPlayer = ({ roomId }) => {
   const [showVideo, setShowVideo] = useState(false);
@@ -92,11 +91,19 @@ const VideoPlayer = ({ roomId }) => {
     }
   };
 
-  const videoInfoProps = {
+  const VideoDashboardProps = {
     title: videoInfo.title || '',
     channel: videoInfo.channel || '',
     thumbnail: videoInfo.thumbnail || '',
     addedBy: videoInfo.addedBy || '',
+    time: videoProgress,
+    duration: videoDuration,
+    volume,
+    isMuted,
+    onChangeVolume: (value) => setVolume(value),
+    onChangeIsMuted: () => setIsMuted(!isMuted),
+    onShowPlaylist: handleOpenPlaylist,
+    onSkip: handleSkipVideo,
   };
 
   return (
@@ -104,6 +111,10 @@ const VideoPlayer = ({ roomId }) => {
       {!showVideo ? (
         <Placeholder>
           <PlayIcon onClick={handleOpenPlaylist} />
+          <EmptyText>
+            <p>The playlist are empty</p>
+            <p>Add videos to start the party</p>
+          </EmptyText>
         </Placeholder>
       ) : (
         <>
@@ -122,25 +133,15 @@ const VideoPlayer = ({ roomId }) => {
               onDuration={handleVideoDuration}
               onEnded={handleEndVideo}
             />
-            {showOverlay && (
-              <Overlay
-                time={videoProgress}
-                duration={videoDuration}
-                volume={volume}
-                isMuted={isMuted}
-                onChangeIsMuted={() => setIsMuted(!isMuted)}
-                onChangeVolume={(value) => setVolume(value)}
-              />
-            )}
 
             <Hidden mdUp>
               <VideoInfoContainer show={showOverlay}>
-                <VideoInfo {...videoInfoProps} onShowPlaylist={handleOpenPlaylist} onSkip={handleSkipVideo} />
+                <VideoDashboard {...VideoDashboardProps} />
               </VideoInfoContainer>
             </Hidden>
           </PlayerContainer>
           <Hidden smDown>
-            <VideoInfo {...videoInfoProps} onShowPlaylist={handleOpenPlaylist} onSkip={handleSkipVideo} />
+            <VideoDashboard {...VideoDashboardProps} />
           </Hidden>
         </>
       )}

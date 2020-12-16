@@ -8,6 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   background-color: ${({ theme }) => theme.primary.dark};
+  border-left: 2px solid ${({ theme }) => theme.primary.default};
 `;
 
 export const MessagesArea = styled.div`

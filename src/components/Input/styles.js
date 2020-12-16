@@ -7,6 +7,27 @@ export const StyledInput = styled.input`
   background-color: transparent;
   color: ${({ theme }) => theme.white};
   width: calc(100% - 40px);
+
+  &::-webkit-input-placeholder {
+    color: ${({ theme }) => theme.gray};
+  }
+  &:-moz-placeholder {
+    color: ${({ theme }) => theme.gray};
+    opacity: 1;
+  }
+  &::-moz-placeholder {
+    color: ${({ theme }) => theme.gray};
+    opacity: 1;
+  }
+  &:-ms-input-placeholder {
+    color: ${({ theme }) => theme.gray};
+  }
+  &::-ms-input-placeholder {
+    color: ${({ theme }) => theme.gray};
+  }
+  &::placeholder {
+    color: ${({ theme }) => theme.gray};
+  }
 `;
 
 export const InputContainer = styled.div`
