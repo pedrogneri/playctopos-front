@@ -5,12 +5,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
-  width: 500px;
-  max-width: 90%;
-  height: 500px;
-  border-radius: 12px;
+  height: 100%;
+  width: 100%;
   background-color: ${({ theme }) => theme.primary.dark};
+  border-right: 2px solid ${({ theme }) => theme.primary.default};
 `;
 
 export const SearchIcon = styled(AiOutlineSearch)`
@@ -43,8 +41,27 @@ export const HeaderContainer = styled.header`
   align-items: center;
   padding: 16px;
   min-height: 83px;
-
+  position: relative;
   border-bottom: 1px solid ${({ theme }) => theme.primary.default};
+`;
+
+export const ExpandButton = styled.div`
+  position: absolute;
+  right: 0;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  font-size: 25px;
+  margin-right: -15px;
+
+  cursor: pointer;
+  color: #fff;
+  background-color: ${({ theme }) => theme.primary.light};
 `;
 
 export const HeaderText = styled.span`
@@ -56,6 +73,5 @@ export const PlusIcon = styled(AiFillPlusCircle)`
   width: 30px;
   height: 30px;
   color: ${({ theme }) => theme.secondary.default};
-  margin-left: auto;
   cursor: pointer;
 `;
