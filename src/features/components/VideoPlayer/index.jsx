@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { Hidden } from '@material-ui/core';
+import { useStoreActions } from 'easy-peasy';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
-import TransitionModal from 'components/TransitionModal';
-import Playlist from 'features/components/Playlist';
-import { updateActualVideo, getVideoUrlByRoom, updatePlaylist } from 'services/room';
+import { updateActualVideo, getVideoUrlByRoom } from 'services/room';
 
 import VideoDashboard from './components/VideoDashboard';
 import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer, EmptyText } from './styles';
@@ -15,7 +14,6 @@ import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer, Emp
 const VideoPlayer = ({ roomId }) => {
   const [showVideo, setShowVideo] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
-  const [showPlaylist, setShowPlaylist] = useState(false);
 
   const [videoUrl, setVideoUrl] = useState('');
   const [videoInfo, setVideoInfo] = useState({});
@@ -23,13 +21,12 @@ const VideoPlayer = ({ roomId }) => {
   const [videoDuration, setVideoDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(isMobile);
-
-  const [playlist, setPlaylist] = useState([]);
+  const changePlaylist = useStoreActions(({ changePlaylist }) => changePlaylist);
 
   useEffect(() => {
     const handleFetchVideoUrl = () => {
       getVideoUrlByRoom(roomId).then(({ room, url }) => {
-        setPlaylist(room.playlist);
+        changePlaylist(room.playlist);
 
         if (!!url) {
           setShowVideo(true);
@@ -53,15 +50,6 @@ const VideoPlayer = ({ roomId }) => {
 
   const handleUpdateActualVideo = async (actualVideo) => {
     await updateActualVideo(roomId, actualVideo);
-  };
-
-  const handleOpenPlaylist = () => {
-    setShowPlaylist(true);
-  };
-
-  const handleUpdatePlaylist = async (playlist) => {
-    await updatePlaylist(roomId, playlist);
-    changeVideoState();
   };
 
   const handleStart = async () => {
@@ -89,6 +77,10 @@ const VideoPlayer = ({ roomId }) => {
     if (isMobile) {
       setShowOverlay(!showOverlay);
     }
+  };
+
+  const handleOpenPlaylist = () => {
+    // TODO: Use onShowPlaylist function from Room,
   };
 
   const VideoDashboardProps = {
@@ -145,9 +137,6 @@ const VideoPlayer = ({ roomId }) => {
           </Hidden>
         </>
       )}
-      <TransitionModal show={showPlaylist} onClose={() => setShowPlaylist(false)}>
-        <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} />
-      </TransitionModal>
     </>
   );
 };
