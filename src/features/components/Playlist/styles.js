@@ -45,25 +45,6 @@ export const HeaderContainer = styled.header`
   border-bottom: 1px solid ${({ theme }) => theme.primary.default};
 `;
 
-export const ExpandButton = styled.div`
-  position: absolute;
-  right: 0;
-  z-index: 2;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
-  height: 30px;
-  width: 30px;
-  font-size: 25px;
-  margin-right: -15px;
-
-  cursor: pointer;
-  color: #fff;
-  background-color: ${({ theme }) => theme.primary.light};
-`;
-
 export const HeaderText = styled.span`
   font-size: 20px;
   color: ${({ theme }) => theme.white};
