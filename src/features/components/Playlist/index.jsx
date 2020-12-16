@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { MdKeyboardArrowRight as ArrowRight, MdKeyboardArrowLeft as ArrowLeft } from 'react-icons/md';
 
 import PropTypes from 'prop-types';
 
@@ -10,18 +9,9 @@ import { getVideoListByQuery } from 'services/search';
 
 import EmptyState from './components/EmptyState';
 import VideoCard from './components/VideoCard';
-import {
-  Container,
-  SearchIcon,
-  ClearIcon,
-  ResultsContainer,
-  HeaderContainer,
-  PlusIcon,
-  StyledForm,
-  ExpandButton,
-} from './styles';
+import { Container, SearchIcon, ClearIcon, ResultsContainer, HeaderContainer, PlusIcon, StyledForm } from './styles';
 
-const Playlist = ({ expanded, switchExpanded, playlist, onUpdatePlaylist }) => {
+const Playlist = ({ playlist, onUpdatePlaylist }) => {
   const toast = useToast();
   const searchBarRef = useRef();
 
@@ -108,7 +98,6 @@ const Playlist = ({ expanded, switchExpanded, playlist, onUpdatePlaylist }) => {
         ) : (
           <PlusIcon onClick={handleShowSearchBar} />
         )}
-        <ExpandButton onClick={switchExpanded}>{expanded ? <ArrowLeft /> : <ArrowRight />}</ExpandButton>
       </HeaderContainer>
       {loading ? (
         <Loader />
@@ -142,8 +131,6 @@ const Playlist = ({ expanded, switchExpanded, playlist, onUpdatePlaylist }) => {
 };
 
 Playlist.propTypes = {
-  expanded: PropTypes.bool,
-  switchExpanded: PropTypes.func.isRequired,
   playlist: PropTypes.arrayOf(PropTypes.object),
   onUpdatePlaylist: PropTypes.func.isRequired,
 };
