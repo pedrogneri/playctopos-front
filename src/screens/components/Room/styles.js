@@ -49,5 +49,5 @@ export const PlaylistContainer = styled.div`
   max-width: 300px;
   height: 100vh;
   margin-left: ${({ show }) => (show ? '0' : '-280px')};
-  transition: margin-left 1s;
+  transition: margin-left 0.6s;
 `;
