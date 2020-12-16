@@ -41,3 +41,13 @@ export const ChatContainer = styled.div`
     height: 70%;
   }
 `;
+
+export const PlaylistContainer = styled.div`
+  display: flex;
+  width: 25%;
+  min-width: 300px;
+  max-width: 300px;
+  height: 100vh;
+  margin-left: ${({ show }) => (show ? '0' : '-280px')};
+  transition: margin-left 1s;
+`;
