@@ -9,11 +9,11 @@ import socket from 'socket';
 import { updateActualVideo, getVideoUrlByRoom } from 'services/room';
 
 import VideoDashboard from './components/VideoDashboard';
-import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer, EmptyText } from './styles';
+import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer, EmptyText, PlayerWrapper } from './styles';
 
 const VideoPlayer = ({ roomId, onShowPlaylist }) => {
   const [showVideo, setShowVideo] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
+  const [showVideoDashboard, setShowVideoDashboard] = useState(false);
 
   const [videoUrl, setVideoUrl] = useState('');
   const [videoInfo, setVideoInfo] = useState({});
@@ -74,9 +74,7 @@ const VideoPlayer = ({ roomId, onShowPlaylist }) => {
   };
 
   const handleClickPlayer = () => {
-    if (isMobile) {
-      setShowOverlay(!showOverlay);
-    }
+    setShowVideoDashboard(!showVideoDashboard);
   };
 
   const VideoDashboardProps = {
@@ -106,24 +104,22 @@ const VideoPlayer = ({ roomId, onShowPlaylist }) => {
         </Placeholder>
       ) : (
         <>
-          <PlayerContainer
-            onMouseEnter={() => setShowOverlay(true)}
-            onMouseLeave={() => setShowOverlay(false)}
-            onClick={handleClickPlayer}
-          >
-            <Player
-              playing={showVideo}
-              url={videoUrl}
-              muted={isMuted}
-              volume={volume}
-              onStart={handleStart}
-              onProgress={handleProgress}
-              onDuration={handleVideoDuration}
-              onEnded={handleEndVideo}
-            />
+          <PlayerContainer>
+            <PlayerWrapper onClick={handleClickPlayer}>
+              <Player
+                playing={showVideo}
+                url={videoUrl}
+                muted={isMuted}
+                volume={volume}
+                onStart={handleStart}
+                onProgress={handleProgress}
+                onDuration={handleVideoDuration}
+                onEnded={handleEndVideo}
+              />
+            </PlayerWrapper>
 
             <Hidden mdUp>
-              <VideoInfoContainer show={showOverlay}>
+              <VideoInfoContainer show={showVideoDashboard}>
                 <VideoDashboard {...VideoDashboardProps} />
               </VideoInfoContainer>
             </Hidden>

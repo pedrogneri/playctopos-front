@@ -59,6 +59,11 @@ export const PlayerContainer = styled.div`
   ${PlayerStyle}
 `;
 
+export const PlayerWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
 export const Player = styled(ReactPlayer)`
   pointer-events: none;
   border: none;
