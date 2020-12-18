@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 
+import { Hidden } from '@material-ui/core';
 import { useStoreState } from 'easy-peasy';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
 import ExpandButton from 'components/ExpandButton';
+import TransitionModal from 'components/TransitionModal';
 import Chat from 'features/components/Chat';
 import Playlist from 'features/components/Playlist';
 import SimpleRegister from 'features/components/SimpleRegister';
@@ -19,7 +21,7 @@ const Room = ({ id, name }) => {
   const [showRegister, setShowRegister] = useState();
   const username = getUsername();
   const playlist = useStoreState((state) => state.playlist);
-  const [openPlaylist, setOpenPlaylist] = useState(false);
+  const [openPlaylist, setOpenPlaylist] = useState(true);
   const [openChat, setOpenChat] = useState(true);
 
   useEffect(() => {
@@ -47,25 +49,36 @@ const Room = ({ id, name }) => {
     <>
       <Helmet title={name} />
       <Container>
-        <PlaylistContainer show={openPlaylist}>
-          <ExpandButton
-            componentName="playlist"
-            fromLeft
-            expanded={openPlaylist}
-            switchExpanded={() => setOpenPlaylist(!openPlaylist)}
-          />
-          <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} />
-        </PlaylistContainer>
+        <Hidden smUp>
+          <TransitionModal show={openPlaylist} onClose={() => setOpenPlaylist(false)}>
+            <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} />
+          </TransitionModal>
+        </Hidden>
+
+        <Hidden xsDown>
+          <PlaylistContainer show={openPlaylist}>
+            <ExpandButton
+              componentName="playlist"
+              fromLeft
+              expanded={openPlaylist}
+              switchExpanded={() => setOpenPlaylist(!openPlaylist)}
+            />
+            <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} />
+          </PlaylistContainer>
+        </Hidden>
+
         <VideoContainer>
           <VideoPlayer roomId={id} onShowPlaylist={handleOpenPlaylist} />
         </VideoContainer>
         <ChatContainer show={openChat}>
-          <ExpandButton
-            componentName="chat"
-            fromRight
-            expanded={openChat}
-            switchExpanded={() => setOpenChat(!openChat)}
-          />
+          <Hidden xsDown>
+            <ExpandButton
+              componentName="chat"
+              fromRight
+              expanded={openChat}
+              switchExpanded={() => setOpenChat(!openChat)}
+            />
+          </Hidden>
           {showRegister ? (
             <SimpleRegister roomId={id} onClose={handleCloseRegister} />
           ) : (
