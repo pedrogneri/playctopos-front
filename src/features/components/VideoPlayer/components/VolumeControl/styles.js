@@ -35,7 +35,7 @@ export const SliderContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 120px;
-  left: 40px;
+  left: 20px;
 `;
 
 export const Container = styled.div`
