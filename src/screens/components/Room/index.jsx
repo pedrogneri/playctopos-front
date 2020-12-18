@@ -63,7 +63,7 @@ const Room = ({ id, name }) => {
           <PlaylistContainer show={openPlaylist}>
             <ExpandButton
               componentName="playlist"
-              fromLeft
+              left
               expanded={openPlaylist}
               switchExpanded={() => setOpenPlaylist(!openPlaylist)}
             />
@@ -78,7 +78,7 @@ const Room = ({ id, name }) => {
           <Hidden xsDown>
             <ExpandButton
               componentName="chat"
-              fromRight
+              right
               expanded={openChat}
               switchExpanded={() => setOpenChat(!openChat)}
             />

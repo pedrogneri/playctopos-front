@@ -6,6 +6,7 @@ import { useStoreActions } from 'easy-peasy';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
+import ExpandButton from 'components/ExpandButton';
 import { updateActualVideo, getVideoUrlByRoom } from 'services/room';
 
 import VideoDashboard from './components/VideoDashboard';
@@ -119,8 +120,14 @@ const VideoPlayer = ({ roomId, onShowPlaylist }) => {
             </PlayerWrapper>
 
             <Hidden mdUp>
-              <VideoInfoContainer show={showVideoDashboard}>
-                <VideoDashboard {...VideoDashboardProps} />
+              <VideoInfoContainer>
+                <ExpandButton
+                  top
+                  componentName="details"
+                  switchExpanded={handleClickPlayer}
+                  expanded={showVideoDashboard}
+                />
+                {showVideoDashboard && <VideoDashboard {...VideoDashboardProps} />}
               </VideoInfoContainer>
             </Hidden>
           </PlayerContainer>

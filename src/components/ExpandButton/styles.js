@@ -2,9 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: absolute;
-  top: 20px;
   z-index: 2;
-  ${({ fromLeft }) => (fromLeft ? 'right: -15px' : 'left: -15px')};
+  ${({ left, right }) => (left || right ? 'top: 20px' : '')};
+  ${({ top }) => (top ? 'margin: 0 calc(50% - 15px)' : '')};
+
+  ${({ top }) => (top ? 'bottom: -15px' : '')};
+  ${({ left }) => (left ? 'right: -15px' : '')};
+  ${({ right }) => (right ? 'left: -15px' : '')};
 
   display: flex;
   justify-content: center;

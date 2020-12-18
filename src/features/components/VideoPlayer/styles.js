@@ -46,7 +46,6 @@ export const EmptyText = styled.div`
 `;
 
 export const VideoInfoContainer = styled.div`
-  display: ${({ show }) => (show ? 'block' : 'none')};
   position: absolute;
   width: 100%;
   z-index: 3;
