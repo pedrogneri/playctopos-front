@@ -21,7 +21,7 @@ const Room = ({ id, name }) => {
   const [showRegister, setShowRegister] = useState();
   const username = getUsername();
   const playlist = useStoreState((state) => state.playlist);
-  const [openPlaylist, setOpenPlaylist] = useState(true);
+  const [openPlaylist, setOpenPlaylist] = useState(false);
   const [openChat, setOpenChat] = useState(true);
 
   useEffect(() => {
