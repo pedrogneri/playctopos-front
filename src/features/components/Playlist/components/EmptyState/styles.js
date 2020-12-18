@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 100%;
+  margin: auto;
 `;
 
 export const IconContainer = styled.div`

@@ -26,9 +26,23 @@ export const ClearIcon = styled(AiFillCloseCircle)`
 export const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   overflow-y: auto;
   padding: 0 16px 16px;
+`;
+
+export const TitleSection = styled.div`
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: ${({ theme }) => theme.primary.light};
+  color: #fff;
+`;
+
+export const SearchWrapper = styled.div`
+  padding: 12px;
 `;
 
 export const StyledForm = styled.form`
