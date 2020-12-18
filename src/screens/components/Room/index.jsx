@@ -40,6 +40,10 @@ const Room = ({ id, name }) => {
     setOpenPlaylist(true);
   };
 
+  const handleClosePlaylist = () => {
+    setOpenPlaylist(false);
+  };
+
   const handleUpdatePlaylist = async (playlist) => {
     await updatePlaylist(id, playlist);
     socket.emit('video.changeState', id);
@@ -50,8 +54,8 @@ const Room = ({ id, name }) => {
       <Helmet title={name} />
       <Container>
         <Hidden smUp>
-          <TransitionModal show={openPlaylist} onClose={() => setOpenPlaylist(false)}>
-            <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} />
+          <TransitionModal show={openPlaylist} onClose={handleClosePlaylist}>
+            <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} onClose={handleClosePlaylist} />
           </TransitionModal>
         </Hidden>
 

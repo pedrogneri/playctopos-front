@@ -1,4 +1,4 @@
-import { AiOutlineSearch, AiFillCloseCircle, AiFillPlusCircle } from 'react-icons/ai';
+import { AiOutlineSearch, AiFillCloseCircle, AiFillPlusCircle, AiOutlineArrowLeft } from 'react-icons/ai';
 
 import styled from 'styled-components';
 
@@ -42,11 +42,20 @@ export const TitleSection = styled.div`
 `;
 
 export const SearchWrapper = styled.div`
+  display: flex;
+  align-items: center;
   padding: 12px;
 `;
 
 export const StyledForm = styled.form`
   width: 100%;
+`;
+
+export const CloseButton = styled(AiOutlineArrowLeft)`
+  margin-right: 12px;
+  height: 30px;
+  width: 30px;
+  color: ${({ theme }) => theme.white};
 `;
 
 export const HeaderContainer = styled.header`

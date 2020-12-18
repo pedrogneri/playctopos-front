@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 
+import { Hidden } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import Input from 'components/Input';
@@ -9,9 +10,18 @@ import { getVideoListByQuery } from 'services/search';
 
 import EmptyState from './components/EmptyState';
 import VideoCard from './components/VideoCard';
-import { Container, SearchIcon, ClearIcon, ResultsContainer, SearchWrapper, StyledForm, TitleSection } from './styles';
+import {
+  Container,
+  SearchIcon,
+  ClearIcon,
+  ResultsContainer,
+  SearchWrapper,
+  StyledForm,
+  TitleSection,
+  CloseButton,
+} from './styles';
 
-const Playlist = ({ playlist, onUpdatePlaylist }) => {
+const Playlist = ({ playlist, onUpdatePlaylist, onClose }) => {
   const toast = useToast();
   const searchBarRef = useRef();
 
@@ -66,6 +76,10 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
   return (
     <Container>
       <SearchWrapper>
+        <Hidden smUp>
+          <CloseButton onClick={onClose} />
+        </Hidden>
+
         <StyledForm onSubmit={handleSearch}>
           <Input
             inputRef={searchBarRef}
@@ -124,6 +138,7 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
 Playlist.propTypes = {
   playlist: PropTypes.arrayOf(PropTypes.object),
   onUpdatePlaylist: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Playlist;
