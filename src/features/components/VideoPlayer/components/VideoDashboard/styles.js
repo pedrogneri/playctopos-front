@@ -19,13 +19,22 @@ export const IconContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
+
+  &:not(:last-child) {
+    margin-right: 24px;
+  }
+
+  @media (max-width: 959px) {
+    &:not(:last-child) {
+      margin-right: 4vh;
+    }
+  }
 `;
 
 export const IconStyle = css`
   height: 25px;
   width: 25px;
   color: ${({ theme }) => theme.gray} !important;
-  margin: 0 12px;
   cursor: pointer;
 
   &:hover {
@@ -35,7 +44,6 @@ export const IconStyle = css`
   @media (max-width: 959px) {
     height: 20px;
     width: 20px;
-    margin: 0 5px;
   }
 `;
 
