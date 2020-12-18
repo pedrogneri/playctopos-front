@@ -5,7 +5,8 @@ export const Container = styled.div`
   flex-direction: row;
   height: 100vh;
   background-color: ${({ theme }) => theme.primary.default};
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   @media (max-width: 959px) {
     flex-direction: column;
@@ -32,12 +33,26 @@ export const ChatContainer = styled.div`
   display: flex;
   width: 25%;
   min-width: 300px;
-  max-width: 400px;
+  max-width: 300px;
   height: 100vh;
+  margin-right: ${({ show }) => (show ? '0' : '-280px')};
+  transition: margin-right 0.6s;
+  position: relative;
 
   @media (max-width: 959px) {
     width: 100%;
     max-width: 100%;
     height: 70%;
   }
+`;
+
+export const PlaylistContainer = styled.div`
+  display: flex;
+  width: 25%;
+  min-width: 300px;
+  max-width: 300px;
+  height: 100vh;
+  margin-left: ${({ show }) => (show ? '0' : '-280px')};
+  transition: margin-left 0.6s;
+  position: relative;
 `;

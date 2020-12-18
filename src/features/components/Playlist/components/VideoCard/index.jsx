@@ -4,7 +4,7 @@ import htmlParser from 'react-html-parser';
 import { Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import UserBadge from 'components/UserBadge';
+import { truncateText } from 'utils/generic';
 import { getUsername } from 'utils/username';
 
 import {
@@ -16,7 +16,7 @@ import {
   AddIcon,
   RemoveIcon,
   BottomContainer,
-  IconContainer,
+  Row,
 } from './styles';
 
 const VideoCard = ({ index, id, title, channel, thumbnail, addedBy, onAddToPlaylist, onRemoveFromPlaylist }) => {
@@ -30,27 +30,30 @@ const VideoCard = ({ index, id, title, channel, thumbnail, addedBy, onAddToPlayl
 
   return (
     <Container>
-      <Thumbnail src={thumbnail} alt={`${title}-thumbnail`} />
-      <InfoContainer>
-        <Title>{htmlParser(title)}</Title>
-        <Channel>{htmlParser(channel)}</Channel>
+      <Row>
+        <Thumbnail src={thumbnail} alt={`${title}-thumbnail`} />
+        <InfoContainer>
+          <Tooltip title={htmlParser(title)} placement="bottom-start">
+            <Title>{truncateText(htmlParser(title).toString(), 35)}</Title>
+          </Tooltip>
+          <Channel>{htmlParser(channel)}</Channel>
+        </InfoContainer>
         <BottomContainer>
-          {addedBy && <UserBadge username={addedBy} />}
           {!!onAddToPlaylist ? (
             <Tooltip title="Add to playlist" placement="bottom-start">
-              <IconContainer>
+              <div>
                 <AddIcon onClick={handleAddToPlaylist} />
-              </IconContainer>
+              </div>
             </Tooltip>
           ) : (
             <Tooltip title="Remove from playlist" placement="bottom-start">
-              <IconContainer>
+              <div>
                 <RemoveIcon onClick={handleRemoveFromPlaylist} />
-              </IconContainer>
+              </div>
             </Tooltip>
           )}
         </BottomContainer>
-      </InfoContainer>
+      </Row>
     </Container>
   );
 };

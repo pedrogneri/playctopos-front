@@ -4,31 +4,23 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  padding: 12px 12px 12px 0;
+  flex-direction: column;
+  padding: 12px 0;
 
   &:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.primary.default};
   }
+`;
 
-  @media (max-width: 959px) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+export const Row = styled.div`
+  display: flex;
 `;
 
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 12px;
-  width: 100%;
-
-  @media (max-width: 959px) {
-    margin-top: 12px;
-    margin-left: 0;
-    max-width: 250px;
-  }
+  max-width: 50%;
 `;
 
 export const Title = styled.p`
@@ -43,18 +35,14 @@ export const Channel = styled.p`
 `;
 
 export const Thumbnail = styled.img`
-  height: 125px;
-`;
-
-export const IconContainer = styled.div`
-  margin-left: auto;
+  height: 45px;
 `;
 
 export const BottomContainer = styled.div`
   display: flex;
   align-items: center;
-  padding-top: 12px;
-  margin-top: auto;
+  justify-content: center;
+  margin-left: auto;
 `;
 
 export const IconStyle = css`

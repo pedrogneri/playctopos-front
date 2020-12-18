@@ -46,7 +46,6 @@ export const EmptyText = styled.div`
 `;
 
 export const VideoInfoContainer = styled.div`
-  display: ${({ show }) => (show ? 'block' : 'none')};
   position: absolute;
   width: 100%;
   z-index: 3;
@@ -57,6 +56,11 @@ export const PlayerContainer = styled.div`
   display: inline-block;
 
   ${PlayerStyle}
+`;
+
+export const PlayerWrapper = styled.div`
+  width: 100%;
+  height: 100%;
 `;
 
 export const Player = styled(ReactPlayer)`

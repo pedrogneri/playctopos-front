@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
+import { Hidden } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import Input from 'components/Input';
@@ -14,25 +15,20 @@ import {
   SearchIcon,
   ClearIcon,
   ResultsContainer,
-  HeaderContainer,
-  PlusIcon,
-  HeaderText,
+  SearchWrapper,
   StyledForm,
+  TitleSection,
+  CloseButton,
 } from './styles';
 
-const Playlist = ({ playlist, onUpdatePlaylist }) => {
+const Playlist = ({ playlist, onUpdatePlaylist, onClose }) => {
   const toast = useToast();
   const searchBarRef = useRef();
 
   const [loading, setLoading] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
-
-  useEffect(() => {
-    if (!!searchBarRef.current) searchBarRef.current.focus();
-  }, [showSearch]);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -63,7 +59,6 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
   const handleClickClear = () => {
     setQuery('');
     setShowResults(false);
-    setShowSearch(false);
   };
 
   const handleAddToPlaylist = (video) => {
@@ -71,7 +66,6 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
     onUpdatePlaylist(newPlaylist);
     setQuery('');
     setShowResults(false);
-    setShowSearch(false);
   };
 
   const handleRemoveFromPlaylist = (index) => {
@@ -79,64 +73,63 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
     onUpdatePlaylist(playlist);
   };
 
-  const handleShowSearchBar = () => {
-    setShowSearch(true);
-  };
-
-  const handleSearchBarBlur = () => {
-    if (!showResults) {
-      setShowSearch(false);
-    }
-  };
-
   return (
     <Container>
-      <HeaderContainer>
-        {showSearch ? (
-          <StyledForm onSubmit={handleSearch}>
-            <Input
-              inputRef={searchBarRef}
-              value={query}
-              onChange={handleChangeQuery}
-              onBlur={handleSearchBarBlur}
-              placeholder="Search something..."
-              onClick={showResults ? handleClickClear : undefined}
-              endAdornment={showResults ? <ClearIcon /> : <SearchIcon />}
-            />
-          </StyledForm>
-        ) : (
-          <>
-            <HeaderText>Room playlist</HeaderText>
-            <PlusIcon onClick={handleShowSearchBar} />
-          </>
-        )}
-      </HeaderContainer>
+      <SearchWrapper>
+        <Hidden smUp>
+          <CloseButton onClick={onClose} />
+        </Hidden>
+
+        <StyledForm onSubmit={handleSearch}>
+          <Input
+            inputRef={searchBarRef}
+            value={query}
+            onChange={handleChangeQuery}
+            placeholder="Search something..."
+            onClick={showResults ? handleClickClear : undefined}
+            endAdornment={showResults ? <ClearIcon /> : <SearchIcon />}
+          />
+        </StyledForm>
+      </SearchWrapper>
       {loading ? (
         <Loader />
       ) : (
-        <ResultsContainer>
+        <>
           {!showResults && playlist.length === 0 && <EmptyState />}
-          {!showResults
-            ? playlist.map((video, index) => (
-                <VideoCard
-                  index={index}
-                  key={`${video.id}-${index}`}
-                  onRemoveFromPlaylist={handleRemoveFromPlaylist}
-                  {...video}
-                />
-              ))
-            : results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }, index) => (
-                <VideoCard
-                  index={index}
-                  key={`${videoId}-${index}`}
-                  id={videoId}
-                  title={title}
-                  channel={channelTitle}
-                  thumbnail={thumbnails.medium.url}
-                  onAddToPlaylist={handleAddToPlaylist}
-                />
-              ))}
-        </ResultsContainer>
+          {showResults && (
+            <>
+              <TitleSection>Results</TitleSection>
+              <ResultsContainer>
+                {results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }, index) => (
+                  <VideoCard
+                    index={index}
+                    key={`${videoId}-${index}`}
+                    id={videoId}
+                    title={title}
+                    channel={channelTitle}
+                    thumbnail={thumbnails.medium.url}
+                    onAddToPlaylist={handleAddToPlaylist}
+                  />
+                ))}
+              </ResultsContainer>
+            </>
+          )}
+          {playlist.length > 0 && (
+            <>
+              <TitleSection>Playlist</TitleSection>
+              <ResultsContainer>
+                {playlist.map((video, index) => (
+                  <VideoCard
+                    index={index}
+                    key={`${video.id}-${index}`}
+                    onRemoveFromPlaylist={handleRemoveFromPlaylist}
+                    {...video}
+                  />
+                ))}
+              </ResultsContainer>
+            </>
+          )}
+        </>
       )}
     </Container>
   );
@@ -145,6 +138,7 @@ const Playlist = ({ playlist, onUpdatePlaylist }) => {
 Playlist.propTypes = {
   playlist: PropTypes.arrayOf(PropTypes.object),
   onUpdatePlaylist: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Playlist;

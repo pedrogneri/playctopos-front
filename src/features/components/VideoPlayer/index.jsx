@@ -2,20 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { Hidden } from '@material-ui/core';
+import { useStoreActions } from 'easy-peasy';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
-import TransitionModal from 'components/TransitionModal';
-import Playlist from 'features/components/Playlist';
-import { updateActualVideo, getVideoUrlByRoom, updatePlaylist } from 'services/room';
+import ExpandButton from 'components/ExpandButton';
+import { updateActualVideo, getVideoUrlByRoom } from 'services/room';
 
 import VideoDashboard from './components/VideoDashboard';
-import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer, EmptyText } from './styles';
+import { Placeholder, Player, PlayIcon, PlayerContainer, VideoInfoContainer, EmptyText, PlayerWrapper } from './styles';
 
-const VideoPlayer = ({ roomId }) => {
+const VideoPlayer = ({ roomId, onShowPlaylist }) => {
   const [showVideo, setShowVideo] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
-  const [showPlaylist, setShowPlaylist] = useState(false);
+  const [showVideoDashboard, setShowVideoDashboard] = useState(false);
 
   const [videoUrl, setVideoUrl] = useState('');
   const [videoInfo, setVideoInfo] = useState({});
@@ -23,13 +22,12 @@ const VideoPlayer = ({ roomId }) => {
   const [videoDuration, setVideoDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(isMobile);
-
-  const [playlist, setPlaylist] = useState([]);
+  const changePlaylist = useStoreActions(({ changePlaylist }) => changePlaylist);
 
   useEffect(() => {
     const handleFetchVideoUrl = () => {
       getVideoUrlByRoom(roomId).then(({ room, url }) => {
-        setPlaylist(room.playlist);
+        changePlaylist(room.playlist);
 
         if (!!url) {
           setShowVideo(true);
@@ -55,15 +53,6 @@ const VideoPlayer = ({ roomId }) => {
     await updateActualVideo(roomId, actualVideo);
   };
 
-  const handleOpenPlaylist = () => {
-    setShowPlaylist(true);
-  };
-
-  const handleUpdatePlaylist = async (playlist) => {
-    await updatePlaylist(roomId, playlist);
-    changeVideoState();
-  };
-
   const handleStart = async () => {
     await handleUpdateActualVideo({ ...videoInfo, duration: videoDuration });
   };
@@ -86,9 +75,7 @@ const VideoPlayer = ({ roomId }) => {
   };
 
   const handleClickPlayer = () => {
-    if (isMobile) {
-      setShowOverlay(!showOverlay);
-    }
+    setShowVideoDashboard(!showVideoDashboard);
   };
 
   const VideoDashboardProps = {
@@ -102,7 +89,7 @@ const VideoPlayer = ({ roomId }) => {
     isMuted,
     onChangeVolume: (value) => setVolume(value),
     onChangeIsMuted: () => setIsMuted(!isMuted),
-    onShowPlaylist: handleOpenPlaylist,
+    onShowPlaylist,
     onSkip: handleSkipVideo,
   };
 
@@ -110,7 +97,7 @@ const VideoPlayer = ({ roomId }) => {
     <>
       {!showVideo ? (
         <Placeholder>
-          <PlayIcon onClick={handleOpenPlaylist} />
+          <PlayIcon onClick={onShowPlaylist} />
           <EmptyText>
             <p>The playlist are empty</p>
             <p>Add videos to start the party</p>
@@ -118,25 +105,29 @@ const VideoPlayer = ({ roomId }) => {
         </Placeholder>
       ) : (
         <>
-          <PlayerContainer
-            onMouseEnter={() => setShowOverlay(true)}
-            onMouseLeave={() => setShowOverlay(false)}
-            onClick={handleClickPlayer}
-          >
-            <Player
-              playing={showVideo}
-              url={videoUrl}
-              muted={isMuted}
-              volume={volume}
-              onStart={handleStart}
-              onProgress={handleProgress}
-              onDuration={handleVideoDuration}
-              onEnded={handleEndVideo}
-            />
+          <PlayerContainer>
+            <PlayerWrapper onClick={handleClickPlayer}>
+              <Player
+                playing={showVideo}
+                url={videoUrl}
+                muted={isMuted}
+                volume={volume}
+                onStart={handleStart}
+                onProgress={handleProgress}
+                onDuration={handleVideoDuration}
+                onEnded={handleEndVideo}
+              />
+            </PlayerWrapper>
 
             <Hidden mdUp>
-              <VideoInfoContainer show={showOverlay}>
-                <VideoDashboard {...VideoDashboardProps} />
+              <VideoInfoContainer>
+                <ExpandButton
+                  top
+                  componentName="details"
+                  switchExpanded={handleClickPlayer}
+                  expanded={showVideoDashboard}
+                />
+                {showVideoDashboard && <VideoDashboard {...VideoDashboardProps} />}
               </VideoInfoContainer>
             </Hidden>
           </PlayerContainer>
@@ -145,15 +136,13 @@ const VideoPlayer = ({ roomId }) => {
           </Hidden>
         </>
       )}
-      <TransitionModal show={showPlaylist} onClose={() => setShowPlaylist(false)}>
-        <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} />
-      </TransitionModal>
     </>
   );
 };
 
 VideoPlayer.propTypes = {
   roomId: PropTypes.string,
+  onShowPlaylist: PropTypes.func,
 };
 
 export default VideoPlayer;

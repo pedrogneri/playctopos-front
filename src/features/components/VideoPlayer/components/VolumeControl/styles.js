@@ -35,7 +35,7 @@ export const SliderContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 120px;
-  left: 40px;
+  left: 20px;
 `;
 
 export const Container = styled.div`
@@ -67,13 +67,11 @@ export const VolumeIcon = css`
   height: 30px;
   width: 30px;
   color: ${({ theme }) => theme.gray} !important;
-  margin: 0 12px;
   cursor: pointer;
 
   @media (max-width: 959px) {
     height: 25px;
     width: 25px;
-    margin: 0 5px;
   }
 `;
 

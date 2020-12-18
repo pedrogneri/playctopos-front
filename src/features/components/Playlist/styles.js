@@ -1,16 +1,14 @@
-import { AiOutlineSearch, AiFillCloseCircle, AiFillPlusCircle } from 'react-icons/ai';
+import { AiOutlineSearch, AiFillCloseCircle, AiFillPlusCircle, AiOutlineArrowLeft } from 'react-icons/ai';
 
 import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
-  width: 500px;
-  max-width: 90%;
-  height: 500px;
-  border-radius: 12px;
+  height: 100%;
+  width: 100%;
   background-color: ${({ theme }) => theme.primary.dark};
+  border-right: 2px solid ${({ theme }) => theme.primary.default};
 `;
 
 export const SearchIcon = styled(AiOutlineSearch)`
@@ -28,13 +26,36 @@ export const ClearIcon = styled(AiFillCloseCircle)`
 export const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   overflow-y: auto;
   padding: 0 16px 16px;
 `;
 
+export const TitleSection = styled.div`
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: ${({ theme }) => theme.primary.light};
+  color: #fff;
+`;
+
+export const SearchWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 12px;
+`;
+
 export const StyledForm = styled.form`
   width: 100%;
+`;
+
+export const CloseButton = styled(AiOutlineArrowLeft)`
+  margin-right: 12px;
+  height: 30px;
+  width: 30px;
+  color: ${({ theme }) => theme.white};
 `;
 
 export const HeaderContainer = styled.header`
@@ -43,7 +64,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   padding: 16px;
   min-height: 83px;
-
+  position: relative;
   border-bottom: 1px solid ${({ theme }) => theme.primary.default};
 `;
 
@@ -56,6 +77,5 @@ export const PlusIcon = styled(AiFillPlusCircle)`
   width: 30px;
   height: 30px;
   color: ${({ theme }) => theme.secondary.default};
-  margin-left: auto;
   cursor: pointer;
 `;
