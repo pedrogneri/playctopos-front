@@ -10,12 +10,6 @@ export const Container = styled.div`
   &:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.primary.default};
   }
-
-  @media (max-width: 959px) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 `;
 
 export const Row = styled.div`
@@ -27,12 +21,6 @@ export const InfoContainer = styled.div`
   flex-direction: column;
   margin-left: 12px;
   max-width: 50%;
-
-  @media (max-width: 959px) {
-    margin-top: 12px;
-    margin-left: 0;
-    max-width: 250px;
-  }
 `;
 
 export const Title = styled.p`
