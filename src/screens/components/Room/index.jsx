@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 
 import { Hidden } from '@material-ui/core';
-import { useStoreState } from 'easy-peasy';
 import PropTypes from 'prop-types';
 import socket from 'socket';
 
@@ -20,7 +19,6 @@ import { Container, VideoContainer, ChatContainer, PlaylistContainer } from './s
 const Room = ({ id, name }) => {
   const [showRegister, setShowRegister] = useState();
   const username = getUsername();
-  const playlist = useStoreState((state) => state.playlist);
   const [openPlaylist, setOpenPlaylist] = useState(false);
   const [openChat, setOpenChat] = useState(true);
 
@@ -55,7 +53,7 @@ const Room = ({ id, name }) => {
       <Container>
         <Hidden smUp>
           <TransitionModal show={openPlaylist} onClose={handleClosePlaylist}>
-            <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} onClose={handleClosePlaylist} />
+            <Playlist onUpdatePlaylist={handleUpdatePlaylist} onClose={handleClosePlaylist} />
           </TransitionModal>
         </Hidden>
 
@@ -67,7 +65,7 @@ const Room = ({ id, name }) => {
               expanded={openPlaylist}
               switchExpanded={() => setOpenPlaylist(!openPlaylist)}
             />
-            <Playlist playlist={playlist} onUpdatePlaylist={handleUpdatePlaylist} />
+            <Playlist onUpdatePlaylist={handleUpdatePlaylist} />
           </PlaylistContainer>
         </Hidden>
 

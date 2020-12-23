@@ -5,7 +5,8 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 12px 0;
+  padding: 12px;
+  background-color: ${({ theme }) => theme.primary.dark};
 
   &:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.primary.default};

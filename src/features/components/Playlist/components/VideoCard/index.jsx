@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import htmlParser from 'react-html-parser';
 
 import { Tooltip } from '@material-ui/core';
@@ -19,7 +19,24 @@ import {
   Row,
 } from './styles';
 
-const VideoCard = ({ index, id, title, channel, thumbnail, addedBy, onAddToPlaylist, onRemoveFromPlaylist }) => {
+const VideoCard = ({
+  dndProvided,
+  index,
+  id,
+  title,
+  channel,
+  thumbnail,
+  addedBy,
+  onAddToPlaylist,
+  onRemoveFromPlaylist,
+}) => {
+  const dndProps = useMemo(() => {
+    if (dndProvided) {
+      const { innerRef, draggableProps, dragHandleProps } = dndProvided;
+      return { ref: innerRef, ...draggableProps, ...dragHandleProps };
+    }
+  }, [dndProvided]);
+
   const handleRemoveFromPlaylist = () => {
     onRemoveFromPlaylist(index);
   };
@@ -29,7 +46,7 @@ const VideoCard = ({ index, id, title, channel, thumbnail, addedBy, onAddToPlayl
   };
 
   return (
-    <Container>
+    <Container {...dndProps}>
       <Row>
         <Thumbnail src={thumbnail} alt={`${title}-thumbnail`} />
         <InfoContainer>
@@ -59,6 +76,7 @@ const VideoCard = ({ index, id, title, channel, thumbnail, addedBy, onAddToPlayl
 };
 
 VideoCard.propTypes = {
+  dndProvided: PropTypes.object,
   index: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
