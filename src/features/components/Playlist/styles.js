@@ -27,7 +27,6 @@ export const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  padding: 0 16px 16px;
 `;
 
 export const TitleSection = styled.div`

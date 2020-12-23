@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { Hidden } from '@material-ui/core';
@@ -22,28 +22,35 @@ const VideoPlayer = ({ roomId, onShowPlaylist }) => {
   const [videoDuration, setVideoDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(isMobile);
+  const [, setLastPlayDate] = useState(0);
   const changePlaylist = useStoreActions(({ changePlaylist }) => changePlaylist);
 
+  const handleFetchVideoUrl = useCallback(() => {
+    getVideoUrlByRoom(roomId).then(({ room, url }) => {
+      changePlaylist(room.playlist);
+
+      if (!!url) {
+        setLastPlayDate((prev) => {
+          if (prev === room.lastPlayDate) {
+            return prev;
+          } else {
+            setShowVideo(true);
+            setVideoInfo(room.actualVideo);
+            setVideoUrl(url);
+            return room.lastPlayDate;
+          }
+        });
+      } else {
+        setShowVideo(false);
+        setVideoUrl('');
+      }
+    });
+  }, [changePlaylist, roomId]);
+
   useEffect(() => {
-    const handleFetchVideoUrl = () => {
-      getVideoUrlByRoom(roomId).then(({ room, url }) => {
-        changePlaylist(room.playlist);
-
-        if (!!url) {
-          setShowVideo(true);
-          setVideoInfo(room.actualVideo);
-          setVideoUrl(url);
-        } else {
-          setShowVideo(false);
-          setVideoUrl('');
-        }
-      });
-    };
-
     handleFetchVideoUrl();
     socket.on('video.changeState', handleFetchVideoUrl);
-    // eslint-disable-next-line
-  }, []);
+  }, [handleFetchVideoUrl]);
 
   const changeVideoState = () => {
     socket.emit('video.changeState', roomId);
