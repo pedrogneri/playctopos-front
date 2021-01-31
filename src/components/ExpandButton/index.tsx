@@ -13,16 +13,16 @@ import { Container } from './styles';
 // TODO: Improve props and layout
 
 type Props = {
-  top: boolean,
-  left: boolean,
-  right: boolean,
+  top?: boolean,
+  left?: boolean,
+  right?: boolean,
   componentName: string,
   expanded: boolean,
   switchExpanded: () => void,
 }
 
 const ExpandButton = ({
-  top, left, right, componentName, switchExpanded, expanded,
+  top = false, left = false, right = false, componentName, switchExpanded, expanded,
 }: Props) => (
   <Tooltip title={`${expanded ? 'Close' : 'Open'} ${componentName}`} placement="bottom-end">
     <Container $top={top} $right={right} $left={left} onClick={switchExpanded}>
