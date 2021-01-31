@@ -23,7 +23,7 @@
   },
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-use-before-define": "off",
     "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
     "class-methods-use-this": "off",
     "curly": "error",
