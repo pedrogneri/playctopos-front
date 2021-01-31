@@ -21,7 +21,7 @@ export interface YoutubeVideoResponse {
     thumbnails: {
       default: YoutubeThumbResponse,
       medium: YoutubeThumbResponse,
-      hight: YoutubeThumbResponse,
+      high: YoutubeThumbResponse,
     },
     channelTitle: string,
   }
