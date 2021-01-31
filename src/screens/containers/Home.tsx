@@ -9,11 +9,11 @@ const HomeContainer = () => {
   const toast = useToast();
   const history = useHistory();
 
-  const handleEnterRoom = (roomName) => {
+  const handleEnterRoom = (roomName: string) => {
     if (roomName.trim()) {
       getRoomByName(roomName)
         .then((room) => {
-          if (!!room) {
+          if (room) {
             history.push(`room/${room._id}`);
           } else {
             toast.add({ type: 'warning', message: 'Invalid room name' });

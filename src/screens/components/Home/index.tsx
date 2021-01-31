@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 
-import PropTypes from 'prop-types';
+import {
+  Container, StyledInput, WelcomeMessage, Button, StyledForm,
+} from './styles';
 
-import { Container, StyledInput, WelcomeMessage, Button, StyledForm } from './styles';
+type Props = {
+  onSubmitRoomName: (name: string) => void,
+}
 
-const Home = ({ onSubmitRoomName }) => {
+const Home = ({ onSubmitRoomName }: Props) => {
   const [roomName, setRoomName] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmitRoomName(roomName);
     setRoomName('');
   };
 
-  const handleChangeRoomId = (event) => {
+  const handleChangeRoomId = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRoomName(event.target.value);
   };
 
@@ -26,10 +30,6 @@ const Home = ({ onSubmitRoomName }) => {
       </StyledForm>
     </Container>
   );
-};
-
-Home.propTypes = {
-  onSubmitRoomName: PropTypes.func,
 };
 
 export default Home;

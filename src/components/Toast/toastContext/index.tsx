@@ -3,16 +3,22 @@ import { createPortal } from 'react-dom';
 
 import Toast from '..';
 
-const ToastContext = React.createContext({});
+type ContextProps = {
+  add:(content: ToastContent) => void,
+  remove: (id: string) => void,
+}
 
 type Props = {
   children: React.ReactNode,
 }
 
 type ToastContent = {
-  message: string,
+  message?: string,
   type: 'success' | 'info' | 'warning' | 'error',
 }
+
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const ToastContext = React.createContext<ContextProps>({ add: () => {}, remove: () => {} });
 
 export const ToastProvider = ({ children }: Props) => {
   const [toasts, setToast] = useState<{ id: string, content: ToastContent }[]>([]);

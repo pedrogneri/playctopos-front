@@ -5,7 +5,7 @@ import { Alert } from '@material-ui/lab';
 import { ToastContainer } from './styles';
 
 type Props = {
-  message: string,
+  message?: string,
   remove: () => void,
   type: 'success' | 'info' | 'warning' | 'error',
 }
