@@ -6,3 +6,23 @@ export interface Video {
   duration?: number,
   addedBy?: string,
 }
+
+interface YoutubeThumbResponse {
+  url: string,
+  width: number,
+  height: number
+}
+
+export interface YoutubeVideoResponse {
+  id: { videoId: string },
+  snippet: {
+    title: string,
+    description: string,
+    thumbnails: {
+      default: YoutubeThumbResponse,
+      medium: YoutubeThumbResponse,
+      hight: YoutubeThumbResponse,
+    },
+    channelTitle: string,
+  }
+}

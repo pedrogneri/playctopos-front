@@ -6,3 +6,8 @@ export interface Room {
   actualVideo: Video,
   playlist: Video[],
 }
+
+export interface RoomResponse {
+  room: Room,
+  url: string,
+}
