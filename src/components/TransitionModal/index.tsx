@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { Backdrop, Fade } from '@material-ui/core';
-import PropTypes from 'prop-types';
 
 import { StyledModal as Modal } from './styles';
 
-const TransitionModal = ({ children, show, onClose }) => (
+type Props = {
+  children: ReactElement,
+  show: boolean,
+  onClose: () => void,
+}
+
+const TransitionModal = ({ children, show, onClose }: Props) => (
   <Modal
     open={show}
     onClose={onClose}
@@ -18,11 +23,5 @@ const TransitionModal = ({ children, show, onClose }) => (
     <Fade in={show}>{children}</Fade>
   </Modal>
 );
-
-TransitionModal.propTypes = {
-  children: PropTypes.node,
-  show: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
 
 export default TransitionModal;
