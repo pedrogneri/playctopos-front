@@ -7,7 +7,7 @@ export interface Video {
   addedBy?: string,
 }
 
-interface YoutubeThumbResponse {
+interface YoutubeThumb {
   url: string,
   width: number,
   height: number
@@ -19,9 +19,9 @@ export interface YoutubeVideoResponse {
     title: string,
     description: string,
     thumbnails: {
-      default: YoutubeThumbResponse,
-      medium: YoutubeThumbResponse,
-      high: YoutubeThumbResponse,
+      default: YoutubeThumb,
+      medium: YoutubeThumb,
+      high: YoutubeThumb,
     },
     channelTitle: string,
   }
