@@ -6,8 +6,12 @@ import { sendWarn } from 'services/chat';
 import { joinRoom, getVideoUrlByRoom } from 'services/room';
 import { getUsername } from 'utils/username';
 
+type Params = {
+  id: string,
+}
+
 const RoomContainer = () => {
-  const { id } = useParams();
+  const { id } = useParams<Params>();
   const history = useHistory();
   const [roomName, setRoomName] = useState('');
 

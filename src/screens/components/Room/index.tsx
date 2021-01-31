@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 
 import { Hidden } from '@material-ui/core';
-import PropTypes from 'prop-types';
 import socket from 'socket';
 
 import ExpandButton from 'components/ExpandButton';
@@ -13,11 +12,19 @@ import SimpleRegister from 'features/components/SimpleRegister';
 import VideoPlayer from 'features/components/VideoPlayer';
 import { updatePlaylist } from 'services/room';
 import { getUsername } from 'utils/username';
+import { Video } from 'models/video';
 
-import { Container, VideoContainer, ChatContainer, PlaylistContainer } from './styles';
+import {
+  Container, VideoContainer, ChatContainer, PlaylistContainer,
+} from './styles';
 
-const Room = ({ id, name }) => {
-  const [showRegister, setShowRegister] = useState();
+type Props = {
+  id: string,
+  name: string,
+}
+
+const Room = ({ id, name }: Props) => {
+  const [showRegister, setShowRegister] = useState(false);
   const username = getUsername();
   const [openPlaylist, setOpenPlaylist] = useState(false);
   const [openChat, setOpenChat] = useState(true);
@@ -42,7 +49,7 @@ const Room = ({ id, name }) => {
     setOpenPlaylist(false);
   };
 
-  const handleUpdatePlaylist = async (playlist) => {
+  const handleUpdatePlaylist = async (playlist: Video[]) => {
     await updatePlaylist(id, playlist);
     socket.emit('video.changeState', id);
   };
@@ -58,21 +65,21 @@ const Room = ({ id, name }) => {
         </Hidden>
 
         <Hidden xsDown>
-          <PlaylistContainer show={openPlaylist}>
+          <PlaylistContainer $show={openPlaylist}>
             <ExpandButton
               componentName="playlist"
               left
               expanded={openPlaylist}
               switchExpanded={() => setOpenPlaylist(!openPlaylist)}
             />
-            <Playlist onUpdatePlaylist={handleUpdatePlaylist} />
+            <Playlist onUpdatePlaylist={handleUpdatePlaylist} onClose={handleClosePlaylist} />
           </PlaylistContainer>
         </Hidden>
 
         <VideoContainer>
           <VideoPlayer roomId={id} onShowPlaylist={handleOpenPlaylist} />
         </VideoContainer>
-        <ChatContainer show={openChat}>
+        <ChatContainer $show={openChat}>
           <Hidden xsDown>
             <ExpandButton
               componentName="chat"
@@ -90,11 +97,6 @@ const Room = ({ id, name }) => {
       </Container>
     </>
   );
-};
-
-Room.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
 };
 
 export default Room;

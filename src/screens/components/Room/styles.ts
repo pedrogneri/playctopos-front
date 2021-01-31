@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+type ContainerProps = {
+  $show: boolean,
+}
+
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -29,13 +33,13 @@ export const VideoContainer = styled.div`
   }
 `;
 
-export const ChatContainer = styled.div`
+export const ChatContainer = styled.div<ContainerProps>`
   display: flex;
   width: 25%;
   min-width: 300px;
   max-width: 300px;
   height: 100vh;
-  margin-right: ${({ show }) => (show ? '0' : '-280px')};
+  margin-right: ${({ $show }) => ($show ? '0' : '-280px')};
   transition: margin-right 0.6s;
   position: relative;
 
@@ -46,13 +50,13 @@ export const ChatContainer = styled.div`
   }
 `;
 
-export const PlaylistContainer = styled.div`
+export const PlaylistContainer = styled.div<ContainerProps>`
   display: flex;
   width: 25%;
   min-width: 300px;
   max-width: 300px;
   height: 100vh;
-  margin-left: ${({ show }) => (show ? '0' : '-280px')};
+  margin-left: ${({ $show }) => ($show ? '0' : '-280px')};
   transition: margin-left 0.6s;
   position: relative;
 `;
