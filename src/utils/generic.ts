@@ -1,4 +1,4 @@
-export const truncateText = (text, size) => {
+export const truncateText = (text: string, size: number) => {
   if (!text) {
     return '';
   }

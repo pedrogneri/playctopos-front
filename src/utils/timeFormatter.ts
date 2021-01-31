@@ -1,12 +1,12 @@
-import moment from 'moment';
+import moment, { Duration } from 'moment';
 
-export const getFormattedTimeBySeconds = (seconds) => {
+export const getFormattedTimeBySeconds = (seconds: number) => {
   const duration = moment.duration(seconds, 'seconds');
 
   return formatDuration(duration);
 };
 
-const formatDuration = (duration) => {
+const formatDuration = (duration: Duration) => {
   let items = [('0' + duration.minutes()).slice(-2), ('0' + duration.seconds()).slice(-2)];
 
   if (duration.hours() > 0) {
