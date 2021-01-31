@@ -10,7 +10,6 @@ import { Theme } from 'theme';
 import { ToastProvider } from 'components/Toast/toastContext';
 import WebSocketContextProvider from 'hooks/useSockets';
 
-import * as serviceWorker from './serviceWorker';
 import { GlobalStyle } from './styles';
 
 ReactDOM.render(
@@ -30,5 +29,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root'),
 );
-
-serviceWorker.unregister();
