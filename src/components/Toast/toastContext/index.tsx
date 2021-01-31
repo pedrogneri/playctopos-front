@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import PropTypes from 'prop-types';
-
 import Toast from '..';
 
 const ToastContext = React.createContext({});
 
-export const ToastProvider = ({ children }) => {
-  const [toasts, setToast] = useState([]);
+type Props = {
+  children: React.ReactNode,
+}
+
+type ToastContent = {
+  message: string,
+  type: 'success' | 'info' | 'warning' | 'error',
+}
+
+export const ToastProvider = ({ children }: Props) => {
+  const [toasts, setToast] = useState<{ id: string, content: ToastContent }[]>([]);
 
   const generateID = () => {
     const first = String(Math.random() * 46656);
@@ -17,19 +24,19 @@ export const ToastProvider = ({ children }) => {
     return first + second;
   };
 
-  const add = (content) => {
+  const add = (content: ToastContent) => {
     const id = generateID();
     setToast([...toasts, { id, content }]);
   };
 
-  const remove = (id) => {
-    setToast(toasts.filter((toast) => toast.id !== id));
+  const remove = (id: string) => {
+    setToast(toasts.filter(toast => toast.id !== id));
   };
 
   return (
     <ToastContext.Provider value={{ add, remove }}>
       {createPortal(
-        toasts.map((toast) => (
+        toasts.map(toast => (
           <Toast
             key={toast.id}
             remove={() => remove(toast.id)}
@@ -42,10 +49,6 @@ export const ToastProvider = ({ children }) => {
       {children}
     </ToastContext.Provider>
   );
-};
-
-ToastProvider.propTypes = {
-  children: PropTypes.element,
 };
 
 export default ToastContext;

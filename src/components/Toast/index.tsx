@@ -1,11 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 
 import { Alert } from '@material-ui/lab';
-import PropTypes from 'prop-types';
 
 import { ToastContainer } from './styles';
 
-const Toast = ({ message, remove, type }) => {
+type Props = {
+  message: string,
+  remove: () => void,
+  type: 'success' | 'info' | 'warning' | 'error',
+}
+
+const Toast = ({ message, remove, type }: Props) => {
   const removeRef = useRef(remove);
 
   useEffect(() => {
@@ -20,12 +25,6 @@ const Toast = ({ message, remove, type }) => {
       <Alert severity={type}>{message || 'Error'}</Alert>
     </ToastContainer>
   );
-};
-
-Toast.propTypes = {
-  message: PropTypes.string,
-  remove: PropTypes.any,
-  type: PropTypes.string,
 };
 
 export default Toast;
