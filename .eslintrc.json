@@ -50,15 +50,8 @@
     "no-use-before-define": "off",
     "quotes": ["error", "single"],
     "semi": [2, "always"],
-    "sort-imports": [
-        "error",
-        {
-          "allowSeparatedGroups": true,
-          "ignoreCase": true,
-          "ignoreDeclarationSort": true,
-          "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
-        }
-    ],
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off",
     "space-before-function-paren": "error",
     "react/jsx-one-expression-per-line": "off",
     "react/destructuring-assignment": ["error", "always"],
