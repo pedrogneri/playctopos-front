@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 
 import { Grid, Hidden, Tooltip } from '@material-ui/core';
-import PropTypes from 'prop-types';
 
 import UserBadge from 'components/UserBadge';
 import { getFormattedTimeBySeconds } from 'utils/timeFormatter';
@@ -9,7 +8,24 @@ import { getFormattedTimeBySeconds } from 'utils/timeFormatter';
 import TitleSection from '../TitleSection';
 import VideoProgress from '../VideoProgress';
 import VolumeControl from '../VolumeControl';
-import { Container, SkipIcon, PlaylistIcon, IconContainer, TimeLabel, TitleSectionWrapper } from './styles';
+import {
+  Container, SkipIcon, PlaylistIcon, IconContainer, TimeLabel, TitleSectionWrapper,
+} from './styles';
+
+type Props = {
+  title: string,
+  channel: string,
+  thumbnail: string,
+  addedBy: string,
+  volume: number,
+  isMuted: boolean,
+  time: number,
+  duration: number,
+  onShowPlaylist: () => void,
+  onSkip: () => void,
+  onChangeVolume: () => void,
+  onChangeIsMuted: () => void,
+}
 
 const VideoDashboard = ({
   title,
@@ -24,7 +40,7 @@ const VideoDashboard = ({
   isMuted,
   time,
   duration,
-}) => {
+}: Props) => {
   const timeLabelText = useMemo(() => `${getFormattedTimeBySeconds(time)} / ${getFormattedTimeBySeconds(duration)}`, [
     time,
     duration,
@@ -74,21 +90,6 @@ const VideoDashboard = ({
       </Container>
     </>
   );
-};
-
-VideoDashboard.propTypes = {
-  title: PropTypes.string.isRequired,
-  channel: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-  addedBy: PropTypes.string.isRequired,
-  onShowPlaylist: PropTypes.func.isRequired,
-  onSkip: PropTypes.func.isRequired,
-  volume: PropTypes.number.isRequired,
-  onChangeVolume: PropTypes.func.isRequired,
-  isMuted: PropTypes.bool.isRequired,
-  onChangeIsMuted: PropTypes.func.isRequired,
-  time: PropTypes.number.isRequired,
-  duration: PropTypes.number.isRequired,
 };
 
 export default VideoDashboard;
