@@ -1,14 +1,19 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import React, {
+  useEffect, useState, useRef, FormEvent, ChangeEvent,
+} from 'react';
+import {
+  DragDropContext, Droppable, Draggable, DraggableProvided, DroppableProvided, DropResult,
+} from 'react-beautiful-dnd';
 
 import { Hidden } from '@material-ui/core';
 import { useStoreState } from 'easy-peasy';
-import PropTypes from 'prop-types';
+import { Store } from 'store';
 
 import Input from 'components/Input';
 import Loader from 'components/Loader';
 import useToast from 'hooks/useToast';
 import { getVideoListByQuery } from 'services/search';
+import { Video, YoutubeVideoResponse } from 'models/video';
 
 import EmptyState from './components/EmptyState';
 import VideoCard from './components/VideoCard';
@@ -23,23 +28,28 @@ import {
   CloseButton,
 } from './styles';
 
-const Playlist = ({ onUpdatePlaylist, onClose }) => {
-  const toast = useToast();
-  const searchBarRef = useRef();
+type Props = {
+  onUpdatePlaylist: (playlist: Video[]) => void,
+  onClose: () => void,
+}
 
-  const playlist = useStoreState((state) => state.playlist);
+const Playlist = ({ onUpdatePlaylist, onClose }: Props) => {
+  const toast = useToast();
+  const searchBarRef = useRef<HTMLInputElement>(null);
+
+  const playlist: Video[] = useStoreState<Store>(state => state.playlist);
   const [playlistState, setPlaylistState] = useState(playlist);
 
   const [loading, setLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<YoutubeVideoResponse[]>([]);
 
   useEffect(() => {
     setPlaylistState(playlist);
   }, [playlist]);
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (query.trim()) {
       setLoading(true);
@@ -61,7 +71,7 @@ const Playlist = ({ onUpdatePlaylist, onClose }) => {
     }
   };
 
-  const reorder = (startIndex, endIndex) => {
+  const reorder = (startIndex: number, endIndex: number) => {
     const result = Array.from(playlist);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -69,7 +79,7 @@ const Playlist = ({ onUpdatePlaylist, onClose }) => {
     return result;
   };
 
-  const onDragEnd = (result) => {
+  const onDragEnd = (result: DropResult) => {
     if (!result.destination) {
       return;
     }
@@ -84,7 +94,7 @@ const Playlist = ({ onUpdatePlaylist, onClose }) => {
     onUpdatePlaylist(list);
   };
 
-  const handleChangeQuery = (event) => {
+  const handleChangeQuery = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
 
@@ -93,14 +103,14 @@ const Playlist = ({ onUpdatePlaylist, onClose }) => {
     setShowResults(false);
   };
 
-  const handleAddToPlaylist = (video) => {
+  const handleAddToPlaylist = (video: Video) => {
     const newPlaylist = [...playlist, video];
     onUpdatePlaylist(newPlaylist);
     setQuery('');
     setShowResults(false);
   };
 
-  const handleRemoveFromPlaylist = (index) => {
+  const handleRemoveFromPlaylist = (index: number) => {
     playlist.splice(index, 1);
     onUpdatePlaylist(playlist);
   };
@@ -133,10 +143,12 @@ const Playlist = ({ onUpdatePlaylist, onClose }) => {
               <>
                 <TitleSection>Results</TitleSection>
                 <ResultsContainer>
-                  {results.map(({ id: { videoId }, snippet: { title, thumbnails, channelTitle } }, index) => (
+                  {results.map(({
+                    id: { videoId }, snippet: { title, thumbnails, channelTitle },
+                  }, index) => (
                     <VideoCard
                       index={index}
-                      key={`${videoId}-${index}`}
+                      key={`${videoId}-${index.toString()}`}
                       id={videoId}
                       title={title}
                       channel={channelTitle}
@@ -152,13 +164,13 @@ const Playlist = ({ onUpdatePlaylist, onClose }) => {
                 <TitleSection>Playlist</TitleSection>
 
                 <Droppable droppableId="playlist">
-                  {(provided) => (
-                    <ResultsContainer ref={provided.innerRef} {...provided.droppableProps}>
+                  {(dropProvided: DroppableProvided) => (
+                    <ResultsContainer ref={dropProvided.innerRef} {...dropProvided.droppableProps}>
                       {playlistState.map((video, index) => (
-                        <Draggable key={`${video.id}-${index}`} draggableId={`${video.id}-${index}`} index={index}>
-                          {(provided) => (
+                        <Draggable key={`${video.id}-${index.toString()}`} draggableId={`${video.id}-${index}`} index={index}>
+                          {(dragProvided: DraggableProvided) => (
                             <VideoCard
-                              dndProvided={provided}
+                              dndProvided={dragProvided}
                               index={index}
                               onRemoveFromPlaylist={handleRemoveFromPlaylist}
                               {...video}
@@ -166,7 +178,7 @@ const Playlist = ({ onUpdatePlaylist, onClose }) => {
                           )}
                         </Draggable>
                       ))}
-                      {provided.placeholder}
+                      {dropProvided.placeholder}
                     </ResultsContainer>
                   )}
                 </Droppable>
@@ -177,11 +189,6 @@ const Playlist = ({ onUpdatePlaylist, onClose }) => {
       </Container>
     </DragDropContext>
   );
-};
-
-Playlist.propTypes = {
-  onUpdatePlaylist: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
 
 export default Playlist;

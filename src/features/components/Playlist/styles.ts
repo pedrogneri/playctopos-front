@@ -1,4 +1,6 @@
-import { AiOutlineSearch, AiFillCloseCircle, AiFillPlusCircle, AiOutlineArrowLeft } from 'react-icons/ai';
+import {
+  AiOutlineSearch, AiFillCloseCircle, AiFillPlusCircle, AiOutlineArrowLeft,
+} from 'react-icons/ai';
 
 import styled from 'styled-components';
 

@@ -21,7 +21,7 @@ import {
 } from './styles';
 
 type Props = {
-  dndProvided: DraggableProvided,
+  dndProvided?: DraggableProvided,
   index: number,
   id: string,
   title: string,
