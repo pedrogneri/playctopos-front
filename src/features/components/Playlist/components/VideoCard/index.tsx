@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import htmlParser from 'react-html-parser';
+import { DraggableProvided } from 'react-beautiful-dnd';
 
 import { Tooltip } from '@material-ui/core';
-import PropTypes from 'prop-types';
 
 import { truncateText } from 'utils/generic';
 import { getUsername } from 'utils/username';
+import { Video } from 'models/video';
 
 import {
   Container,
@@ -19,6 +20,18 @@ import {
   Row,
 } from './styles';
 
+type Props = {
+  dndProvided: DraggableProvided,
+  index: number,
+  id: string,
+  title: string,
+  channel: string,
+  thumbnail: string,
+  addedBy?: string,
+  onAddToPlaylist?: (video: Video) => void,
+  onRemoveFromPlaylist?: (index: number) => void,
+}
+
 const VideoCard = ({
   dndProvided,
   index,
@@ -29,20 +42,27 @@ const VideoCard = ({
   addedBy,
   onAddToPlaylist,
   onRemoveFromPlaylist,
-}) => {
+}: Props) => {
   const dndProps = useMemo(() => {
     if (dndProvided) {
       const { innerRef, draggableProps, dragHandleProps } = dndProvided;
       return { ref: innerRef, ...draggableProps, ...dragHandleProps };
     }
+    return {};
   }, [dndProvided]);
 
   const handleRemoveFromPlaylist = () => {
-    onRemoveFromPlaylist(index);
+    if (onRemoveFromPlaylist) {
+      onRemoveFromPlaylist(index);
+    }
   };
 
   const handleAddToPlaylist = () => {
-    onAddToPlaylist({ id, title, channel, thumbnail, addedBy: getUsername() });
+    if (onAddToPlaylist) {
+      onAddToPlaylist({
+        id, title, channel, thumbnail, addedBy: getUsername(),
+      });
+    }
   };
 
   return (
@@ -56,7 +76,7 @@ const VideoCard = ({
           <Channel>{htmlParser(channel)}</Channel>
         </InfoContainer>
         <BottomContainer>
-          {!!onAddToPlaylist ? (
+          {onAddToPlaylist ? (
             <Tooltip title="Add to playlist" placement="bottom-start">
               <div>
                 <AddIcon onClick={handleAddToPlaylist} />
@@ -73,18 +93,6 @@ const VideoCard = ({
       </Row>
     </Container>
   );
-};
-
-VideoCard.propTypes = {
-  dndProvided: PropTypes.object,
-  index: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  channel: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-  addedBy: PropTypes.string,
-  onAddToPlaylist: PropTypes.func,
-  onRemoveFromPlaylist: PropTypes.func,
 };
 
 export default VideoCard;
