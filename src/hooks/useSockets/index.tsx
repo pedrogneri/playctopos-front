@@ -7,11 +7,9 @@ import { Store } from 'store';
 import { sendMessage } from 'services/chat';
 
 type ContextValue = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  handleSendMessage: Function;
+  handleSendMessage: (roomId: string, message: Message) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
 const WebSocketContext = createContext<ContextValue>({ handleSendMessage: () => {} });
 
 export const useSockets = () => useContext(WebSocketContext);
