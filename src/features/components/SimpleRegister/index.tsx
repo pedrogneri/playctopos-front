@@ -1,29 +1,36 @@
-import React, { useState, useEffect } from 'react';
-
-import PropTypes from 'prop-types';
+import React, {
+  useState, useEffect, ChangeEvent, FormEvent,
+} from 'react';
 
 import { sendWarn } from 'services/chat';
 import { changeUsername, getUsername } from 'utils/username';
 
-import { Container, Button, StyledForm, StyledInput, Label, UserIcon } from './styles';
+import {
+  Container, Button, StyledForm, StyledInput, Label, UserIcon,
+} from './styles';
 
-const SimpleRegister = ({ roomId, onClose }) => {
-  const [username, setUsername] = useState('');
+type Props = {
+  roomId: string;
+  onClose: () => void;
+}
+
+const SimpleRegister = ({ roomId, onClose }: Props) => {
+  const [username, setUsername] = useState<string>();
 
   useEffect(() => {
     setUsername(getUsername());
   }, []);
 
-  const handleChangeInput = (event) => {
+  const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const oldUsername = getUsername() || 'Someone';
-    if (oldUsername !== username) {
+    if (oldUsername !== username && username?.trim()) {
       sendWarn(roomId, `${oldUsername} changed his name to ${username}`);
-      changeUsername(username);
+      changeUsername(username.trim());
     }
     onClose();
   };
@@ -38,11 +45,6 @@ const SimpleRegister = ({ roomId, onClose }) => {
       </StyledForm>
     </Container>
   );
-};
-
-SimpleRegister.propTypes = {
-  roomId: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
 
 export default SimpleRegister;
