@@ -5,7 +5,7 @@ import { InputContainer, StyledInput, StyledIconButton } from './styles';
 type Props = {
   inputRef: React.RefObject<HTMLInputElement>,
   endAdornment?: React.ReactNode,
-  value: any,
+  value: string,
   placeholder: string,
   onChange: (event: ChangeEvent<HTMLInputElement>) => void,
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void,
