@@ -23,7 +23,7 @@ type Props = {
   duration: number,
   onShowPlaylist: () => void,
   onSkip: () => void,
-  onChangeVolume: () => void,
+  onChangeVolume: (value: number) => void,
   onChangeIsMuted: () => void,
 }
 
