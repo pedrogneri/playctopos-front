@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, FocusEvent } from 'react';
 
 import { InputContainer, StyledInput, StyledIconButton } from './styles';
 
@@ -7,8 +7,8 @@ type Props = {
   endAdornment?: React.ReactNode,
   value: any,
   placeholder: string,
-  onChange: () => void,
-  onBlur: () => void,
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void,
+  onBlur?: (event: FocusEvent<HTMLInputElement>) => void,
   onClick?: () => void,
 }
 
