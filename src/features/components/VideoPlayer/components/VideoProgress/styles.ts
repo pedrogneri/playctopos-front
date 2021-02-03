@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+type ProgressBarProps = {
+  $value: number;
+}
+
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -15,8 +19,8 @@ export const BaseBar = styled.div`
   height: 100%;
 `;
 
-export const ProgressBar = styled.div`
-  width: ${({ value }) => `${value}%`};
+export const ProgressBar = styled.div<ProgressBarProps>`
+  width: ${({ $value }) => `${$value}%`};
   height: 100%;
   background-color: ${({ theme }) => theme.secondary.default};
   transition: width 1s;
