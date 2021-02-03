@@ -11,7 +11,8 @@ type ContextValue = {
   handleSendMessage: Function;
 }
 
-const WebSocketContext = createContext<ContextValue | null>(null);
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const WebSocketContext = createContext<ContextValue>({ handleSendMessage: () => {} });
 
 export const useSockets = () => useContext(WebSocketContext);
 
