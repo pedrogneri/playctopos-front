@@ -11,26 +11,19 @@ export const Title = styled.h5`
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: normal;
+
+  @media (max-width: 959px) {
+    font-size: 12px;
+  }
 `;
 
 export const Subtitle = styled.h5`
   color: ${({ theme }) => theme.gray};
   font-weight: normal;
-`;
 
-Title.xs = styled.h5`
-  color: ${({ theme }) => theme.white};
-  font-size: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  font-weight: normal;
-  text-overflow: ellipsis;
-`;
-
-Subtitle.xs = styled.h5`
-  font-size: 12px;
-  font-weight: normal;
-  color: ${({ theme }) => theme.gray};
+  @media (max-width: 959px) {
+    font-size: 12px;
+  }
 `;
 
 export const Thumbnail = styled.img`
