@@ -3,6 +3,10 @@ import { IoMdSend } from 'react-icons/io';
 
 import styled from 'styled-components';
 
+type MessageProps = {
+  $color?: string,
+}
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,7 +23,7 @@ export const MessagesArea = styled.div`
   height: calc(100% - 60px);
 `;
 
-export const Message = styled.p`
+export const Message = styled.p<MessageProps>`
   font-size: 14px;
   margin-bottom: 10px;
   color: ${({ theme }) => theme.white};
@@ -27,7 +31,7 @@ export const Message = styled.p`
 
   & > b {
     font-weight: 600;
-    color: ${({ color }) => color};
+    color: ${({ $color }) => $color};
   }
 `;
 
