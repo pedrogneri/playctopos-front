@@ -1,8 +1,8 @@
 import api from 'api';
-import { YoutubeVideoResponse } from 'models/video';
+import { Video } from 'models/video';
 
 export const getVideoListByQuery = async (query: string) => {
-  const response = await api.get<YoutubeVideoResponse[]>('/searchByQuery', {
+  const response = await api.get<Video[]>('/searchByQuery', {
     params: {
       query,
     },
@@ -11,7 +11,7 @@ export const getVideoListByQuery = async (query: string) => {
 };
 
 export const getVideoById = async (id: string) => {
-  const response = await api.get<YoutubeVideoResponse>('/searchById', {
+  const response = await api.get<Video>('/searchById', {
     params: {
       id,
     },

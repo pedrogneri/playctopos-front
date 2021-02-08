@@ -13,7 +13,7 @@ import Input from 'components/Input';
 import Loader from 'components/Loader';
 import useToast from 'hooks/useToast';
 import { getVideoListByQuery } from 'services/search';
-import { Video, YoutubeVideoResponse } from 'models/video';
+import { Video } from 'models/video';
 
 import EmptyState from './components/EmptyState';
 import VideoCard from './components/VideoCard';
@@ -43,7 +43,7 @@ const Playlist = ({ onUpdatePlaylist, onClose }: Props) => {
   const [loading, setLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<YoutubeVideoResponse[]>([]);
+  const [results, setResults] = useState<Video[]>([]);
 
   useEffect(() => {
     setPlaylistState(playlist);
@@ -143,17 +143,12 @@ const Playlist = ({ onUpdatePlaylist, onClose }: Props) => {
               <>
                 <TitleSection>Results</TitleSection>
                 <ResultsContainer>
-                  {results.map(({
-                    id: { videoId }, snippet: { title, thumbnails, channelTitle },
-                  }, index) => (
+                  {results.map((video, index) => (
                     <VideoCard
                       index={index}
-                      key={`${videoId}-${index.toString()}`}
-                      id={videoId}
-                      title={title}
-                      channel={channelTitle}
-                      thumbnail={thumbnails.medium.url}
+                      key={`${video.id}-${index.toString()}`}
                       onAddToPlaylist={handleAddToPlaylist}
+                      {...video}
                     />
                   ))}
                 </ResultsContainer>
